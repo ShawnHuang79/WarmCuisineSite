@@ -4,6 +4,7 @@ package com.wcs.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,22 +42,51 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errorList = new ArrayList<>();
     	//1.取得request中的form data(id, password, captcha),並檢查
-		//response.setCharacterEncoding("UTF-8");不用輸入是因為這三個項目都是英文，如果是中文就要先
-		String username = request.getParameter("username");
+		response.setCharacterEncoding("UTF-8");//傳來的項目有中文就要先寫這一行
+		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 		String fullname = request.getParameter("fullname");
 		String password = request.getParameter("password");
 		String comfirmPassword = request.getParameter("comfirmPassword");
+		LocalDate birthday = LocalDate.parse(request.getParameter("birthday"));
+		char gender = (request.getParameter("gender")).charAt(0);
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
 		
+		Boolean subscribed = true;
+		if((request.getParameter("subscribed"))==null) {
+			subscribed = false;
+		}
+		/*Boolean subscribed = false; 
+		if((request.getParameter("subscribed"))!=null && (request.getParameter("subscribed")).equals("on")){
+			subscribed = true;
+		}*/
+		System.out.println(subscribed);
 		
 		String captcha = request.getParameter("captcha");
 		
-		if(username==null || username.length()==0) {
+		if(id==null || id.length()==0) {
 			errorList.add("必須輸入帳號");
+		}
+		if(email==null || email.length()==0) {
+			errorList.add("必須輸入email");
+		}
+		if(fullname==null || fullname.length()==0) {
+			errorList.add("必須輸入姓名");
 		}
 		if(password==null || password.length()==0) {
 			errorList.add("必須輸入密碼");
 		}
+		if(comfirmPassword==null || comfirmPassword.length()==0) {
+			errorList.add("必須輸入確認密碼");
+		}
+		if(birthday==null) { //birthday沒輸入是回傳什麼?
+			errorList.add("必須輸入生日");
+		}
+		if(gender != 'M' && gender != 'F' && gender != 'U') {
+			errorList.add("必須選擇性別");
+		}
+		
 		if(captcha==null || captcha.length()==0) {
 			errorList.add("必須輸入驗證碼");
 		}else {
@@ -68,13 +98,17 @@ public class RegisterServlet extends HttpServlet {
 	    	CustomerService service = new CustomerService();
 	    	Customer c = new Customer();
 	    	try {
-	    		c.setId(username);
+	    		c.setId(id);
 	    		c.setEmail(email);
+	    		c.setName(fullname);
 	    		c.setPassword(password);
-	    		
+	    		c.setBirthday(birthday);
+	    		c.setGender(gender);
+	    		c.setAddress(address);
+	    		c.setPhone(phone);
 	    				
 	    		service.register(c);
-	    		//3.1登入成功，轉交(forward)給register_ok.jsp
+	    		//3.1註冊成功，轉交(forward)給register_ok.jsp
 	    		request.setAttribute("member", c);
 	    		RequestDispatcher dispatcher = request.getRequestDispatcher("register_ok.jsp");
 	    		dispatcher.forward(request, response);
@@ -82,7 +116,7 @@ public class RegisterServlet extends HttpServlet {
 	    	}catch(WCSInvalidDataException e) {
 	    		errorList.add(e.getMessage());
 			}catch(WCSException e){
-	    		//3.2登入失敗
+	    		//3.2註冊失敗
 	    		this.log("註冊失敗", e);
 	    		errorList.add(e.getMessage());
 	    	}catch(Exception e) {//RuntimeException, WCSInvalidDataException都包含在內。

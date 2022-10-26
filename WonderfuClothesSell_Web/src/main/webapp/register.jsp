@@ -1,3 +1,4 @@
+<%@page pageEncoding='UTF-8'%>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -26,7 +27,7 @@
 		        border:solid 1px #ccc;
 		        border-radius: 5px;
 	        }
-			input[type="radio"], #showPwdBox{
+			input[type="radio"], #showPwdBox, #subscribedBox{
 				width: 30px;
 	        	height: 15px;
 	       	 	margin: 0px;
@@ -93,7 +94,10 @@
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
 	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
 		<script>
-			//$("#showPwdBox").click(showPasswordHandler);
+			$(document).ready(init);
+			function init(){
+				$("#showPwdBox").click(showPasswordHandler);
+			}
 			function showPasswordHandler(){
 				if ((($("#showPwdBox").prop("checked")))){//prop用在沒有資料值的屬性上
 					$(".Pwd").attr("type", "text");
@@ -108,19 +112,20 @@
 	</head>  
   	<body>
 	    <header>
-	    	<h2>網站首頁</h2>
+	    	<h2>註冊頁面</h2>
 	    </header>
 		<article id="signupContainer"> <!-- 改article -->
 			<div class="loginAndSignup">  
 				<h3>註冊 Sign Up</h3>
 			</div>
-	        <form action="用戶管理">
-	            <input type="text" name="username" placeholder="帳號" pattern='[A-Z][1289]\d{8}' required>
+	        <form action="register.do" method="POST">
+	        	<div>${errorList}</div>
+	            <input type="text" name="id" placeholder="帳號" pattern='[A-Z][1289]\d{8}' required>
 	            <input type="email" name="email" placeholder="email" required>
 				<input type="text" name="fullname" placeholder="使用者姓名" required minlength="2" maxlength="20">
 	            <input type="password" class=Pwd  name="password" placeholder="密碼" required>
 	            <input type="password" class=Pwd name="comfirmPassword" placeholder="確認密碼" required>
-				<input type="checkbox" id="showPwdBox" onchange="showPasswordHandler()"><label>顯示密碼</label>
+				<input type="checkbox" id="showPwdBox"><label>顯示密碼</label>
 				<input type="date" name="birthday" placeholder="生日 yyyy/mm/dd" required>
 				<input type="text" name="address" placeholder="地址">
 				<input type="tel" name="phone" placeholder="手機號碼">
@@ -130,6 +135,7 @@
 					<label>女</label><input type="radio" name="gender" value="F">
 					<label>不想透漏</label><input type="radio" name="gender" value="U">
 				</div>
+				<input type="checkbox" id="subscribedBox" name="subscribed" checked><label>訂閱電子報</label>
 				<input name='captcha' required placeholder="請輸入驗證碼">
 				<img src="images/captcha.jpg" id="captchaImage" onclick="refreshCaptcha()" title="點選即可更新圖片"><br>
 	            <input type="submit" value="註冊" class="submit">

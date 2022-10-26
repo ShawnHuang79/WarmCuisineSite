@@ -39,11 +39,11 @@ public class LoginServlet extends HttpServlet {
 		List<String> errorList = new ArrayList<>();
     	//1.取得request中的form data(id, password, captcha),並檢查
 		//response.setCharacterEncoding("UTF-8");不用輸入是因為這三個項目都是英文，如果是中文就要先
-		String username = request.getParameter("username");
+		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		String captcha = request.getParameter("captcha");
 		
-		if(username==null || username.length()==0) {
+		if(id==null || id.length()==0) {
 			errorList.add("必須輸入帳號");
 		}
 		if(password==null || password.length()==0) {
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
     	//2.檢查無誤，呼叫商業邏輯。
 	    	CustomerService service = new CustomerService();
 	    	try {
-	    		Customer c = service.login(username, password);
+	    		Customer c = service.login(id, password);
 	    		request.setAttribute("member", c);
 	    		//3.1登入成功，轉交(forward)給login_ok.jsp
 	    		RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");

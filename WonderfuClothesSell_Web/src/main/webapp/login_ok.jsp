@@ -26,9 +26,9 @@
 			<hr>
 		</header>
 	    <nav>
-	    	<a href='register.html'>註冊</a>|
-	    	<a href='login.html'>登入</a>|
-	    	<a href='member/update.html'>修改會員</a>|
+	    	<a href='register.jsp'>註冊</a>|
+	    	<a href='login.jsp'>登入</a>|
+	    	<a href='member/update.jsp'>修改會員</a>|
 	    	<hr>
 	    </nav>
 	    <%

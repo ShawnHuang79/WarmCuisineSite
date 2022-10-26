@@ -1,3 +1,4 @@
+<%@page pageEncoding='UTF-8'%>
 <!DOCTYPE HTML>
 <html>
 
@@ -36,7 +37,8 @@
 			}
 
 	    </style>
-	    <script src="jquery.js"></script>
+	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
+	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
 
 	</head>  
   	<body>
@@ -52,9 +54,9 @@
 			<hr>
 		</header>
 	    <nav>
-	    	<a href='register.html'>註冊</a>|
+	    	<a href='register.jsp'>註冊</a>|
 	    	<a href='login.jsp'>登入</a>|
-	    	<a href='member/update.html'>修改會員</a>|
+	    	<a href='member/update.jsp'>修改會員</a>|
 	    	<hr>
 	    </nav>
 
