@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+
+
+	<head>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta charset="UTF-8">
+	    <title>login</title>
+	    <style>
+	        @import url(myfont.css);
+	        body{
+	            background-color: white;
+	        }
+			body {
+				margin: 0px;
+			}
+			.vendor-list{
+				list-style: none;
+				border: 1px dashed black;
+				display: flex;
+				flex-direction: row; /*row column row-reverse column-reverse*/
+				flex-wrap: wrap;
+			
+			}
+			.vendor-list li{
+				width: 400px;
+				border: 1px solid black;
+				padding-top: 30px;
+				background: #F0F0FF;
+				text-align: center;
+				margin: 10px;
+			}
+			.vendor-tile img{
+				width: 200px;
+				height: 150px;
+			}
+
+	    </style>
+	    <script src="jquery.js"></script>
+
+	</head>  
+  	<body>
+		<header>
+			<h1><a href='#'>Eat Food歡迎</a> 
+				
+			</h1>
+			<form>
+				<input type='search' placeholder='請輸入查詢關鍵字'>
+				<input type='submit' value='搜尋'>
+			</form>
+			
+			<hr>
+		</header>
+	    <nav>
+	    	<a href='register.html'>註冊</a>|
+	    	<a href='login.jsp'>登入</a>|
+	    	<a href='member/update.html'>修改會員</a>|
+	    	<hr>
+	    </nav>
+
+	    <article>
+			<ul class="vendor-list" data-title-pickup=""
+				data-title-delivery="熱門餐廳" >
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure class="vendor-tile">
+						<picture class="vendor-picture">
+								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
+						</picture>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+					</figure>
+				</li>
+			</ul>
+	    </article>    
+
+		<footer id="copyright">
+			<div>Copyright © 2022 All rights reserved</div>
+		</footer>    
+	</body>
+</html>

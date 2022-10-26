@@ -9,7 +9,7 @@ public class GuessNumber_doWhile {
 		Random random = new Random();
 		int answer = random.nextInt(10)+1;
 		Scanner scanner = new Scanner(System.in);
-		int limit = 3;
+		int limit = 31;
 		int counter = 1;
 		int target;
 		do {

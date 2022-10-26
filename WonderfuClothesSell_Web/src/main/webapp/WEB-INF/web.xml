@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0" metadata-complete="false">
+  <display-name>WonderfuClothesSell_Web</display-name>
+  <servlet>
+  	<description>Login使用的驗證碼</description>
+  	<servlet-name>com.wcs.view.CaptchaServlet_Login</servlet-name>
+  	<servlet-class>com.wcs.view.CaptchaServlet</servlet-class>
+  	<init-param>
+  		<param-name>len</param-name>
+  		<param-value>4</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>com.wcs.view.CaptchaServlet_Login</servlet-name>
+  	<url-pattern>/images/login_captcha.jpg</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<description>register和update使用的驗證碼</description>
+  	<servlet-name>com.wcs.view.CaptchaServlet</servlet-name>
+  	<servlet-class>com.wcs.view.CaptchaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>com.wcs.view.CaptchaServlet</servlet-name>
+  	<url-pattern>/images/captcha.jpg</url-pattern>
+  	<url-pattern>/member/images/captcha.jpg</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
