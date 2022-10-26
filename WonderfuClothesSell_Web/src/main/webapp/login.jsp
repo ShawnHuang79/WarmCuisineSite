@@ -96,6 +96,10 @@
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
 	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
 		<script>
+			$(document).ready(init);
+			function init(){
+				$("#showPwdBox").click(showPasswordHandler);
+			}
 			function showPasswordHandler(){
 				if ((($("#showPwdBox").prop("checked")))){
 					$("#Pwd").attr("type", "text");
@@ -120,9 +124,9 @@
 	        </div>
         	<form action="login.do" method="POST">
         		<div>${errorList}</div>
-	            <input type="text" name="username" placeholder="帳號或email" required>
+	            <input type="text" name="id" placeholder="帳號或email" required>
 	            <input type="password" id="Pwd" name="password" placeholder="密碼" required>
-				<input type="checkbox" id="showPwdBox" onchange="showPasswordHandler()"><label>顯示密碼</label>
+				<input type="checkbox" id="showPwdBox"><label>顯示密碼</label>
 				<input name='captcha' required placeholder="請輸入驗證碼">
 				<img src="images/login_captcha.jpg" id="captchaImage" onclick="refreshCaptcha()" title="點選即可更新圖片"><br>
 	        	<input type="submit" value="登入" class="submit" onclick="location.href='https://'">
