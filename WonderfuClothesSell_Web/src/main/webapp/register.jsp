@@ -97,6 +97,9 @@
 			$(document).ready(init);
 			function init(){
 				$("#showPwdBox").click(showPasswordHandler);
+				<% if(request.getMethod().equals("POST")){%>
+					repopulateForm();
+				<% } %>
 			}
 			function showPasswordHandler(){
 				if ((($("#showPwdBox").prop("checked")))){//prop用在沒有資料值的屬性上
@@ -108,6 +111,11 @@
 			function refreshCaptcha(){
 				$("#captchaImage").attr("src","images/captcha.jpg?"+ new Date());
 			}
+			function repopulateForm(){
+				$("input[name='id']").val('<%= request.getParameter("id") %>');
+			}
+			//TODO要把資料都帶回來
+			
 		</script>
 	</head>  
   	<body>

@@ -1,5 +1,3 @@
-//TODO 都還沒寫
-
 package com.wcs.controller;
 
 import java.io.IOException;
@@ -41,8 +39,8 @@ public class RegisterServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errorList = new ArrayList<>();
-    	//1.取得request中的form data(id, password, captcha),並檢查
-		response.setCharacterEncoding("UTF-8");//傳來的項目有中文就要先寫這一行
+    	//1.取得request中的form data並檢查
+		request.setCharacterEncoding("UTF-8");//傳來的項目有中文就要先寫這一行
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 		String fullname = request.getParameter("fullname");
@@ -52,16 +50,15 @@ public class RegisterServlet extends HttpServlet {
 		char gender = (request.getParameter("gender")).charAt(0);
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
-		
-		Boolean subscribed = true;
+		boolean subscribed = true;
 		if((request.getParameter("subscribed"))==null) {
 			subscribed = false;
 		}
-		/*Boolean subscribed = false; 
+		/*boolean subscribed = false; 
 		if((request.getParameter("subscribed"))!=null && (request.getParameter("subscribed")).equals("on")){
 			subscribed = true;
 		}*/
-		System.out.println(subscribed);
+		
 		
 		String captcha = request.getParameter("captcha");
 		
@@ -80,6 +77,8 @@ public class RegisterServlet extends HttpServlet {
 		if(comfirmPassword==null || comfirmPassword.length()==0) {
 			errorList.add("必須輸入確認密碼");
 		}
+		//兩個密碼的確認要寫
+		
 		if(birthday==null) { //birthday沒輸入是回傳什麼?
 			errorList.add("必須輸入生日");
 		}
@@ -106,6 +105,7 @@ public class RegisterServlet extends HttpServlet {
 	    		c.setGender(gender);
 	    		c.setAddress(address);
 	    		c.setPhone(phone);
+	    		c.setSubscribed(subscribed);
 	    				
 	    		service.register(c);
 	    		//3.1註冊成功，轉交(forward)給register_ok.jsp
