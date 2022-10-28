@@ -77,6 +77,9 @@ public class RegisterServlet extends HttpServlet {
 		if(comfirmPassword==null || comfirmPassword.length()==0) {
 			errorList.add("必須輸入確認密碼");
 		}
+		if(!password.equals(comfirmPassword)) {
+			errorList.add("兩次密碼輸入不相同");
+		}
 		//兩個密碼的確認要寫
 		
 		if(birthday==null) { //birthday沒輸入是回傳什麼?

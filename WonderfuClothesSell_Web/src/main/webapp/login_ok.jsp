@@ -6,11 +6,11 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
-		<meta http-equiv="refresh" content="5; url=https://www.google.com"/><!-- 跳轉網站 -->
+		<meta http-equiv="refresh" content="5; url='/wcs/index.jsp'"/><!-- 跳轉網站 -->
 		<title>登入成功</title>
 
 	    <style>
-			@import url(myfont.css);
+			@import url(/wcs/css/wcs.css);
 	    </style>
 	</head>
 	<body>
@@ -32,7 +32,7 @@
 	    	<hr>
 	    </nav>
 	    <%
-	    	Customer c = (Customer)request.getAttribute("member");
+	    	Customer c = (Customer)session.getAttribute("member");
 	    %>
 	    <article>
 	    	<h1><%= c==null?"XXX":c.getName() %>你好</h1>>

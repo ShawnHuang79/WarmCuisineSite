@@ -7,7 +7,7 @@
 	    <title>會員資料修改</title>
 
 	    <style>
-			@import url(myfont.css);
+			@import url(/wcs/css/wcs.css);
 	
 			header{
 		        /*定位對齊*/

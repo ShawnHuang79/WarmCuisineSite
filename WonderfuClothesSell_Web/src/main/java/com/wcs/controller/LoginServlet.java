@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.wcs.entity.Customer;
 import com.wcs.exception.WCSException;
@@ -49,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 		if(password==null || password.length()==0) {
 			errorList.add("必須輸入密碼");
 		}
+		HttpSession session = request.getSession();
 		if(captcha==null || captcha.length()==0) {
 			errorList.add("必須輸入驗證碼");
 		}else {
@@ -60,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 	    	CustomerService service = new CustomerService();
 	    	try {
 	    		Customer c = service.login(id, password);
-	    		request.setAttribute("member", c);
+	    		session.setAttribute("member", c);
 	    		//3.1登入成功，轉交(forward)給login_ok.jsp
 	    		RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
 	    		dispatcher.forward(request, response);

@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Customer"%>
 <%@page pageEncoding='UTF-8'%>
 <!DOCTYPE HTML>
 <html>
@@ -6,7 +7,7 @@
 	    <meta charset="UTF-8">
 	    <title>會員註冊</title>
 	    <style>
-			@import url(myfont.css);
+			@import url(/wcs/css/wcs.css);
 	
 			header{
 		        /*定位對齊*/
@@ -100,6 +101,9 @@
 				<% if(request.getMethod().equals("POST")){%>
 					repopulateForm();
 				<% } %>
+				
+				$("input[name='password']").attr("minlength", <%=Customer.PWD_MINIMUM %>);
+				$("input[name='password']").attr("maxlength", <%=Customer.PWD_MAXIMUM %>);s
 			}
 			function showPasswordHandler(){
 				if ((($("#showPwdBox").prop("checked")))){//prop用在沒有資料值的屬性上
@@ -113,8 +117,16 @@
 			}
 			function repopulateForm(){
 				$("input[name='id']").val('<%= request.getParameter("id") %>');
+				$("input[name='email']").val('<%= request.getParameter("email") %>');
+				$("input[name='fullname']").val('<%= request.getParameter("fullname") %>');
+				$("input[name='birthday']").val('<%= request.getParameter("birthday") %>');
+				$("input[value='<%= request.getParameter("gender") %>']").prop("checked", true);
+				$("input[name='address']").val('<%= request.getParameter("address") %>');
+				$("input[name='phone']").val('<%= request.getParameter("phone") %>');
+				
+		
 			}
-			//TODO要把資料都帶回來
+				//TODO subscribed考慮要不要寫
 			
 		</script>
 	</head>  
@@ -126,11 +138,12 @@
 			<div class="loginAndSignup">  
 				<h3>註冊 Sign Up</h3>
 			</div>
+			
 	        <form action="register.do" method="POST">
-	        	<div>${errorList}</div>
+	        	<div>${errorList[0]}</div>
 	            <input type="text" name="id" placeholder="帳號" pattern='[A-Z][1289]\d{8}' required>
 	            <input type="email" name="email" placeholder="email" required>
-				<input type="text" name="fullname" placeholder="使用者姓名" required minlength="2" maxlength="20">
+				<input type="text" name="fullname" placeholder="使用者姓名" required>
 	            <input type="password" class=Pwd  name="password" placeholder="密碼" required>
 	            <input type="password" class=Pwd name="comfirmPassword" placeholder="確認密碼" required>
 				<input type="checkbox" id="showPwdBox"><label>顯示密碼</label>

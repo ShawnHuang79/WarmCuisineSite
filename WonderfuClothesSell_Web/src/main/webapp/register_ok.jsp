@@ -10,7 +10,7 @@
 		<title>註冊成功</title>
 
 	    <style>
-			@import url(myfont.css);
+			@import url(/wcs/css/wcs.css);
 	    </style>
 	</head>
 	<body>

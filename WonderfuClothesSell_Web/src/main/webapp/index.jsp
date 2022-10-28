@@ -8,7 +8,7 @@
 	    <meta charset="UTF-8">
 	    <title>login</title>
 	    <style>
-	        @import url(myfont.css);
+	        @import url(/wcs/css/wcs.css);
 	        body{
 	            background-color: white;
 	        }
@@ -42,23 +42,8 @@
 
 	</head>  
   	<body>
-		<header>
-			<h1><a href='#'>Eat Food歡迎</a> 
-				
-			</h1>
-			<form>
-				<input type='search' placeholder='請輸入查詢關鍵字'>
-				<input type='submit' value='搜尋'>
-			</form>
-			
-			<hr>
-		</header>
-	    <nav>
-	    	<a href='register.jsp'>註冊</a>|
-	    	<a href='login.jsp'>登入</a>|
-	    	<a href='member/update.jsp'>修改會員</a>|
-	    	<hr>
-	    </nav>
+		<jsp:include page='/subviews/header.jsp' /> 
+		<%@include file='/subviews/nav.jsp' %> 
 
 	    <article>
 			<ul class="vendor-list" data-title-pickup=""
@@ -208,10 +193,7 @@
 					</figure>
 				</li>
 			</ul>
-	    </article>    
-
-		<footer id="copyright">
-			<div>Copyright © 2022 All rights reserved</div>
-		</footer>    
+	    </article> 
+	    <%@include file='/subviews/footer.jsp' %>   
 	</body>
 </html>
