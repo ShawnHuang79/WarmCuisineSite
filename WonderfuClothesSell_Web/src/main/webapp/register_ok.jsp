@@ -6,7 +6,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
-		<meta http-equiv="refresh" content="5; url=https://www.google.com"/><!-- 跳轉網站 -->
+		<meta http-equiv="refresh" content="5; url=/wcs/index.jsp"/><!-- 跳轉網站 -->
 		<title>註冊成功</title>
 
 	    <style>

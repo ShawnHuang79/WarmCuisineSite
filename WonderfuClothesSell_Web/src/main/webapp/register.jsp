@@ -5,6 +5,7 @@
 	<head>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta charset="UTF-8">
+<!-- 圖還沒加	    <link rel="icon" type="image/png" href="/wcs/images/favicon.png">  -->
 	    <title>會員註冊</title>
 	    <style>
 			@import url(/wcs/css/wcs.css);

@@ -1,17 +1,12 @@
 <%@page pageEncoding='UTF-8'%>
 <!DOCTYPE HTML>
 <html>
-
-
 	<head>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta charset="UTF-8">
 	    <title>login</title>
 	    <style>
 	        @import url(/wcs/css/wcs.css);
-	        body{
-	            background-color: white;
-	        }
 			body {
 				margin: 0px;
 			}

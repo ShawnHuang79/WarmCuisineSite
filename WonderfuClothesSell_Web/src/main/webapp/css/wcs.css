@@ -4,3 +4,21 @@
 body{
 	font-family:'Noto Serif TC', serif;
 }
+header{
+	display: flex;
+	flex-direction: row;
+}
+header h1{
+	min-width: 250px;
+}
+
+header div{
+	width: 600px;
+}
+
+header form{
+	min-width: 230px;
+}
+header a{
+	min-width: 35px;
+}
