@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.wcs.entity.Customer;
 import com.wcs.exception.WCSException;
@@ -88,12 +89,16 @@ public class RegisterServlet extends HttpServlet {
 		if(gender != 'M' && gender != 'F' && gender != 'U') {
 			errorList.add("必須選擇性別");
 		}
-		
+		HttpSession session = request.getSession();
 		if(captcha==null || captcha.length()==0) {
 			errorList.add("必須輸入驗證碼");
 		}else {
-			//TODO: 檢查驗證碼
+			String sessionCapture = (String)session.getAttribute("com.wcs.view.CaptchaServlet");
+			if (!captcha.equalsIgnoreCase(sessionCapture)) {
+				errorList.add("驗證碼不正確");
+			}
 		}
+		session.removeAttribute("captcha");
 		
 		if(errorList.isEmpty()) {
     	//2.呼叫商業邏輯

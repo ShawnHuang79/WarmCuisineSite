@@ -28,7 +28,7 @@
 		        border:solid 1px #ccc;
 		        border-radius: 5px;
 	        }
-			input[type="radio"], #showPwdBox{
+			input[type="radio"], #showPwdBox, #idSaveBox{
 				width: 30px;
 	        	height: 15px;
 	       	 	margin: 0px;
@@ -124,7 +124,8 @@
 	        </div>
         	<form action="login.do" method="POST">
         		<div>${errorList}</div>
-	            <input type="text" name="id" placeholder="帳號或email" required>
+	            <input type="text" name="id" placeholder="帳號或email" required value='${cookie.id.value}'>
+	            <input type="checkbox" id="idSaveBox" name="autoId" value='ON' ${cookie.autoId.value}><label>記住我的帳號</label>
 	            <input type="password" id="Pwd" name="password" placeholder="密碼" required>
 				<input type="checkbox" id="showPwdBox"><label>顯示密碼</label>
 				<input name='captcha' required placeholder="請輸入驗證碼">
@@ -132,7 +133,7 @@
 	        	<input type="submit" value="登入" class="submit" onclick="location.href='https://'">
 
         	</form>  
-
+				
 	    </div>
 	
 		<footer id="copyright">

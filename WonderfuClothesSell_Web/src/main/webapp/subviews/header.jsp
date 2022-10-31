@@ -21,7 +21,7 @@
 	<a href='/wcs/login.jsp'>登入</a>|
 	<%}else{%>
 	<a href='/wcs/register.jsp'>修改會員</a>|
-	<a href='/wcs/login.jsp'>登出</a>|
+	<a href='/wcs/logout.do'>登出</a>|
 	<%} %>
 </header>
 <!-- /subviews/header.jsp end -->

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,18 +55,41 @@ public class LoginServlet extends HttpServlet {
 		if(captcha==null || captcha.length()==0) {
 			errorList.add("必須輸入驗證碼");
 		}else {
-			//TODO: 檢查驗證碼
+			String sessionCapture = (String)session.getAttribute("com.wcs.view.CaptchaServlet_Login");
+			if (!captcha.equalsIgnoreCase(sessionCapture)) {
+				errorList.add("驗證碼不正確");
+			}
 		}
+		session.removeAttribute("captcha");
 		
 		if(errorList.isEmpty()) {
     	//2.檢查無誤，呼叫商業邏輯。
 	    	CustomerService service = new CustomerService();
 	    	try {
 	    		Customer c = service.login(id, password);
+	    		//可選擇不做的寫入cookie
+	    		String autoId = request.getParameter("autoId"); //!=null就是有勾選
+	    		Cookie idCookie = new Cookie("id", id);
+	    		Cookie autoIdCookie = new Cookie("autoId", "checked");
+	    		if(autoId==null) {
+	    			//set cookie=0
+	    			idCookie.setMaxAge(0);
+	    			autoIdCookie.setMaxAge(0);
+	    		}else {
+	    			//set cookie=秒數
+	    			idCookie.setMaxAge(7*24*60*60);
+	    			autoIdCookie.setMaxAge(7*24*60*60);
+	    		}
+	    		//write cookie
+	    		response.addCookie(idCookie);
+	    		response.addCookie(autoIdCookie);
+	    		//cookie寫入結束
 	    		session.setAttribute("member", c);
 	    		//3.1登入成功，轉交(forward)給login_ok.jsp
 	    		RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
 	    		dispatcher.forward(request, response);
+	    		//3.1作法二:登入成功轉址首頁
+	    		//response.sendRedirect(request.getContextPath());
 	    		return;    		
 	    	}catch(WCSException e){
 	    		//3.2登入失敗
