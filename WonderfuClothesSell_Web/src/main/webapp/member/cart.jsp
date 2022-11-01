@@ -10,9 +10,15 @@
 	</head>
 	<body>
 		<jsp:include page='/subviews/header.jsp' > 
-			<jsp:param value="Cart" name="subtitle"/>
+			<jsp:param value="購物車" name="subtitle"/>
 		</jsp:include>
+		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<% --%>
+// 			if()
+// 			response.sendRedirect();
+<%-- 		%> --%>
 		<article>
 		</article>
+		<%@include file='/subviews/footer.jsp' %>   
 	</body>
 </html>

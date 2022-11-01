@@ -1,3 +1,6 @@
+<%@page import="com.wcs.entity.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="com.wcs.service.ProductService"%>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,9 +42,28 @@
 			<jsp:param value="Product" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
+		
+		<%
+			ProductService service = new ProductService();
+			List<Product> list = service.getAllProducts();//結果沒出來
+			
+		%>
 		<article>
+		<% if(list==null||list.size()==0){ %>
+		<h2>查無產品</h2>
+		<%}else{ %>
 			<ul class="vendor-list" data-title-pickup=""
 				data-title-delivery="熱門餐廳" >
+				<% for(int i=0;i<list.size();i++){
+					Product p = list.get(i);%>
+					
+					<%= p.getPhotoUrl()%>
+				<% 
+				}
+		}
+				%>
+<!--				<a href='?'
+ 				要用?的方式傳上網址列進行搜尋，是給使用者用選擇的方式作為查詢條件? -->
 				<li>
 					<figure class="vendor-tile">
 						<picture class="vendor-picture">

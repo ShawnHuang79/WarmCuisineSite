@@ -7,6 +7,7 @@
 	    <title>login</title>
 	    <style>
 	        @import url(/wcs/css/wcs.css);
+
 			body {
 				margin: 0px;
 			}
@@ -30,6 +31,7 @@
 				width: 200px;
 				height: 150px;
 			}
+				
 
 	    </style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 

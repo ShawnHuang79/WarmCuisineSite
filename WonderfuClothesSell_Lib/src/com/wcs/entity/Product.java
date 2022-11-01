@@ -66,6 +66,9 @@ public class Product {
 	public void setLaunchDate(LocalDate launchDate) {
 		this.launchDate = launchDate;
 	}
+	public void setLaunchDate(String launchDate) {
+		this.setLaunchDate(LocalDate.parse(launchDate));
+	}
 	public int getStatus() {
 		return status;
 	}
