@@ -10,7 +10,6 @@ public class CustomerService {
 		if(idOrEmail==null || pwd==null) {
 			throw new IllegalArgumentException("會員登入，帳號密碼不得為null");
 		}
-
 		Customer c = dao.selectCustomer(idOrEmail);
 		if(c!=null && pwd!=null && pwd.equals(c.getPassword())) {
 			return c;

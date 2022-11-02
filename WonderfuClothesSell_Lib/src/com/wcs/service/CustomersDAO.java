@@ -45,10 +45,8 @@ class CustomersDAO {
 					c.setAddress(rs.getString("address"));
 					c.setPhone(rs.getString("phone"));
 					c.setSubscribed(rs.getBoolean("subscribed"));
-
 				}
 			}
-		
 		}catch(SQLException e) {
 			throw new WCSException("查詢客戶失敗", e);
 		}

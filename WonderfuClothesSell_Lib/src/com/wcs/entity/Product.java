@@ -11,6 +11,9 @@ public class Product {
 	private String description;
 	private LocalDate launchDate ;
 	private int status = 1;//0:新產品；1:已上架；-1:已停售
+	private String category;
+	private int discount;
+	
 	
 	public Product() {
 	}
@@ -75,11 +78,24 @@ public class Product {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName()
 				+": id=" + id + ", 產品名稱=" + name + ", 單價=" + unitPrice + ", 庫存=" + stock + ",\n 圖片網址="
-				+ photoUrl + ",\n 說明=" + description + ", 上架日期=" + launchDate + ", status=" + status ;
+				+ photoUrl + ",\n 說明=" + description + ", 上架日期=" + launchDate + ", status=" + status +
+				", category=" + category + ", discount=" + discount;
 	}
 	@Override
 	public int hashCode() {
@@ -105,6 +121,7 @@ public class Product {
 		}
 		return true;
 	}
+
 	
 	
 }

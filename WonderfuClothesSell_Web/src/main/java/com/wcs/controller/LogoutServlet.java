@@ -31,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
 		//1.取得request中的session物件，但若沒有，不要建立新的(false)。
 		HttpSession session = request.getSession(false);
 		if(session!=null) {
-			//2.呼叫商業邏輯
+			//2.呼叫商業邏輯，把伺服器的session整個清掉
 			session.invalidate();
 		}
 		//3.外部轉址給首頁

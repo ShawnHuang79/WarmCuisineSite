@@ -18,6 +18,7 @@ import com.wcs.entity.Customer;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
+//檢查要開啟member資料夾底下的頁面時，是否已經登入。
 @WebFilter("/member/*")
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
@@ -40,6 +41,7 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		//如果在session的member屬性值是null，代表還沒有登入會員，就
 		HttpServletRequest httpRequest = ((HttpServletRequest)request);
 		HttpServletResponse httpResponse = ((HttpServletResponse)response);
 		HttpSession session = httpRequest.getSession();
@@ -47,7 +49,7 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 		if(member!=null) {
 			chain.doFilter(request, response);
 		}else {
-			httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.jsp");
+			httpResponse.sendRedirect("/wcs/login.jsp");
 		}
 		
 		

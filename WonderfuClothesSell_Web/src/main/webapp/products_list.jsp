@@ -48,6 +48,13 @@
 			List<Product> list = service.getAllProducts();//結果沒出來
 			
 		%>
+		<aside>
+			<a href='?'>全部產品</a><br>
+			<a href='?newest='>最新上架</a><br>
+			<a href='?category=書籍'>書籍</a><br>
+			<a href='?category=文具'>文具</a><br>
+		</aside>
+		
 		<article>
 		<% if(list==null||list.size()==0){ %>
 		<h2>查無產品</h2>
@@ -58,6 +65,8 @@
 					Product p = list.get(i);%>
 					
 					<%= p.getPhotoUrl()%>
+					<%= p.getCategory() %>
+					<%= p.getDiscount() %>
 				<% 
 				}
 		}

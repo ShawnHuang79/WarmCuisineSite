@@ -13,7 +13,7 @@ public class TestProductService_getAllProducts {
 	public static void main(String[] args) {
 		ProductService service = new ProductService();
 		try{
-			List<Product> list = service.getPriceIntevalProducts();
+			List<Product> list = service.getNewestProducts();
 			System.out.println(list);
 		}catch(WCSException e) {
 			Logger.getLogger("").log(
