@@ -13,15 +13,19 @@ public class ProductService {
 	public List<Product> getNewestProducts()throws WCSException{
 		return dao.selectNewestProducts();
 	}
-	public List<Product> getKeywordProducts()throws WCSException{
-		return dao.selectKeywordProducts();
+	public List<Product> getKeywordProducts(String keyword)throws WCSException{
+		if(keyword==null || keyword.length()==0) {
+			throw new IllegalArgumentException("產品查詢時需有1個以上的關鍵字");
+		}
+		return dao.selectKeywordProducts(keyword);
 	}
-	public List<Product> getCategoryProducts()throws WCSException{
-		return dao.selectCategoryProducts();
+	public List<Product> getCategoryProducts(String category)throws WCSException{
+		if(category==null || category.length()==0) {
+			throw new IllegalArgumentException("產品分類查詢必須有值");
+		}
+		return dao.selectCategoryProducts(category);
 	}
-	public List<Product> getPriceIntevalProducts()throws WCSException{
-		return dao.selectPriceIntevalProducts();
+	public List<Product> getPriceIntevalProducts(double minPrice, double maxPrice)throws WCSException{
+		return dao.selectPriceIntevalProducts(minPrice, maxPrice);
 	}
-	
-	
 }

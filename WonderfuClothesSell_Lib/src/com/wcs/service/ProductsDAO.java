@@ -12,27 +12,16 @@ class ProductsDAO {
 	private static final String SELECT_All_products = "SELECT id, vendor, name, unit_price, stock,\r\n"
 			+ "	photo_url, description, launch_date, category, discount\r\n"
 			+ "	FROM wcs.products";
-	private static final String SELECT_Newest_products = "SELECT id, vendor, name, unit_price, stock,\r\n"
-			+ "	photo_url, description, launch_date, category, discount\r\n"
-			+ "	FROM wcs.products\r\n"
+	private static final String SELECT_Newest_products = SELECT_All_products
 			+ "    WHERE launch_date <= curdate()\r\n"
 			+ "    ORDER BY launch_date DESC LIMIT 3";
-	
-	private static final String SELECT_Keyword_products = "SELECT id, vendor, name, unit_price, stock,\r\n"
-			+ "	photo_url, description, launch_date, category, discount\r\n"
-			+ "	FROM wcs.products\r\n"
-			+ "    WHERE name LIKE '%雞%'";
-	private static final String SELECT_Category_products = "SELECT id, vendor, name, unit_price, stock,\r\n"
-			+ "	photo_url, description, launch_date, category, discount\r\n"
-			+ "	FROM wcs.products\r\n"
-			+ "    WHERE category ='飲料'";
-	private static final String SELECT_Price_Inteval_products = "SELECT id, vendor, name, unit_price, stock,\r\n"
-			+ "	photo_url, description, launch_date, category, discount\r\n"
-			+ "	FROM wcs.products\r\n"
-			+ "    WHERE unit_price BETWEEN 50 AND 100";
+	private static final String SELECT_Keyword_products = SELECT_All_products
+			+ "    WHERE name LIKE ?";
+	private static final String SELECT_Category_products = SELECT_All_products
+			+ "    WHERE category = ?";
+	private static final String SELECT_Price_Inteval_products = SELECT_All_products
+			+ "    WHERE unit_price BETWEEN ? AND ?";
 
-
-	
 	List<Product> selectAllProducts() throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
@@ -49,11 +38,10 @@ class ProductsDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new WCSException("[查詢產品]失敗",e);
 		}
 		return list;
 	}
-	
 	List<Product> selectNewestProducts() throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
@@ -68,18 +56,18 @@ class ProductsDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new WCSException("[查詢最新產品]失敗",e);
 		}
 		return list;
 	}
-	
-	List<Product> selectKeywordProducts() throws WCSException{
+	List<Product> selectKeywordProducts(String keyword) throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
 				Connection connection = MySQLConnection.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECT_Keyword_products);
 				){
 			//3.1這裡沒有?值
+				pstmt.setString(1, '%'+keyword+'%');
 			try(
 					ResultSet rs = pstmt.executeQuery();
 					){
@@ -89,17 +77,18 @@ class ProductsDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new WCSException("[依關鍵字查詢產品]失敗",e);
 		}
 		return list;
 	}
-	List<Product> selectCategoryProducts() throws WCSException{
+	List<Product> selectCategoryProducts(String category) throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
 				Connection connection = MySQLConnection.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECT_Category_products);
 				){
 			//3.1這裡沒有?值
+				pstmt.setString(1, category);
 			try(
 					ResultSet rs = pstmt.executeQuery();
 					){
@@ -109,17 +98,19 @@ class ProductsDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new WCSException("[依分類查詢產品]失敗",e);
 		}
 		return list;
 	}
-	List<Product> selectPriceIntevalProducts() throws WCSException{
+	List<Product> selectPriceIntevalProducts(double minPrice, double maxPrice) throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
 				Connection connection = MySQLConnection.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECT_Price_Inteval_products);
 				){
 			//3.1這裡沒有?值
+				pstmt.setDouble(1, minPrice);
+				pstmt.setDouble(2, maxPrice);
 			try(
 					ResultSet rs = pstmt.executeQuery();
 					){
@@ -129,11 +120,11 @@ class ProductsDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new WCSException("[依價格區間查詢產品]失敗",e);
 		}
 		return list;
 	}
-	Product productEntireData(ResultSet rs) throws SQLException {
+	private Product productEntireData(ResultSet rs) throws SQLException {
 		Product p;
 		int discount = rs.getInt("discount");
 		if(discount>0) {
