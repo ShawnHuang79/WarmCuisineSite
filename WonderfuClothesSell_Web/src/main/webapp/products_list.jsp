@@ -69,18 +69,20 @@
 			String newest = request.getParameter("newest");
 			String keyword = request.getParameter("keyword");
 			String category = request.getParameter("category");
-			/*if((request.getParameter("minPrice"))!=null){
-				double minPrice = 0;
+			double minPrice = 0;
+			double maxPrice = 0;
+			if((request.getParameter("minPrice"))!=null){
 				try{
 					minPrice = Double.parseDouble(request.getParameter("minPrice"));
 				}catch (Exception e){
 				}
+			}
 			if((request.getParameter("maxPrice"))!=null){
-				double maxPrice = 0;
 				try{
 					maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
 				}catch (Exception e){
-				}*/	
+				}
+			}
 			//String minPrice = request.getParameter("minPrice");
 			//String maxPrice = request.getParameter("maxPrice");
 			ProductService service = new ProductService();
@@ -92,9 +94,9 @@
 			}else if(category!=null && category.length()>0){
 				list = service.getCategoryProducts(category);
 			}
-			/*else if(minPrice!=0 && maxPrice!=0){
+			else if(minPrice!=0 && maxPrice!=0){
 				list = service.getPriceIntevalProducts(minPrice, maxPrice);
-			}*/
+			}
 			else{
 				list = service.getAllProducts();
 			}
