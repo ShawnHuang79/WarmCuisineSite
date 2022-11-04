@@ -21,7 +21,9 @@ class ProductsDAO {
 			+ "    WHERE category = ?";
 	private static final String SELECT_Price_Inteval_products = SELECT_All_products
 			+ "    WHERE unit_price BETWEEN ? AND ?";
-
+	private static final String SELECT_Id_products = SELECT_All_products
+			+ "    WHERE id= ?";
+	
 	List<Product> selectAllProducts() throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
@@ -124,7 +126,32 @@ class ProductsDAO {
 		}
 		return list;
 	}
+
+	Product selectIdProduct(String productId) throws WCSException {
+		Product p = null;
+		try (
+				Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_Id_products);
+				){
+			//3.1這裡沒有?值
+				pstmt.setString(1, productId);
+				
+			try(
+					ResultSet rs = pstmt.executeQuery();
+					){
+				//處理rs
+				while(rs.next()) {
+
+					p = productEntireData(rs);
+				}
+			}
+		} catch (SQLException e) {
+			throw new WCSException("[依ID區間查詢產品]失敗",e);
+		}
+		return p;
+	}
 	private Product productEntireData(ResultSet rs) throws SQLException {
+		
 		Product p;
 		int discount = rs.getInt("discount");
 		if(discount>0) {
@@ -143,4 +170,5 @@ class ProductsDAO {
 		p.setCategory(rs.getString("category"));
 		return p;
 	}
+
 }

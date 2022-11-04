@@ -8,9 +8,11 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Insert title here</title>
+<!-- 		fancybox -->
+		<link rel='stylesheet' type='text/css' href='fancybox3/jquery.fancybox.css'>
 		<style>
 			@import url(/wcs/css/wcs.css);
-				        body{
+			body{
 	            background-color: white;
 	        }
 			body {
@@ -40,9 +42,16 @@
 				width: 200px;
 				height: 150px;
 			}
+			#getProductData_Div{
+				width: 1000px;
+				height: 800px;
+			}
 	    </style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
-	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+			integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+			crossorigin="anonymous"></script>
+<!-- fancybox -->
+	    <script src='fancybox3/jquery.fancybox.js'></script>
 	    <script>
 	    	function getProductByCategory(){
 	    		
@@ -51,10 +60,40 @@
 	    	function init(){
 	    		
 	    	}
-	    	function getBookPng(theImg){
-	    		
+	    	function getBookPng(theImg){	
 	    		$(theImg).attr("src", "images/defaultpicture.png")
 	    	}
+	    	function getProductData(pid, doAjax){ //如果需要p的資料，就從參數pid送來，doAjax控制同步非同步，
+	    		//
+	    		var urlPath = 'product.jsp?productId=1'+pid;
+	    		if(doAjax){
+	    			$.ajax({
+	    				url: urlPath,
+	    				method: 'GET'
+	    			}).done(getProductDataDoneHandler);
+	    			
+	    		}else{
+	    			location.href=urlPath//同步請求
+	    		}
+	    	}
+	    	function getProductDataDoneHandler(response){
+	    		//console.log(response);
+
+	    		$("#getProductData_Div").html(response);
+<!-- fancybox -->
+	    		$.fancybox.open({
+	    		    src  : '#getProductData_Div',
+	    		    type : 'inline',
+	    		    opts : {
+	    		    	afterShow : function( instance, current ) {
+	    		       	console.info('done!');
+	    	     		}
+	    	   		}
+	    	  	});
+<!-- fancybox -->
+	    	}
+	    	
+	    	
 	    </script>
 	    
 	</head>
@@ -63,7 +102,10 @@
 			<jsp:param value="Product" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
-		
+<!-- fancybox -->
+		<div id='getProductData_Div'>
+		</div>
+<!-- fancybox -->
 		<%
 			//1.取得QueryString中指定的參數
 			String newest = request.getParameter("newest");
@@ -127,22 +169,26 @@
 <!--				<a href='?'
  				要用?的方式傳上網址列進行搜尋，是給使用者用選擇的方式作為查詢條件? -->
 				<li>
-					<a href='product.jsp?productId=1'> <%-- <%= p.getId() %> --%>
-						<figure class="vendor-tile">
+					
+					<figure class="vendor-tile">
+						<a href='javascript:getProductData()'> <%-- <%= p.getId() %>要用參數送到function使用 --%>
 							<picture class="vendor-picture">
 									<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
 							</picture>
-							<figcaption class="vendor-info">
-								<span class="headline">臻蜜定食舖</span>
-									<div class="ratings-component">
-										<span class="stars"></span>
-										<span class="rating"><strong>4.4</strong>/5</span>
-									</div>
-								<p>&lt;店內價&gt;台式</p>
-								<p><strong>免費</strong> 外送</p>
-							</figcaption>
-						</figure>
-					</a>
+						</a>
+						<a href='javascript:getProductData("", true)'>
+						<figcaption class="vendor-info">
+							<span class="headline">臻蜜定食舖</span>
+								<div class="ratings-component">
+									<span class="stars"></span>
+									<span class="rating"><strong>4.4</strong>/5</span>
+								</div>
+							<p>&lt;店內價&gt;台式</p>
+							<p><strong>免費</strong> 外送</p>
+						</figcaption>
+						</a>
+					</figure>
+					
 				</li>
 				<li>
 					<figure class="vendor-tile">

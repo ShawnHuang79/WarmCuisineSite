@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" 
+			content="width=device-width, initial-scale=1.0">
+<link rel='stylesheet' type='text/css' href='jquery.fancybox.css'>
+<style>
+/*  	.fancybox-bg { */
+/*      	background: rgb(130, 230, 130); */
+/*      }  /* default:rgb(30, 30, 70) */ */
+
+ 	.fancybox-is-open .fancybox-bg { 
+ 	    opacity: 0.5; 
+ 	} 
+</style>
+<script src="https://code.jquery.com/jquery-3.0.0.js" 
+			integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+			crossorigin="anonymous"></script>
+<script src='jquery.fancybox.js'></script>
+<script>
+$(document).ready(init);
+
+function init(){
+	$("#test").on('click', function() {	  
+		$.fancybox.open({
+		    src  : '#hidden-content',
+		    type : 'inline',
+		    opts : {
+		      afterShow : function( instance, current ) {
+		        console.info('done!');
+	      }
+	    }
+	  });	  
+	});
+}
+</script>
+</head>
+<body>
+	<p>
+	  <button type='button' id='test'>Click me</button>
+	</p>
+	
+	<div style="display:none" id="hidden-content">
+		<h2>Hello!</h2>
+		<p>You are awesome!</p>
+	</div>
+</body>
+</html>

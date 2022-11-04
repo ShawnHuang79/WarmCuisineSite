@@ -13,12 +13,11 @@ public class TestProductService_getAllProducts {
 	public static void main(String[] args) {
 		ProductService service = new ProductService();
 		try{
-			List<Product> list = service.getNewestProducts();
+			Product list = service.getIdProduct("3");
 			System.out.println(list);
 		}catch(WCSException e) {
 			Logger.getLogger("").log(
 					Level.SEVERE, e.getMessage(), e);
 		}
 	}
-
 }

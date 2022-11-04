@@ -28,4 +28,10 @@ public class ProductService {
 	public List<Product> getPriceIntevalProducts(double minPrice, double maxPrice)throws WCSException{
 		return dao.selectPriceIntevalProducts(minPrice, maxPrice);
 	}
+	public Product getIdProduct(String productId)throws WCSException{
+		if(productId==null || productId.length()==0) {
+			throw new IllegalArgumentException("產品id查詢時需有1個以上的關鍵字");
+		}
+		return dao.selectIdProduct(productId);
+	}
 }
