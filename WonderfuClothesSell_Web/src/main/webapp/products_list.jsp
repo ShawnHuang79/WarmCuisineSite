@@ -38,13 +38,65 @@
 				width: 200px;
 				height: 150px;
 			}
-			.photo{
+			/*.photo{
 				width: 200px;
 				height: 150px;
+			}*/
+			/*.column {
+			  float: left;
+			  width: 25%;
+			}*/
+			
+			/* lightbox */
+			.modal {
+			  display: none;
+			  opacity: 0;
+			  position: fixed;
+			  z-index: 1;
+			  padding-top: 100px;
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  height: 100%;
+			  overflow: auto;
+			  background-color: black;
+			  transition: opacity 0.4s;
 			}
+			
+			/* Modal Content */
+			.modal-content {
+			  position: relative;
+			  background-color: #fefefe;
+			  margin: auto;
+			  padding: 0;
+			  width: 90%;
+			  max-width: 500px;
+			}
+			
+			/* The Close Button */
+			.close {
+			  color: white;
+			  position: absolute;
+			  top: 10px;
+			  right: 25px;
+			  font-size: 35px;
+			  font-weight: bold;
+			}
+			
+			.close:hover,
+			.close:focus {
+			  color: #999;
+			  text-decoration: none;
+			  cursor: pointer;
+			}
+			.cursor {
+			  cursor: pointer;
+			}
+			/* lightbox */
 			#getProductData_Div{
-				width: 1000px;
-				height: 800px;
+				/*width: 1000px;
+				height: 800px;*/
+
 			}
 	    </style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
@@ -65,7 +117,7 @@
 	    	}
 	    	function getProductData(pid, doAjax){ //如果需要p的資料，就從參數pid送來，doAjax控制同步非同步，
 	    		//
-	    		var urlPath = 'product.jsp?productId=1'+pid;
+	    		var urlPath = 'product_div.jsp?productId='+pid;
 	    		if(doAjax){
 	    			$.ajax({
 	    				url: urlPath,
@@ -73,23 +125,14 @@
 	    			}).done(getProductDataDoneHandler);
 	    			
 	    		}else{
-	    			location.href=urlPath//同步請求
+	    			location.href=('product.jsp?productId='+pid)//同步請求
 	    		}
 	    	}
 	    	function getProductDataDoneHandler(response){
-	    		//console.log(response);
 
 	    		$("#getProductData_Div").html(response);
 <!-- fancybox -->
-	    		$.fancybox.open({
-	    		    src  : '#getProductData_Div',
-	    		    type : 'inline',
-	    		    opts : {
-	    		    	afterShow : function( instance, current ) {
-	    		       	console.info('done!');
-	    	     		}
-	    	   		}
-	    	  	});
+				openModal()
 <!-- fancybox -->
 	    	}
 	    	
@@ -103,9 +146,23 @@
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
 <!-- fancybox -->
-		<div id='getProductData_Div'>
+		<div id="myModal" class="modal">
+	 		<span class="close cursor" onclick="closeModal()">&times;</span>
+	  		<div id='getProductData_Div' class="modal-content">
+			</div>
 		</div>
 <!-- fancybox -->
+
+		<script>
+		function openModal() {
+		  document.getElementById("myModal").style.display = "block";
+		  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
+		}
+		function closeModal() {
+		    document.getElementById("myModal").style.opacity = 0
+		    setTimeout(function(){document.getElementById("myModal").style.display = "none";},300);
+		}
+		</script>
 		<%
 			//1.取得QueryString中指定的參數
 			String newest = request.getParameter("newest");
@@ -125,8 +182,6 @@
 				}catch (Exception e){
 				}
 			}
-			//String minPrice = request.getParameter("minPrice");
-			//String maxPrice = request.getParameter("maxPrice");
 			ProductService service = new ProductService();
 			List<Product> list = null;			
 			if(newest!=null){
@@ -151,173 +206,34 @@
 		</aside>
 		
 		<article>
-		<% if(list==null||list.size()==0){ %>
-		<h2>查無產品</h2>
-		<%}else{ %>
+
 			<ul class="vendor-list" data-title-pickup=""
 				data-title-delivery="熱門餐廳" >
-				<% for(int i=0;i<list.size();i++){
-					Product p = list.get(i);%>
-					<img class='photo' src='<%= p.getPhotoUrl() %>' onerror='getBookPng(this)'>
-					<%= p.getPhotoUrl()%>
-					<%= p.getCategory() %>
-					<%= p.getDiscount() %>
-				<%
+				<% if(list==null||list.size()==0){ %>
+					<h2>查無產品</h2>
+				<%}else{ %>
+					<% for(int i=0;i<list.size();i++){
+						Product p = list.get(i);%>
+						<li>
+							<figure class="vendor-tile">
+								<a href='javascript:getProductData(<%= p.getId() %>)'> 
+									<picture class="vendor-picture">
+											<img src='<%= p.getPhotoUrl() %>'>
+									</picture>
+								</a>
+								<a href='javascript:getProductData(<%= p.getId() %>, true)'>
+								<figcaption class="vendor-info">
+									<span class="headline"><%= p.getName()%></span>
+									<p>&lt;店內價&gt;台式</p>
+									<p><strong>免費</strong> 外送</p>
+								</figcaption>
+								</a>
+							</figure>
+						</li>						
+					<%
+					}
 				}
-		}
 				%>
-<!--				<a href='?'
- 				要用?的方式傳上網址列進行搜尋，是給使用者用選擇的方式作為查詢條件? -->
-				<li>
-					
-					<figure class="vendor-tile">
-						<a href='javascript:getProductData()'> <%-- <%= p.getId() %>要用參數送到function使用 --%>
-							<picture class="vendor-picture">
-									<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
-							</picture>
-						</a>
-						<a href='javascript:getProductData("", true)'>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-						</a>
-					</figure>
-					
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="https://images.deliveryhero.io/image/fd-tw/LH/tfbb-hero.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="https://images.deliveryhero.io/image/fd-tw/LH/b2ql-hero.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="https://images.deliveryhero.io/image/fd-tw/LH/szlu-hero.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="https://images.deliveryhero.io/image/fd-tw/LH/y2mr-hero.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="https://www.foodpanda.com.tw/restaurant/y2mr/pa-pa-rice-yi-shi-dun-fan"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure class="vendor-tile">
-						<picture class="vendor-picture">
-								<img src="images/food.jpg"><!-- 這裡是連到食物的圖片 -->
-						</picture>
-						<figcaption class="vendor-info">
-							<span class="headline">臻蜜定食舖</span>
-								<div class="ratings-component">
-									<span class="stars"></span>
-									<span class="rating"><strong>4.4</strong>/5</span>
-								</div>
-							<p>&lt;店內價&gt;台式</p>
-							<p><strong>免費</strong> 外送</p>
-						</figcaption>
-					</figure>
-				</li>
 			</ul>
 	    </article>    
 	</body>
