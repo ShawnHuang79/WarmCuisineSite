@@ -22,6 +22,7 @@ header form{
 header a{
 	min-width: 35px;
 }
+/* 登出跳窗start */
 #snackbar{
 	visibility: hidden;
 	min-width: 250px;
@@ -37,7 +38,7 @@ header a{
 	top: 30px;
 	font-size: 17px;
 }
-/* 登出跳窗start */
+
 #snackbar.show {
 	visibility: visible;
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;

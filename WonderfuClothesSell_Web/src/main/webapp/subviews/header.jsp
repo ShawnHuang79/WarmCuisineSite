@@ -1,11 +1,48 @@
 <%@page import="com.wcs.entity.Customer"%>
 <%@ page pageEncoding="UTF-8"%>
+<style>
+	@import url(/wcs/css/lightbox.css);
+	#login{
+		cursor: pointer;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.0.0.js" 
+	integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+	crossorigin="anonymous">
+</script>
 <script>
-	
+	$(document).ready(initAjax);
+	function initAjax(){
+		$("#login").click(loginHandler);
+	}
+	function loginHandler(){
+		$.ajax({
+			url: '/wcs/login.jsp',
+			method: 'GET'
+		}).done(loginAjaxHandler);
+	}
+	function loginAjaxHandler(response){
+
+		$("#getProductData_Div").html(response);
+		openModal()
+	}
+	function openModal() {
+		  document.getElementById("myModal").style.display = "block";
+		  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
+		}
+	function closeModal() {
+	    document.getElementById("myModal").style.opacity = 0
+	    setTimeout(function(){document.getElementById("myModal").style.display = "none";},300);
+	}
 </script>
 
 <!-- /subviews/header.jsp start -->
 <header>
+	<div id="myModal" class="modal">
+ 		<span class="close cursor" onclick="closeModal()">&times;</span>
+  		<div id='getProductData_Div' class="modal-content">
+		</div>
+	</div>	
 	<h1><a href='/wcs'>Eat Food</a> 
 		<sub>
 			<%=request.getParameter("subtitle")==null?"歡迎光臨": request.getParameter("subtitle") %>
@@ -29,7 +66,7 @@
 	if(c==null){
 	%>
 	<a href='/wcs/register.jsp'>註冊</a>|
-	<a href='/wcs/login.jsp'>登入</a>|
+	<a id='login'>登入</a>|
 	<%}else{%>
 	<a href='/wcs/member/update.jsp'>修改會員</a>|
 	<a href='/wcs/logout.do' onclick="logoutSnackbar()" >登出</a>|

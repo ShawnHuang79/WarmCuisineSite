@@ -8,10 +8,9 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Insert title here</title>
-<!-- 		fancybox -->
-		<link rel='stylesheet' type='text/css' href='fancybox3/jquery.fancybox.css'>
 		<style>
 			@import url(/wcs/css/wcs.css);
+			@import url(/wcs/css/lightbox.css);
 			body{
 	            background-color: white;
 	        }
@@ -38,6 +37,7 @@
 				width: 200px;
 				height: 150px;
 			}
+			
 			/*.photo{
 				width: 200px;
 				height: 150px;
@@ -47,72 +47,21 @@
 			  width: 25%;
 			}*/
 			
-			/* lightbox */
-			.modal {
-			  display: none;
-			  opacity: 0;
-			  position: fixed;
-			  z-index: 1;
-			  padding-top: 100px;
-			  left: 0;
-			  top: 0;
-			  width: 100%;
-			  height: 100%;
-			  overflow: auto;
-			  background-color: black;
-			  transition: opacity 0.4s;
-			}
-			
-			/* Modal Content */
-			.modal-content {
-			  position: relative;
-			  background-color: #fefefe;
-			  margin: auto;
-			  padding: 0;
-			  width: 90%;
-			  max-width: 500px;
-			}
-			
-			/* The Close Button */
-			.close {
-			  color: white;
-			  position: absolute;
-			  top: 10px;
-			  right: 25px;
-			  font-size: 35px;
-			  font-weight: bold;
-			}
-			
-			.close:hover,
-			.close:focus {
-			  color: #999;
-			  text-decoration: none;
-			  cursor: pointer;
-			}
-			.cursor {
-			  cursor: pointer;
-			}
-			/* lightbox */
-			#getProductData_Div{
-				/*width: 1000px;
-				height: 800px;*/
 
-			}
 	    </style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
 			integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
 			crossorigin="anonymous"></script>
-<!-- fancybox -->
-	    <script src='fancybox3/jquery.fancybox.js'></script>
 	    <script>
 	    	function getProductByCategory(){
 	    		
 	    	}
-	    	$(init);
+	    	$(document).ready(init);
 	    	function init(){
 	    		
 	    	}
-	    	function getBookPng(theImg){	
+	    	function getBookPng(theImg){
+	    		alert(this);
 	    		$(theImg).attr("src", "images/defaultpicture.png")
 	    	}
 	    	function getProductData(pid, doAjax){ //如果需要p的資料，就從參數pid送來，doAjax控制同步非同步，
@@ -131,12 +80,16 @@
 	    	function getProductDataDoneHandler(response){
 
 	    		$("#getProductData_Div").html(response);
-<!-- fancybox -->
 				openModal()
-<!-- fancybox -->
 	    	}
-	    	
-	    	
+			function openModal() {
+				  document.getElementById("myModal").style.display = "block";
+				  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
+				}
+			function closeModal() {
+			    document.getElementById("myModal").style.opacity = 0
+			    setTimeout(function(){document.getElementById("myModal").style.display = "none";},300);
+			}
 	    </script>
 	    
 	</head>
@@ -154,14 +107,7 @@
 <!-- fancybox -->
 
 		<script>
-		function openModal() {
-		  document.getElementById("myModal").style.display = "block";
-		  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
-		}
-		function closeModal() {
-		    document.getElementById("myModal").style.opacity = 0
-		    setTimeout(function(){document.getElementById("myModal").style.display = "none";},300);
-		}
+
 		</script>
 		<%
 			//1.取得QueryString中指定的參數
@@ -199,7 +145,7 @@
 			}
 		%>
 		<aside>
- 			<a href='?'>全部產品</a><br> <!--query string -->
+ 			<a href='?'>全部產品</a><br> <%--query string --%>
 			<a href='?newest='>最新上架</a><br>
 			<a href='?category=餐點'>餐點</a><br>
 			<a href='javascript:getProductByCategory("飲料")'>飲料</a><br>
@@ -218,7 +164,7 @@
 							<figure class="vendor-tile">
 								<a href='javascript:getProductData(<%= p.getId() %>)'> 
 									<picture class="vendor-picture">
-											<img src='<%= p.getPhotoUrl() %>'>
+										<img src='<%= p.getPhotoUrl() %>' onerror='getBookPng(this)'> <%--加入圖片的error處理 --%>
 									</picture>
 								</a>
 								<a href='javascript:getProductData(<%= p.getId() %>, true)'>
