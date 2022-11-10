@@ -119,6 +119,7 @@
 			function repopulateForm(){
 				$("input[name='id']").val('<%= request.getParameter("id") %>');
 				$("input[name='email']").val('<%= request.getParameter("email") %>');
+				//改成${sessionScope.member.email}??(member這個變數可能不一樣)
 				$("input[name='fullname']").val('<%= request.getParameter("fullname") %>');
 				$("input[name='birthday']").val('<%= request.getParameter("birthday") %>');
 				$("input[value='<%= request.getParameter("gender") %>']").prop("checked", true);

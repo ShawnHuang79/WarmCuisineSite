@@ -180,6 +180,9 @@
 					}
 				}
 				%>
+				<%--test --%>
+				<li><a href='product5.jsp?productId=5'></a></li>
+				
 			</ul>
 	    </article>    
 	</body>
