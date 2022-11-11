@@ -26,8 +26,8 @@ SELECT id, name, unit_price, discount, stock,
 		photo_url, description, launch_date, category,
 		productIdfk, sizefk, price
     FROM products LEFT JOIN products_price
-		ON products.id = products_price.productIdfk
-	WHERE products.id = 5;
+		ON products.id = products_price.productIdfk;
+	/*WHERE products.id = 5;*/
 
 /*RIGHT OUTER JOIN*/
 SELECT id, name, unit_price, discount, stock, 

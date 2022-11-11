@@ -33,3 +33,6 @@ SELECT id, vendor, name, unit_price, stock,
 	photo_url, description, launch_date, category, discount
 	FROM wcs.products
     WHERE id='2';
+    
+/**/
+SELECT DISTINCT category FROM products;

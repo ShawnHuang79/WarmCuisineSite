@@ -18,6 +18,7 @@
 // 			response.sendRedirect();
 <%-- 		%> --%>
 		<article>
+			
 		</article>
 		<%@include file='/subviews/footer.jsp' %>   
 	</body>

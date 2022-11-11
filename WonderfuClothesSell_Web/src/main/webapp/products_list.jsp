@@ -158,8 +158,11 @@
 				<% if(list==null||list.size()==0){ %>
 					<h2>查無產品</h2>
 				<%}else{ %>
-					<% for(int i=0;i<list.size();i++){
-						Product p = list.get(i);%>
+					<%-- for(int i=0;i<list.size();i++){
+						Product p = list.get(i);--%>
+					<%
+						for(Product p:list){
+					%>	
 						<li>
 							<figure class="vendor-tile">
 								<a href='javascript:getProductData(<%= p.getId() %>)'> 

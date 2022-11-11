@@ -4,14 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wcs.entity.Color;
 import com.wcs.entity.Outlet;
 import com.wcs.entity.Product;
 import com.wcs.exception.WCSException;
 
 class ProductsDAO {
-	private static final String SELECT_All_products = "SELECT id, vendor, name, unit_price, stock,\r\n"
+	private static final String SELECT_All_products = "SELECT id, name, unit_price, stock,\r\n"
 			+ "	photo_url, description, launch_date, category, discount\r\n"
-			+ "	FROM wcs.products";
+			+ "	FROM wcs.products_view";
 	private static final String SELECT_Newest_products = SELECT_All_products
 			+ "    WHERE launch_date <= curdate()\r\n"
 			+ "    ORDER BY launch_date DESC LIMIT 3";
@@ -143,6 +144,7 @@ class ProductsDAO {
 				while(rs.next()) {
 
 					p = productEntireData(rs);
+					//TODO 再加入尺寸及價格
 				}
 			}
 		} catch (SQLException e) {
@@ -168,6 +170,16 @@ class ProductsDAO {
 		p.setDescription(rs.getString("description"));
 		p.setLaunchDate(rs.getString("launch_date"));
 		p.setCategory(rs.getString("category"));
+		
+		//取出顏色資料
+		/*String colorName = rs.getString("color_name");
+		if(colorName!=null) {
+			Color color = new Color();
+			color.setColorName(colorName);
+			color.setStock(rs.getInt("color_stock"));
+			color.setPhotoUrl(rs.getString("color_photo"));
+		}*/
+		
 		return p;
 	}
 

@@ -1,6 +1,10 @@
 package com.wcs.entity;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Product {
 	private int id;//PKey, AUTO-INCREMENT, 必要
@@ -13,8 +17,21 @@ public class Product {
 	private int status = 1;//0:新產品；1:已上架；-1:已停售
 	private String category;
 	private int discount;
+	private Map<String, Color> colorsMap = new TreeMap<>();
 	
+	public Map<String, Color> getColorsMap() {
+		return new TreeMap(colorsMap);//Collections.u(colorsMap)
+	}
+	//setter
+	public void addColor(Color color) {
+		if(color==null) throw new IllegalArgumentException("加入colorsMap時, color物件不得為null");
+		colorsMap.put(color.getColorName(), color);
+	}
 	
+	public boolean isColorful() {
+		return colorsMap!=null && colorsMap.size()>0;
+	}
+
 	public Product() {
 	}
 	public Product(int id, String name, double price) {
@@ -46,7 +63,17 @@ public class Product {
 		this.unitPrice = unitPrice;
 	}
 	public int getStock() {
-		return stock;
+		if(colorsMap==null || colorsMap.isEmpty()) {
+			return stock;
+		}else {
+			int totalStock=0;
+			
+			for(Color color:colorsMap.values()) {
+				
+			}
+			return totalStock;
+			//colorsMap.values().getClass()
+		}
 	}
 	public void setStock(int stock) {
 		this.stock = stock;

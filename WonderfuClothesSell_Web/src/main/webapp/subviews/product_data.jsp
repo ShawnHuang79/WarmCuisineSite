@@ -21,6 +21,8 @@
 	}
 	function changeProductHandler(){
 		$("#theProductPhoto").attr('src', $(this).attr('data-photo'));
+		//$("#colorStockSpan").html('('color+":"+stock+ '個)')
+		
 		//$("select[name='colorName'] option:selected")如果用select+option的寫法。
 	}
 </script>
