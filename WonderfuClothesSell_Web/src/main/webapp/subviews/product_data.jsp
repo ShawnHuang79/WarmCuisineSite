@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Size"%>
 <%@page import="com.wcs.entity.Outlet"%>
 <%@page import="com.wcs.entity.Product"%>
 <%@page import="com.wcs.service.ProductService"%>
@@ -56,9 +57,21 @@
 			<label>顏色:</label>
 			<div>
 				<label>容量:</label>
-				<input class='productVolumnradio' type='radio' name='volumn' value='大' data-photo='' required><label>大</label>
-				<input class='productVolumnradio' type='radio' name='volumn' value='中'><label>中</label>
-				<input class='productVolumnradio' type='radio' name='volumn' value='小'><label>小</label>
+				<!-- 取得資料庫中的size大小並加到畫面上 -->
+				<%for (String sizeName:p.getSizesMap().keySet()){
+					Size size = p.getSizesMap().get(sizeName);
+				%>
+				<input class='productVolumnradio' type='radio' name='volumn' value='<%=sizeName %>' data-photo='' required
+					data-price='<%=size.getPrice() %>'
+				>
+				<label><%=sizeName %></label>
+					
+				<% }%>
+				
+				
+
+<!-- 				<input class='productVolumnradio' type='radio' name='volumn' value='中'><label>中</label> 
+				<input class='productVolumnradio' type='radio' name='volumn' value='小'><label>小</label>-->
 			</div>
 			<label>數量:</label>
 			<input type='number' min='1' max='12' required>

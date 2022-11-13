@@ -17,19 +17,20 @@ public class Product {
 	private int status = 1;//0:新產品；1:已上架；-1:已停售
 	private String category;
 	private int discount;
-	private Map<String, Color> colorsMap = new TreeMap<>();
+	private Map<String, Size> sizesMap = new TreeMap<>();
 	
-	public Map<String, Color> getColorsMap() {
-		return new TreeMap(colorsMap);//Collections.u(colorsMap)
+	//Map, Set, List, []型態屬性的getter:
+	public Map<String, Size> getSizesMap() {
+		return sizesMap;//Collections.u(colorsMap)
 	}
-	//setter
-	public void addColor(Color color) {
-		if(color==null) throw new IllegalArgumentException("加入colorsMap時, color物件不得為null");
-		colorsMap.put(color.getColorName(), color);
+	//Map, Set, List, []型態屬性的setter要改成add(update, delete)
+	public void addSize(Size size) {
+		if(size==null) throw new IllegalArgumentException("加入sizesMap時, size物件不得為null");
+		sizesMap.put(size.getName(), size);
 	}
-	
-	public boolean isColorful() {
-		return colorsMap!=null && colorsMap.size()>0;
+	//判斷是否有不同size
+	public boolean isMultiSize() {
+		return sizesMap!=null && sizesMap.size()>0;
 	}
 
 	public Product() {
@@ -56,6 +57,7 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+	//不同size有不同的價格，應該是從資料讀取放進product物件那邊去改放進來的價格才對
 	public double getUnitPrice() {
 		return unitPrice;
 	}
@@ -63,17 +65,7 @@ public class Product {
 		this.unitPrice = unitPrice;
 	}
 	public int getStock() {
-		if(colorsMap==null || colorsMap.isEmpty()) {
-			return stock;
-		}else {
-			int totalStock=0;
-			
-			for(Color color:colorsMap.values()) {
-				
-			}
-			return totalStock;
-			//colorsMap.values().getClass()
-		}
+		return stock;
 	}
 	public void setStock(int stock) {
 		this.stock = stock;

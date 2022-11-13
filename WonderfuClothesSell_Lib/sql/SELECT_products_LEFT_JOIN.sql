@@ -22,9 +22,11 @@ SELECT id, name, unit_price, discount, stock,
 
 SELECT id, name, unit_price, discount, photo_url,
 		description, launch_date, category, discount,
-        sizefk, price
+        size, price
 FROM products LEFT JOIN products_price
 		ON products.id = products_price.productIdfk
+        LEFT JOIN products_size
+        ON products_price.sizefk = products_size.sizePK
         
 /*a left join b on 條件1 left join c on 條件2 執行順序是：先a和b進行連線，生成一張中間表d，然後再和c進行條件連線生成最後的表的資料 
  select * from a left join b on （a,b的連線條件）left join c on(a,b形成的臨時中間表和c的連線條件)*/
