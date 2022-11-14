@@ -1,11 +1,12 @@
+<%@page import="com.wcs.entity.Customer"%>
 <%@page pageEncoding='UTF-8'%>
 <!DOCTYPE HTML>
 <html>
 	<head>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta charset="UTF-8">
-	    <title>會員資料修改</title>
-
+<!-- 圖還沒加	    <link rel="icon" type="image/png" href="/wcs/images/favicon.png">  -->
+	    <title>會員修改</title>
 	    <style>
 			@import url(/wcs/css/wcs.css);
 	
@@ -28,7 +29,7 @@
 		        border:solid 1px #ccc;
 		        border-radius: 5px;
 	        }
-			input[type="radio"], #showPwdBox{
+			input[type="radio"], #showPwdBox, #subscribedBox{
 				width: 30px;
 	        	height: 15px;
 	       	 	margin: 0px;
@@ -75,6 +76,9 @@
 	        .submit:hover{
 	        	background: #db6937;
 	        }
+	        #captchaImage{
+	        	cursor: pointer;
+	        }
 	        footer{
 				position:relative; 
 		        text-align: center;
@@ -82,16 +86,19 @@
 		        margin: 220px 0px 0px 0px;
 		        font-size: 14px;
 	        }
-	
-
     	</style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
 	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
 		<script>
-			
 			$(document).ready(init);
 			function init(){
 				$("#showPwdBox").click(showPasswordHandler);
+				<% if(request.getMethod().equals("POST")){%>
+					repopulateForm();
+				<% } %>
+				repopulateForm();
+				$("input[name='password']").attr("minlength", <%=Customer.PWD_MINIMUM %>);
+				$("input[name='password']").attr("maxlength", <%=Customer.PWD_MAXIMUM %>);
 			}
 			function showPasswordHandler(){
 				if ((($("#showPwdBox").prop("checked")))){//prop用在沒有資料值的屬性上
@@ -101,27 +108,40 @@
 				}
 			}
 			function refreshCaptcha(){
-					$("#captchaImage").attr("src","images/captcha.jpg?"+ new Date());
-				}
-
+				$("#captchaImage").attr("src","images/captcha.jpg?"+ new Date());
+			}
+			function repopulateForm(){
+ 				$("input[name='id']").val('${sessionScope.member.id}');
+				$("input[name='email']").val('${sessionScope.member.email}');
+				$("input[name='fullname']").val('${sessionScope.member.name}');
+				$("input[name='birthday']").val('${sessionScope.member.birthday}');
+				$("input[value='${sessionScope.member.gender}']").prop("checked", true);
+				$("input[name='address']").val('${sessionScope.member.address}');
+				$("input[name='phone']").val('${sessionScope.member.phone}');
+				
+		
+			}
+				//TODO subscribed考慮要不要寫
+			
 		</script>
 	</head>  
   	<body>
 	    <header>
-	    	<h2>會員資料更新</h2>
+	    	<h2>會員修改</h2>
 	    </header>
 		<article id="signupContainer"> <!-- 改article -->
 			<div class="loginAndSignup">  
-				<h3>修改 Update</h3>
+				<h3>會員修改 Update</h3>
 			</div>
-	         <!-- 改action目標位置 -->
-	        <form action="" method="POST">
-	            <input type="text" name="id" placeholder="帳號" pattern='[A-Z][1289]\d{8}' required>
+			
+	        <form action="/wcs/update.do" method="POST">
+	        	<div>${errorList[0]}</div>
+	            <input type="text" name="id" placeholder="帳號" pattern='[A-Z][1289]\d{8}' disabled="disabled">
 	            <input type="email" name="email" placeholder="email" required>
-				<input type="text" name="fullname" placeholder="使用者姓名" required minlength="2" maxlength="20">
+				<input type="text" name="fullname" placeholder="使用者姓名" required>
 	            <input type="password" class=Pwd  name="password" placeholder="密碼" required>
 	            <input type="password" class=Pwd name="comfirmPassword" placeholder="確認密碼" required>
-				<input type="checkbox" id="showPwdBox" onchange="showPasswordHandler()"><label>顯示密碼</label>
+				<input type="checkbox" id="showPwdBox"><label>顯示密碼</label>
 				<input type="date" name="birthday" placeholder="生日 yyyy/mm/dd" required>
 				<input type="text" name="address" placeholder="地址">
 				<input type="tel" name="phone" placeholder="手機號碼">
@@ -134,7 +154,7 @@
 				<input type="checkbox" id="subscribedBox" name="subscribed" checked><label>訂閱電子報</label>
 				<input name='captcha' required placeholder="請輸入驗證碼">
 				<img src="images/captcha.jpg" id="captchaImage" onclick="refreshCaptcha()" title="點選即可更新圖片"><br>
-	            <input type="submit" value="修改" class="submit">
+	            <input type="submit" value="註冊" class="submit">
 	        </form>  
 		</article>
 	

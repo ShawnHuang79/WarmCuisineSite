@@ -18,9 +18,15 @@ public class CustomerService {
 	}
 	public void register(Customer c) throws WCSException{
 		if(c==null)throw new IllegalArgumentException(
-				"會員註冊，Customer物件c度不得為null");
+				"會員註冊，Customer物件c不得為null");
 		
 		dao.insert(c);
+	}
+	public void update(Customer c) throws WCSException{
+		if(c==null)throw new IllegalArgumentException(
+				"會員修改，Customer物件c不得為null");
+		
+		dao.update(c);
 	}
 	
 }

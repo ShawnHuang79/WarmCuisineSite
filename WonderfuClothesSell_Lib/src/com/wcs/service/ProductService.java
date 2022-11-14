@@ -37,8 +37,8 @@ public class ProductService {
 	}
 	
 	//產品+顏色+尺寸1對多對多用
-	public List<Size> getSizeList(String productId, String colorName)throws WCSException{
+	/*public List<Size> getSizeList(String productId, String colorName)throws WCSException{
 		if(productId==null) throw new IllegalArgumentException("查詢size時必須有產品編號值");
 		return dao.selectSizeList(productId,colorName);
-	}
+	}*/
 }

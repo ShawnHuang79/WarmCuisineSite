@@ -1,7 +1,6 @@
 package com.wcs.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +19,16 @@ import com.wcs.exception.WCSInvalidDataException;
 import com.wcs.service.CustomerService;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class UpdateServlet
  */
-@WebServlet("/register.do") //http://localhost:8080/wcs/register.do 
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/update.do")
+public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public UpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,12 +36,10 @@ public class RegisterServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errorList = new ArrayList<>();
     	//1.取得request中的form data並檢查
 		request.setCharacterEncoding("UTF-8");//傳來的項目有中文就要先寫這一行
-		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 		String fullname = request.getParameter("fullname");
 		String password = request.getParameter("password");
@@ -61,9 +58,6 @@ public class RegisterServlet extends HttpServlet {
 		}*/
 		String captcha = request.getParameter("captcha");
 		
-		if(id==null || id.length()==0) {
-			errorList.add("必須輸入帳號");
-		}
 		if(email==null || email.length()==0) {
 			errorList.add("必須輸入email");
 		}
@@ -101,9 +95,8 @@ public class RegisterServlet extends HttpServlet {
 		if(errorList.isEmpty()) {
     	//2.呼叫商業邏輯
 	    	CustomerService service = new CustomerService();
-	    	Customer c = new Customer();
+	    	Customer c = (Customer)session.getAttribute("member");
 	    	try {
-	    		c.setId(id);
 	    		c.setEmail(email);
 	    		c.setName(fullname);
 	    		c.setPassword(password);
@@ -113,9 +106,9 @@ public class RegisterServlet extends HttpServlet {
 	    		c.setPhone(phone);
 	    		c.setSubscribed(subscribed);
 	    				
-	    		service.register(c);
+	    		service.update(c);
 	    		//3.1註冊成功，轉交(forward)給register_ok.jsp
-	    		request.setAttribute("member", c);
+	    		session.setAttribute("member", c);
 	    		RequestDispatcher dispatcher = request.getRequestDispatcher("register_ok.jsp");
 	    		dispatcher.forward(request, response);
 	    		return;    		
@@ -123,20 +116,18 @@ public class RegisterServlet extends HttpServlet {
 	    		errorList.add(e.getMessage());
 			}catch(WCSException e){
 	    		//3.2註冊失敗
-	    		this.log("註冊失敗", e);
+	    		this.log("修改會員失敗", e);
 	    		errorList.add(e.getMessage());
 	    	}catch(Exception e) {//RuntimeException, WCSInvalidDataException都包含在內。
-	    		this.log("註冊功能發生系統錯誤",e);
-	    		errorList.add("註冊系統錯誤: "+e.getMessage());
+	    		this.log("修改會員功能發生系統錯誤",e);
+	    		errorList.add("修改會員系統錯誤: "+e.getMessage());
 	    	}
     	}	
 		//3.2註冊失敗，轉交(forward)給register.jsp
 		request.setAttribute("errorList", errorList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/update.jsp");
 		dispatcher.forward(request, response);
 		
 		
     }
 }
-
-

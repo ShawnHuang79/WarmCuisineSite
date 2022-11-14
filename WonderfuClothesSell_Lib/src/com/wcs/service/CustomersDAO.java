@@ -89,4 +89,41 @@ class CustomersDAO {
 			throw new WCSException("新增客戶失敗", e);
 		}
 	}
+	
+	private static final String UPDATE_CUSTOMER= "UPDATE wcs.customers "
+			+ " SET email=?, name =?, password=?, birthday=?, "
+			+ " gender=?, address=?, phone=?, subscribed=? "
+			+ " WHERE id =?";
+	public void update(Customer c) throws WCSException{
+		
+		try (
+			Connection connection = MySQLConnection.getConnection();//1,2 取得連線
+			PreparedStatement pstmt = connection.prepareStatement(UPDATE_CUSTOMER);//3.準備指令
+			){
+			//3.1傳入?值
+			pstmt.setString(1, c.getEmail());
+			pstmt.setString(2, c.getName());
+			pstmt.setString(3, c.getPassword());
+			pstmt.setString(4, String.valueOf(c.getBirthday()));//寫.toString()也可以
+			pstmt.setString(5, String.valueOf(c.getGender()));
+			pstmt.setString(6, c.getAddress());
+			pstmt.setString(7, c.getPhone());
+			pstmt.setBoolean(8, c.isSubscribed());
+			pstmt.setString(9, c.getId());
+			//4.執行指令
+			pstmt.executeUpdate();
+			
+			
+		}catch(SQLIntegrityConstraintViolationException e) {
+			if(e.getMessage().indexOf("customers.PRIMARY")>-1) {
+				throw new WCSDuplicateEntryException("帳號", e);
+			}else if(e.getMessage().indexOf("customers.email_UNIQUE")>-1) {
+				throw new WCSDuplicateEntryException("email", e);
+			}else {
+				throw new WCSException("修改會員資料失敗", e);
+			}
+		} catch (SQLException e) {
+			throw new WCSException("修改會員資料失敗", e);
+		}
+	}
 }

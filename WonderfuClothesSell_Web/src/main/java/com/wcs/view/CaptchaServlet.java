@@ -48,6 +48,7 @@ public class CaptchaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Random random = new Random();
 		String captcha = "";
+		//使用的範圍不含0和1，考慮把O和I也去掉
 		for(int i=0;i<len;i++) {
 			int data = random.nextInt(34);
 			char ch = (char)(data<8? data+'2':data-8+'A');
