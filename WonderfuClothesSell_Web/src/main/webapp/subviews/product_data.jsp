@@ -26,6 +26,23 @@
 		
 		//$("select[name='colorName'] option:selected")如果用select+option的寫法。
 	}
+	//改Json回傳格式用
+	
+	
+	/*function getSizeJsonDataDoneHandler(data){
+		var jsonSizeArray = data.sizeArray;
+		$("#sizeDiv>div").html('');
+		for(i=0;i<jsonSizeArray.length;i++){
+			var jsonSize = jsonSizeArray[i];
+			var radioInput = "<input type = 'radio' value='M' name='size' required ">
+			var sizeLabel = "<label>"+jsonSize.sizeName+"</label>";
+			
+			$("#sizeDiv>div").append(radioInput);
+			$("#sizeDiv>div").append(sizeLabel);
+				
+		}
+	}*/
+	
 </script>
 
 
@@ -57,8 +74,7 @@
 			<label>顏色:</label>
 			<div>
 				<label>容量:</label>
-				<!-- 取得資料庫中的size大小並加到畫面上 -->
-				<%for (String sizeName:p.getSizesMap().keySet()){
+ 				<%for (String sizeName:p.getSizesMap().keySet()){ 
 					Size size = p.getSizesMap().get(sizeName);
 				%>
 				<input class='productVolumnradio' type='radio' name='volumn' value='<%=sizeName %>' data-photo='' required

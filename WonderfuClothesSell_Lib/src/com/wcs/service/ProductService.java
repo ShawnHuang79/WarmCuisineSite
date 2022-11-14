@@ -3,6 +3,7 @@ package com.wcs.service;
 import java.util.List;
 
 import com.wcs.entity.Product;
+import com.wcs.entity.Size;
 import com.wcs.exception.WCSException;
 
 public class ProductService {
@@ -33,5 +34,11 @@ public class ProductService {
 			throw new IllegalArgumentException("產品id查詢時需有1個以上的關鍵字");
 		}
 		return dao.selectIdProduct(productId);
+	}
+	
+	//產品+顏色+尺寸1對多對多用
+	public List<Size> getSizeList(String productId, String colorName)throws WCSException{
+		if(productId==null) throw new IllegalArgumentException("查詢size時必須有產品編號值");
+		return dao.selectSizeList(productId,colorName);
 	}
 }
