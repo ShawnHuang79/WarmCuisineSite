@@ -406,44 +406,42 @@
 				background-color: #ff6700 !important;
 			}
 	    </style>
-	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
-			integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
-			crossorigin="anonymous"></script>
+
 	    <script>
 			window.onload = function() {
 				//預設測試資料
-				var aData = [{
-						"imgUrl": "img/03-car-01.png",
+				var productData = [{
+						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/40237680.jpg",
 						"proName": " 小米手環4 NFC版 ",
 						"proPrice": "229",
 						"proComm": "1"
 					},
 					{
-						"imgUrl": "img/03-car-02.png",
+						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/LH/p6lj-hero.jpg",
 						"proName": " Redmi AirDots真無線藍芽耳機 ",
 						"proPrice": "99.9",
 						"proComm": "9.7"
 					},
 					{
-						"imgUrl": "img/03-car-03.png",
+						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/40237680.jpg",
 						"proName": " 米家藍芽溫度計 ",
 						"proPrice": "65",
 						"proComm": "1.3"
 					},
 					{
-						"imgUrl": "img/03-car-04.png",
+						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/LH/p6lj-hero.jpg",
 						"proName": " 小米智能鬧鐘 ",
 						"proPrice": "149",
 						"proComm": "1.1"
 					},
 					{
-						"imgUrl": "img/03-car-05.png",
+						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/40237680.jpg",
 						"proName": "米家電子溫度計Pro  ",
 						"proPrice": "750",
 						"proComm": "0.3"
 					},
 					{
-						"imgUrl": "img/03-car-06.png",
+						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/LH/p6lj-hero.jpg",
 						"proName": " 小米手環3 NFC版 Pro  ",
 						"proPrice": "199",
 						"proComm": "3.3"
@@ -473,40 +471,41 @@
 						"proComm": "7.2"
 					}
 				];
-				var oBox = document.getElementById("box");
-				var oCar = document.getElementById("car");
-				var oUl = document.getElementsByTagName("ul")[0];
+				var productBox = document.getElementById("box");
+				var cart = document.getElementById("car");
+				var productUl = document.getElementsByTagName("ul")[0];
 
-				for (var i = 0; i < aData.length; i++) {
-					var oLi = document.createElement("li");
-					var data = aData[i];
+				for (var i = 0; i < productData.length; i++) {
+					var productLi = document.createElement("li");
+					var data = productData[i];
 
-					oLi.innerHTML += '<div class="pro_img"><img src="' + data["imgUrl"] + '" width="150" height="150"></div>';
-					oLi.innerHTML += '<h3 id="h3" class="pro_name"><a rel="nofollow" href="#">' + data["proName"] + '</a></h3>';
-					oLi.innerHTML += '<p class="pro_price">' + data["proPrice"] + '元</p>';
-					oLi.innerHTML += '<div class="add_btn">加入購物車</div>';
-					oUl.appendChild(oLi);
+					productLi.innerHTML += '<div class="pro_img"><img src="' + data["imgUrl"] + '" width="150" height="150"></div>';
+					productLi.innerHTML += '<h3 id="h3" class="pro_name"><a rel="nofollow" href="#">' + data["proName"] + '</a></h3>';
+					productLi.innerHTML += '<p class="pro_price">' + data["proPrice"] + '元</p>';
+					productLi.innerHTML += '<div class="add_btn">加入購物車</div>';
+					productUl.appendChild(productLi);
 
 				}
-				var aBtn = getClass(oBox, "add_btn");//获取box下的所有添加购物车按钮
+				var aBtn = getClass(productBox, "add_btn");//获取box下的所有添加购物车按钮
 				var number = 0;//初始化商品数量
 				for (var i = 0; i < aBtn.length; i++) {
 					number++;
 					aBtn[i].index = i;
 					aBtn[i].onclick = function() {
-						var oDiv = document.createElement("div");
-						var data = aData[this.index];
-						oDiv.className = "row hid";
-						oDiv.innerHTML += '<div class="check left"> <i class="i_check" id="i_check" onclick="i_check()" >√</i></div>';
-						oDiv.innerHTML += '<div class="img left"><img src="' + data["imgUrl"] + '" width="80" height="80"></div>';
-						oDiv.innerHTML += '<div class="name left"><span>' + data["proName"] + '</span></div>';
-						oDiv.innerHTML += '<div class="price left"><span>' + data["proPrice"] + '元</span></div>';
-						oDiv.innerHTML +=' <div class="item_count_i"><div class="num_count"><div class="count_d">-</div><div class="c_num">1</div><div class="count_i">+</div></div> </div>'
-						oDiv.innerHTML += '<div class="subtotal left"><span>' + data["proPrice"] + '元</span></div>'
-						oDiv.innerHTML += '<div class="ctrl left"><a rel="nofollow" href="javascript:;">×</a></div>';
-						oCar.appendChild(oDiv);
+						var createDiv = document.createElement("div");
+						var data = productData[this.index];
+						createDiv.className = "row hid";
+						createDiv.innerHTML += '<div class="check left"> <i class="i_check" id="i_check" onclick="i_check()" >√</i></div>';
+						createDiv.innerHTML += '<div class="img left"><img src="' + data["imgUrl"] + '" width="80" height="80"></div>';
+						createDiv.innerHTML += '<div class="name left"><span>' + data["proName"] + '</span></div>';
+						createDiv.innerHTML += '<div class="price left"><span>' + data["proPrice"] + '元</span></div>';
+						createDiv.innerHTML +=' <div class="item_count_i"><div class="num_count"><div class="count_d">-</div><div class="c_num">1</div><div class="count_i">+</div></div> </div>'
+						createDiv.innerHTML += '<div class="subtotal left"><span>' + data["proPrice"] + '元</span></div>'
+						createDiv.innerHTML += '<div class="ctrl left"><a rel="nofollow" href="javascript:;">×</a></div>';
+						cart.appendChild(createDiv);
+						//flag好像沒用到
 						var flag = true;
-						var check = oDiv.firstChild.getElementsByTagName("i")[0];
+						var check = createDiv.firstChild.getElementsByTagName("i")[0];
 						check.onclick = function() {
 							// console.log(check.className);
 							if (check.className == "i_check i_acity") {
@@ -517,11 +516,11 @@
 							}
 							getAmount();
 						}
-						var delBtn = oDiv.lastChild.getElementsByTagName("a")[0];
+						var delBtn = createDiv.lastChild.getElementsByTagName("a")[0];
 						delBtn.onclick = function() {
 							var result = confirm("確定刪除嗎?");
 							if (result) {
-								oCar.removeChild(oDiv);
+								cart.removeChild(createDiv);
 								number--;
 								getAmount();
 							}
@@ -580,7 +579,7 @@
 						delBtn.onclick = function() {
 							var result = confirm("確定刪除嗎?");
 							if (result) {
-								oCar.removeChild(oDiv);
+								cart.removeChild(createDiv);
 								number--;
 								getAmount();
 							}
@@ -680,6 +679,7 @@
 					<div class="name left">商品名稱</div>
 					<div class="price left">單價</div>
 					<div class="number left">數量</div>
+					<div class="size left">尺寸</div>
 					<div class="subtotal left">小計</div>
 					<div class="ctrl left">操作</div>
 				</div>

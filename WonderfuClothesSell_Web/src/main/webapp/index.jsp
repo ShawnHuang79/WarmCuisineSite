@@ -25,6 +25,9 @@
 				width:3765px;/*image width=753x5=3765px*/
 				display: flex;
 			}
+			#imgs:hover{
+				
+			}
 			#prev,#next{
 				position:absolute;
 				width:30px;

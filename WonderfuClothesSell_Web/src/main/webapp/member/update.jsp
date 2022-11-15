@@ -154,7 +154,7 @@
 				<input type="checkbox" id="subscribedBox" name="subscribed" checked><label>訂閱電子報</label>
 				<input name='captcha' required placeholder="請輸入驗證碼">
 				<img src="images/captcha.jpg" id="captchaImage" onclick="refreshCaptcha()" title="點選即可更新圖片"><br>
-	            <input type="submit" value="註冊" class="submit">
+	            <input type="submit" value="修改會員資料" class="submit">
 	        </form>  
 		</article>
 	

@@ -109,7 +109,7 @@ public class UpdateServlet extends HttpServlet {
 	    		service.update(c);
 	    		//3.1註冊成功，轉交(forward)給register_ok.jsp
 	    		session.setAttribute("member", c);
-	    		RequestDispatcher dispatcher = request.getRequestDispatcher("register_ok.jsp");
+	    		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/update.jsp");
 	    		dispatcher.forward(request, response);
 	    		return;    		
 	    	}catch(WCSInvalidDataException e) {
@@ -125,7 +125,7 @@ public class UpdateServlet extends HttpServlet {
     	}	
 		//3.2註冊失敗，轉交(forward)給register.jsp
 		request.setAttribute("errorList", errorList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/update.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 		dispatcher.forward(request, response);
 		
 		

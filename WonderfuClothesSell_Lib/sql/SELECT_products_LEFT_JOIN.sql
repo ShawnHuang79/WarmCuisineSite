@@ -19,10 +19,9 @@ SELECT id, name, unit_price, discount, stock,
 		ON products.id = products_price.productIdfk
 	WHERE products.id = 5;
     
-
+/*LEFT OUTER JOIN, E05檢視產品ID明細，如果沒有尺寸的產品，price會不存在，要處理。 products_join_size_view*/
 SELECT id, name, unit_price, discount, photo_url,
-		description, launch_date, category, discount,
-        size, price
+		description, launch_date, category, size, price
 FROM products LEFT JOIN products_price
 		ON products.id = products_price.productIdfk
         LEFT JOIN products_size
