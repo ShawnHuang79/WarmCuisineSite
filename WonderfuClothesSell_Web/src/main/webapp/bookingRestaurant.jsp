@@ -30,9 +30,9 @@
 			<input type="checkbox" class="seat" name="seat" value="A3"><label>A3</label>
 			<input type="checkbox" class="seat" name="seat" value="B1"><label>B1</label>
 			<input type="checkbox" class="seat" name="seat" value="B2"><label>B2</label>
-			<input type="checkbox" class="seat" name="seat" value="B3"><label>B3</label>
-			<input type="checkbox" class="seat" name="seat" value="A5"><label>A5</label>
-			<input type="checkbox" class="seat" name="seat" value="A4"><label>A4</label>
+			<input type="checkbox" class="seat" name="seat" value="C1"><label>C1</label>
+			<input type="checkbox" class="seat" name="seat" value="C2"><label>C2</label>
+			<input type="checkbox" class="seat" name="seat" value="D1"><label>D1</label>
 			<input type="text" value="${paramValues.seat}">
 			<input type="submit" value="繼續" class="submit">
 			

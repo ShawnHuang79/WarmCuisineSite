@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.ShoppingCart"%>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -650,7 +651,15 @@
 // 			if()
 // 			response.sendRedirect();
 <%-- 		%> --%>
+		<%
+			ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+		%>
 		<article>
+			<%=cart %>
+			
+			<% for(CartItem cartItem: cart.getCartItemsSet()){ %>
+			
+			
 			<div class="header">
 				<div class="container">
 					<div class="header-logo">

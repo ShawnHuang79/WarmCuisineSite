@@ -69,7 +69,7 @@
 		<%} %>
 		<div>售價:79</div>
 		<div>庫存: 1</div>
-		<form method='POST' action>
+		<form method='POST' action='/wcs/add_cart.do'>
 			<input type='text' name='productId' value='<%=productId%>'>
 			<label>顏色:</label>
 			<div>

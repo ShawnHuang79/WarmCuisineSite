@@ -134,7 +134,7 @@
 				<h3>會員修改 Update</h3>
 			</div>
 			
-	        <form action="/wcs/update.do" method="POST">
+	        <form action="update.do" method="POST">
 	        	<div>${errorList[0]}</div>
 	            <input type="text" name="id" placeholder="帳號" pattern='[A-Z][1289]\d{8}' disabled="disabled">
 	            <input type="email" name="email" placeholder="email" required>

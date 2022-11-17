@@ -21,7 +21,7 @@ import com.wcs.service.CustomerService;
 /**
  * Servlet implementation class UpdateServlet
  */
-@WebServlet("/update.do")
+@WebServlet("/member/update.do")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
