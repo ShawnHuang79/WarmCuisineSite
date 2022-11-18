@@ -647,20 +647,19 @@
 			<jsp:param value="購物車" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
-<%-- 		<% --%>
-// 			if()
-// 			response.sendRedirect();
-<%-- 		%> --%>
+
 		<%
 			ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 		%>
 		<article>
-			<%=cart %>
+<%-- 			<%=cart %> --%>
+<%-- 			<% for(CartItem cartItem: cart.getCartItemsSet()){ %> --%>
+			<%if(cart==null || cart.isEmpty()){ %>
+				<div>購物車目前沒有商品</div>
+			<%}else{%>
 			
-			<% for(CartItem cartItem: cart.getCartItemsSet()){ %>
 			
-			
-			<div class="header">
+<!-- 舊的header注意class+CSS? 			<div class="header">
 				<div class="container">
 					<div class="header-logo">
 						<a rel="nofollow" class="logo ir" href="" title="小米官网">EAT FOOD</a>
@@ -675,11 +674,17 @@
 							href="http://www.weichufeng.cn/regist.jsp">註冊</a>
 					</div>
 				</div>
-			</div>
-		
-		
+			</div>  -->	
+
+				<div>共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件, 
+			總金額: <%=cart.getTotalAmount() %>元
+			<%}  %>
+			<form action='update_cart.do'>
 			<div id="car" class="car">
 		
+<%-- 				<div>共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件,  --%>
+<%-- 						總金額: <%=cart.getTotalAmount() %>元 --%>
+				</div>
 				<div class="head_row hid">
 					<div class="check left">
 						<i onclick="checkAll()">√</i>
@@ -701,7 +706,7 @@
 					合計：<span id="price_num">0</span>元
 				</div>
 			</div>
-		
+			</form>
 		
 		
 			<div id="box">

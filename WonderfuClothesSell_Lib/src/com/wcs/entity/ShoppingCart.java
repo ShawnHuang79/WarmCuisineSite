@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class ShoppingCart {
 	private Customer member;
+	//map<購物車的物件,數量>
 	private Map<CartItem, Integer> cartMap = new HashMap<>();
 	public Customer getMember() {
 		return member;
@@ -21,19 +22,22 @@ public class ShoppingCart {
 	public boolean isEmpty() {
 		return cartMap.isEmpty();
 	}
-	public Integer getQuantity(CartItem key) {
-		return cartMap.get(key);
+	public int getQuantity(CartItem key) {
+		//用.get依照傳入的CartItem為key取出其數量
+		Integer qty = cartMap.get(key);
+		return qty==null?0:qty;
 	}
 	public Set<CartItem> getCartItemsSet() {
-		return new HashSet(cartMap.keySet());
+		return new HashSet<>(cartMap.keySet());
 	}
 	//cartMap's business Methods
 	public double getAmount(CartItem key) {
-		return key.getProduct().getUnitPrice() * getQuantity(key);
+		return key.getUnitPrice() * getQuantity(key);
 	}
+	//總價
 	public int getTotalQuantity() {
 		int sum=0;
-		for(Integer qty:cartMap.value()) {
+		for(Integer qty:cartMap.values()) {
 			if(qty!=null) {
 				sum+=qty;
 			}
@@ -55,14 +59,38 @@ public class ShoppingCart {
 	
 	
 	//cartMap's setter
-	public Integer add(CartItem key, Integer value) {
+	
+	//cartMap's setter(delegate methods) 
+	/*public Integer add(CartItem key, Integer value) {
 		return cartMap.put(key, value);
+	}*/
+	public void add(Product product, Size size, int quantity) {
+		if (product==null || quantity<=0) 
+				throw new IllegalArgumentException("加入購物車時，必需有產品與數量");
+		
+		CartItem cartItem = new CartItem();
+		cartItem.setProduct(product);
+		if(product.hasSize() && size!=null) {			
+			cartItem.setSize(size);
+		}
+		
+		Integer oldQty = cartMap.get(cartItem);
+		if(oldQty!=null) quantity+=oldQty;
+		
+		cartMap.put(cartItem, quantity);
 	}
+	
 	//修改購物明細數量，會檢查後面兩個數字是否相同，把old取代成new
 	public boolean update(CartItem key, int oldValue, int newValue) {
 		return cartMap.replace(key, oldValue, newValue);
 	}	
-	public Integer remove(Object key) {
-		return cartMap.remove(key);
+	public Integer remove(CartItem cartItem) {
+		return cartMap.remove(cartItem);
 	}
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + "訂購人: " + member + ",\n 購物明細:" + cartMap + ",\n 共" + size() +
+				"項, " + getTotalQuantity() + "件, 總金額: " + getTotalAmount() + "元";
+	}
+	
 }

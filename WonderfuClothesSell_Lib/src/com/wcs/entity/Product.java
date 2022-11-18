@@ -1,8 +1,10 @@
 package com.wcs.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -16,8 +18,22 @@ public class Product {
 	private LocalDate launchDate ;
 	private int status = 1;//0:新產品；1:已上架；-1:已停售
 	private String category;
+	//discount好像被移到其他地方了
 	private int discount;
-	private Map<String, Size> sizesMap = new TreeMap<>();
+	//private boolean hasSize;
+	private List<Size> sizesList = new ArrayList<>();
+	
+	public List<Size> getSizesList() {
+		return sizesList;//Collections.u(colorsMap)
+	}
+	public void addSize(Size size) {
+		if(size==null) throw new IllegalArgumentException("加入sizeList時, size物件不得為null");
+		sizesList.add(size);
+	}
+	public boolean isMultiSize() {
+		return sizesList!=null && sizesList.size()>0;
+	}
+	/*private Map<String, Size> sizesMap = new TreeMap<>();
 	
 	//Map, Set, List, []型態屬性的getter:
 	public Map<String, Size> getSizesMap() {
@@ -26,12 +42,12 @@ public class Product {
 	//Map, Set, List, []型態屬性的setter要改成add(update, delete)
 	public void addSize(Size size) {
 		if(size==null) throw new IllegalArgumentException("加入sizesMap時, size物件不得為null");
-		sizesMap.put(size.getName(), size);
+		sizesMap.put(size.getSizeName(), size);
 	}
 	//判斷是否有不同size
 	public boolean isMultiSize() {
 		return sizesMap!=null && sizesMap.size()>0;
-	}
+	}*/
 
 	public Product() {
 	}
@@ -111,6 +127,14 @@ public class Product {
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
+	
+	//上面還寫了一個isMultiSize，是否有重複再看看
+	/*public boolean hasSize() {
+		return hasSize;
+	}
+	public void setHasSize(boolean hasSize) {
+		this.hasSize = hasSize;
+	}*/
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName()

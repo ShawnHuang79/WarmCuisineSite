@@ -74,13 +74,12 @@
 			<label>顏色:</label>
 			<div>
 				<label>容量:</label>
- 				<%for (String sizeName:p.getSizesMap().keySet()){ 
-					Size size = p.getSizesMap().get(sizeName);
+ 				<%for (Size size:p.getSizesList()){ 
 				%>
-				<input class='productVolumnradio' type='radio' name='volumn' value='<%=sizeName %>' data-photo='' required
-					data-price='<%=size.getPrice() %>'
+				<input class='productVolumnradio' type='radio' name='volumn' value='<%=size.getSizeName() %>' data-photo='' required
+					data-price='<%=size.getUnitPrice() %>'
 				>
-				<label><%=sizeName %></label>
+				<label><%=size.getSizeName() %></label>
 					
 				<% }%>
 				

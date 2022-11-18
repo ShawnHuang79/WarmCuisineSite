@@ -2,9 +2,8 @@ package com.wcs.entity;
 
 import java.time.LocalDateTime;
 
-public class CartItem {
+public class CartItem implements Comparable<CartItem>{
 	private Product product;//PKEY
-	private Color color;//PKEY
 	private Size size;//PKEY
 	private LocalDateTime createdTime = LocalDateTime.now();
 	
@@ -13,12 +12,6 @@ public class CartItem {
 	}
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-	public Color getColor() {
-		return color;
-	}
-	public void setColor(Color color) {
-		this.color = color;
 	}
 	public Size getSize() {
 		return size;
@@ -33,65 +26,46 @@ public class CartItem {
 	public String getProductName() {
 		return product.getName();
 	}
-	public String getColorName() {
-		if(color!=null){
-			return color.getColorName();
-		}else {
-			return "";
-		}
-	}
 	public String getSizeName() {
 		if(size!=null){
-			return color.getSizeName();
+			return size.getSizeName();
 		}else {
 			return "";
-		}
-	}
-	public String getProductPhotoUrl() {
-		if(color!=null) {
-			return color.getPhotoUrl();
-		}else {
-			return product.getPhotoUrl();
-		}
-	}
-	public int getStock() {
-		if(size!=null) {
-			return size.getStock();
-		}else if(color!=null){
-			return color.getStock();
-		}else {
-			return product.getStock();
 		}
 	}
 	public double getListPrice() {
 		if(size!=null) {
-			return size.getlistPrice();
+			return size.getListPrice();
 		}else {
 			if(product instanceof Outlet) {
-				return ((Outlet)product.getListPrice();
+				return ((Outlet)product).getListPrice();
 			}
 		}
-		return Product.getUnitPrice();
+		return product.getUnitPrice();
 	}
-	public String getDiscountString() {
+	public String getDiscountString() {//取得"?折"
 		if(product instanceof Outlet) {
 			return ((Outlet)product).getDiscountString();
 		}
 		return "";
 	
 	}
-	getUnitPrice(){
-	
-	
+	public double getUnitPrice() {
+		if(size!=null) {
+			return size.getUnitPrice();
+		}
+		return product.getUnitPrice();
+	}
+
 	@Override
 	public String toString() {
-		return this.getClass().getName() + "產品: " + product + ", 顏色: " + color + ", 尺寸: " + size;
+		return this.getClass().getSimpleName() + "產品名稱: " + getProductId() + ", 購買Size: " + getSizeName() + ", 定價: "
+				+ getListPrice() + ", 折扣: " + getDiscountString() + ", 售價: " + getUnitPrice();
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		return result;
@@ -108,13 +82,6 @@ public class CartItem {
 			return false;
 		}
 		CartItem other = (CartItem) obj;
-		if (color == null) {
-			if (other.color != null) {
-				return false;
-			}
-		} else if (!color.equals(other.color)) {
-			return false;
-		}
 		if (product == null) {
 			if (other.product != null) {
 				return false;
@@ -131,6 +98,13 @@ public class CartItem {
 		}
 		return true;
 	}
-	
-	
+	@Override
+	public int compareTo(CartItem o) {
+		int firstCompare = this.createdTime.compareTo(o.createdTime);
+		if(firstCompare!=0) {
+			return firstCompare;
+		}else {
+			return hashCode()-o.hashCode();
+		}
+	}
 }

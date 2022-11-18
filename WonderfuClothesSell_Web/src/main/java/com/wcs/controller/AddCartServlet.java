@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.wcs.entity.Product;
 import com.wcs.entity.ShoppingCart;
+import com.wcs.entity.Size;
 import com.wcs.exception.WCSException;
 import com.wcs.service.ProductService;
 
@@ -40,17 +41,15 @@ public class AddCartServlet extends HttpServlet {
 		//1.取得request中的formData
 		//productId在畫面中不用看到，但要用input hidden偷偷傳過來。
 		String productId = request.getParameter("productId");
-		String colorName = request.getParameter("colorName");
 		String sizeName = request.getParameter("sizeName");
 		String quantity = request.getParameter("quantity");
 		
 		if(productId!=null && quantity!=null && quantity.matches("\\d+")) {
 			ProductService pService = new ProductService();
 			try {
-				Product p = pService.getProductById(productId);
+				Product p = pService.getIdProduct(productId);
 				if(p!=null) {
-					Color color = p.findColor(colorName);
-					Size size = p.Service.getSize(productId, colorName, sizeName);
+					//Size size = p.Service.getSize(productId, colorName, sizeName);
 					int qty = Integer.parseInt(quantity);
 					ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 					//第一次建立購物車時，加入session當中。
@@ -58,8 +57,11 @@ public class AddCartServlet extends HttpServlet {
 						cart = new ShoppingCart();
 						session.setAttribute("cart", cart);
 					}
-					cart.add(p, colorName, size, qty);
+					Size size = null;
+					if(p.hasSize() && sizeName!=null)
+						size = pService.getSize(productId, sizeName);
 					
+					cart.add(p, size, qty);
 				}else {
 					errorList.add("加入購物車失敗productId: " + productId + "查無資料!");
 				}
@@ -71,9 +73,10 @@ public class AddCartServlet extends HttpServlet {
 				errorList.add("加入購物車失敗，發生系統錯誤"+e);
 			}
 		}else {
-			errorList.add("加入購物車失敗 productId: " + productId + ", quantity");
+			errorList.add("加入購物車失敗 productId: " + productId + ", quantity" + quantity + "無法處理!");
 		}
-		
+		//無論對錯都Redirect給購物車
+		response.sendRedirect("member/cart.jsp");
 	}
 
 }

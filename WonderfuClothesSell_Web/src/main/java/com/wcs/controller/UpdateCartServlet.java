@@ -33,21 +33,19 @@ public class UpdateCartServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 		if(cart!=null) {
-			for(CartItem cartItem:cart.getCartItemSet()) {
+			for(CartItem cartItem:cart.getCartItemsSet()) {
 				String quantity = request.getParameter("quantity"+cartItem.hashCode());
 				String delete = request.getParameter("delete"+cartItem.hashCode());
 				if(delete==null && quantity!=null && quantity.matches("\\d+")) {
 					int oldQty = cart.getQuantity(cartItem);
 					int qty = Integer.parseInt(quantity);
-					cart.update(cartItem, oldQty, qty);
-				}else if(qty==0) {
-					cart.remove.
-				}
-				
-				else if{delete!=null){
-					
-				}
-					
+					if(qty>0) {
+						cart.update(cartItem, oldQty, qty);
+					}else if(qty==0) {
+						cart.remove(cartItem);
+					}
+				}else if(delete!=null){
+					cart.remove(cartItem);
 				}
 			}
 		}

@@ -27,7 +27,7 @@ class ProductsDAO {
 			+ "	description, launch_date, category, size, price "
 			+ " FROM wcs.products_join_size_view"
 			+ "    WHERE id= ?"
-			+ "    ORDER BY price";
+			+ "    ORDER BY price DESC";
 	
 	List<Product> selectAllProducts() throws WCSException{
 		List<Product> list = new ArrayList<>();
@@ -167,8 +167,8 @@ class ProductsDAO {
 						String sizeName = rs.getString("size");
 						if(sizeName!=null) {
 							Size size = new Size();
-							size.setName(sizeName);
-							size.setPrice(rs.getDouble("price"));
+							size.setSizeName(sizeName);
+							size.setUnitPrice(rs.getDouble("price"));
 							p.addSize(size);
 					
 					}
@@ -209,5 +209,4 @@ class ProductsDAO {
 		
 		return p;
 	}
-
 }
