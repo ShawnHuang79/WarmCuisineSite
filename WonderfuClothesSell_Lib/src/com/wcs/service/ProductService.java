@@ -40,14 +40,13 @@ public class ProductService {
 	
 	//這裡的getSizeList要再想想怎麼寫和連接，老師是依照有需要的時候才join，在產品列表中不會顯示size，就不join。
 	//size要在加在selectbyID裡面，只是要把size從map改list
-	/*public List<Size> getSizeList(String productId)
+	public List<Size> getSizeList(String productId)
 			throws WCSException{
 			if(productId==null)
 				throw new IllegalArgumentException("查詢產品size清單時，產品編號必須有值");
-			
 			return dao.selectSizeList(productId);
 		}
-	//這裡的getSize要再想想怎麼寫，
+	
 	public Size getSize(String id, String sizeName) throws WCSException{
 		if(sizeName==null || sizeName.length()==0) 
 			throw new IllegalArgumentException("查詢產品size物件時，產品sizeName必須有值");
@@ -58,7 +57,7 @@ public class ProductService {
 			}
 		}
 		throw new WCSInvalidDataException("查詢的["+id + "-" + sizeName + "]資料不存在");
-	}*/
+	}
 	
 	//產品+顏色+尺寸1對多對多用
 	/*public List<Size> getSizeList(String productId, String colorName)throws WCSException{

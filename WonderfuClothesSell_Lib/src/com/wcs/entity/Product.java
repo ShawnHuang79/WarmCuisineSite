@@ -33,21 +33,7 @@ public class Product {
 	public boolean isMultiSize() {
 		return sizesList!=null && sizesList.size()>0;
 	}
-	/*private Map<String, Size> sizesMap = new TreeMap<>();
-	
-	//Map, Set, List, []型態屬性的getter:
-	public Map<String, Size> getSizesMap() {
-		return sizesMap;//Collections.u(colorsMap)
-	}
-	//Map, Set, List, []型態屬性的setter要改成add(update, delete)
-	public void addSize(Size size) {
-		if(size==null) throw new IllegalArgumentException("加入sizesMap時, size物件不得為null");
-		sizesMap.put(size.getSizeName(), size);
-	}
-	//判斷是否有不同size
-	public boolean isMultiSize() {
-		return sizesMap!=null && sizesMap.size()>0;
-	}*/
+
 
 	public Product() {
 	}
@@ -170,3 +156,19 @@ public class Product {
 	
 	
 }
+
+/*private Map<String, Size> sizesMap = new TreeMap<>();
+
+//Map, Set, List, []型態屬性的getter:
+public Map<String, Size> getSizesMap() {
+	return sizesMap;//Collections.u(colorsMap)
+}
+//Map, Set, List, []型態屬性的setter要改成add(update, delete)
+public void addSize(Size size) {
+	if(size==null) throw new IllegalArgumentException("加入sizesMap時, size物件不得為null");
+	sizesMap.put(size.getSizeName(), size);
+}
+//判斷是否有不同size
+public boolean isMultiSize() {
+	return sizesMap!=null && sizesMap.size()>0;
+}*/

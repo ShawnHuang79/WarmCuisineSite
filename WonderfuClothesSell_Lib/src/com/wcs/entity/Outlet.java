@@ -37,6 +37,7 @@ public class Outlet extends Product {
 				super.getUnitPrice() * (100- this.discount) /100;
 		return price;
 	}
+	//多寫一個牌價，顯示的原本沒有outlet時的一般價格
 	public double getListPrice() {
 		return super.getUnitPrice();
 	}

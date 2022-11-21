@@ -34,18 +34,20 @@ public class ShoppingCart {
 	//unitprice的邏輯是老師寫的，要再調整
 	public double getUnitPrice(CartItem key) {
 		double price = key.getUnitPrice();
-		if(!(key.getProduct() instanceof Outlet) 
+		//看起來是非outlet並且是VIP才用這個邏輯
+		/*if(!(key.getProduct() instanceof Outlet) 
 				&&member instanceof VIP) {
 			price *=(100D-((VIP)member).getDiscount())/100;			
-		}
+		}*/
 		return price;
 	}
 	//getDiscountString的邏輯是老師寫的，要再調整
 	public String getDiscountString(CartItem key) {
-		if(member instanceof VIP 
+		//看起來是非outlet並且是VIP才用這個邏輯
+		/*if(member instanceof VIP 
 				&& !(key.getProduct() instanceof Outlet)) {
 			return "VIP "+((VIP)member).getDiscountString();
-		}
+		}*/
 		return key.getDiscountString();
 	}
 	

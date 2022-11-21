@@ -179,6 +179,11 @@ class ProductsDAO {
 		}
 		return p;
 	}
+	//TODO 從view把sizelist回傳
+	List<Size> selectSizeList(String productId) {
+		return null;
+	}
+	
 	private Product productEntireData(ResultSet rs) throws SQLException {
 		
 		Product p;
@@ -209,4 +214,5 @@ class ProductsDAO {
 		
 		return p;
 	}
+
 }
