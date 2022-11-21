@@ -44,6 +44,9 @@ public class AddCartServlet extends HttpServlet {
 		String sizeName = request.getParameter("sizeName");
 		String quantity = request.getParameter("quantity");
 		
+		//從前端傳過來的是某個產品的"中"這個size以及需要數量，要用product service去找DAO要資料庫
+		//裏面size的相關資料拿出來放在size物件裡面才能夠給cart進行add
+		
 		if(productId!=null && quantity!=null && quantity.matches("\\d+")) {
 			ProductService pService = new ProductService();
 			try {

@@ -11,7 +11,7 @@
 	$(document).ready(init);
 	
 	function init(){
-		$(".productVolumnradio").on('change', changeProductHandler)
+		$(".productVolumnRadio").on('change', changeProductHandler)
 		<%if(request.getMethod().equals("POST")){%>
 			repopulateForm();
 		<%}%>
@@ -76,7 +76,7 @@
 				<label>容量:</label>
  				<%for (Size size:p.getSizesList()){ 
 				%>
-				<input class='productVolumnradio' type='radio' name='volumn' value='<%=size.getSizeName() %>' data-photo='' required
+				<input class='productVolumnRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
 					data-price='<%=size.getUnitPrice() %>'
 				>
 				<label><%=size.getSizeName() %></label>
@@ -85,11 +85,11 @@
 				
 				
 
-<!-- 				<input class='productVolumnradio' type='radio' name='volumn' value='中'><label>中</label> 
-				<input class='productVolumnradio' type='radio' name='volumn' value='小'><label>小</label>-->
+<!-- 				<input class='productVolumnRadio' type='radio' name='volumn' value='中'><label>中</label> 
+				<input class='productVolumnRadio' type='radio' name='volumn' value='小'><label>小</label>-->
 			</div>
 			<label>數量:</label>
-			<input type='number' min='1' max='12' required>
+			<input type='number' min='1' max='12' name='quantity' required>
 			<input type='submit' value="加入購物車">
 		</form>
 	</div>
