@@ -30,6 +30,26 @@ public class ShoppingCart {
 	public Set<CartItem> getCartItemsSet() {
 		return new HashSet<>(cartMap.keySet());
 	}
+	
+	//unitprice的邏輯是老師寫的，要再調整
+	public double getUnitPrice(CartItem key) {
+		double price = key.getUnitPrice();
+		if(!(key.getProduct() instanceof Outlet) 
+				&&member instanceof VIP) {
+			price *=(100D-((VIP)member).getDiscount())/100;			
+		}
+		return price;
+	}
+	//getDiscountString的邏輯是老師寫的，要再調整
+	public String getDiscountString(CartItem key) {
+		if(member instanceof VIP 
+				&& !(key.getProduct() instanceof Outlet)) {
+			return "VIP "+((VIP)member).getDiscountString();
+		}
+		return key.getDiscountString();
+	}
+	
+	
 	//cartMap's business Methods
 	public double getAmount(CartItem key) {
 		return key.getUnitPrice() * getQuantity(key);

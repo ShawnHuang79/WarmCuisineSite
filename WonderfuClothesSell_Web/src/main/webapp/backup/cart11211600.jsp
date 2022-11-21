@@ -1,4 +1,3 @@
-<%@page import="com.wcs.entity.CartItem"%>
 <%@page import="com.wcs.entity.ShoppingCart"%>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +10,7 @@
 			* {
 				margin: 0;
 				padding: 0;
+				font-family: "微软雅黑";
 				list-style: none;
 				color: #666;
 				text-decoration: none;
@@ -20,7 +20,26 @@
 			body {
 				background: #f5f5f5;
 				height: 100%;
-			}	
+			}
+			
+			.container {
+				position: relative;
+				width: 1226px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			
+			.container {
+				width: 93px;
+				margin-top: 26px;
+			}
+			
+			.link {
+				padding: 0 5px;
+				color: #757575;
+				text-decoration: none;
+			}
+			
 			.hide {
 				overflow: hidden;
 			}
@@ -74,13 +93,13 @@
 				margin-bottom: 14px;
 			}
 			
-			.productImg {
+			.pro_img {
 				width: 150px;
 				height: 150px;
 				margin: 0 auto 18px;
 			}
 			
-			.productName {
+			.pro_name {
 				display: block;
 				text-overflow: ellipsis;
 				white-space: nowrap;
@@ -88,30 +107,34 @@
 				font-weight: 400;
 			}
 			
-			.productName a {
+			.pro_name a {
 				color: #333;
 			}
 			
-			.productPrice {
+			.pro_price {
 				color: #ff6700;
 				margin: 10px;
 			}
 			
+			.pro_rank {
+				color: #757575;
+				margin: 10px;
+			}
 			
-			#moreProductBox li:hover .addBtn {
+			#moreProductBox li:hover .add_btn {
 				display: block;
 			}
-			/*沒有pro_rank但移除他卻會影響product列表的opacity?*/
-			#moreProductBox li:hover .addBtnrank {
+			
+			#moreProductBox li:hover .pro_rank {
 				opacity: 0;
 			}
 			
-			#moreProductBox li .addBtn:hover {
+			#moreProductBox li .add_btn:hover {
 				background-color: #f60;
 				color: white;
 			}
 			
-			.addBtn {
+			.add_btn {
 				height: 22px;
 				position: absolute;
 				width: 122px;
@@ -259,11 +282,6 @@
 				color: white;
 			}
 			
-			#checkOutBtn {
-				cursor: pointer;
-			}
-			
-			
 			#sumArea #checkOutAmountDiv {
 				width: 250px;
 				height: 60px;
@@ -282,7 +300,7 @@
 				/*	float: left;*/
 			}
 			
-			.quantityDiv {
+			.item_count_i {
 				height: 85px;
 				width: 10%;
 				/*border: 1px solid black;*/
@@ -290,7 +308,7 @@
 				margin-right: 25px;
 			}
 			
-			.quantityInnerDiv {
+			.num_count {
 				width: 150px;
 				height: 40px;
 				border: 1.2px solid #E0E0E0;
@@ -298,7 +316,7 @@
 				margin-top: 21px;
 			}
 			
-			.quantityIncrease {
+			.count_i {
 				width: 30%;
 				height: 40px;
 				line-height: 40px;
@@ -308,7 +326,7 @@
 				color: #747474;
 			}
 			
-			.quantityIncrease:hover {
+			.count_i:hover {
 				width: 30%;
 				height: 40px;
 				line-height: 40px;
@@ -320,7 +338,7 @@
 				cursor: pointer;
 			}
 			
-			.quantity {
+			.c_num {
 				width: 40%;
 				height: 40px;
 				line-height: 40px;
@@ -330,7 +348,7 @@
 				color: #747474;
 			}
 			
-			.quantityDecrease {
+			.count_d {
 				width: 30%;
 				height: 40px;
 				line-height: 40px;
@@ -340,7 +358,7 @@
 				color: #747474;
 			}
 			
-			.quantityDecrease:hover {
+			.count_d:hover {
 				width: 30%;
 				height: 40px;
 				line-height: 40px;
@@ -430,16 +448,16 @@
 					var productLi = document.createElement("li");
 					var data = productData[i];
 
-					productLi.innerHTML += '<div class="productImg"><img src="' + data["imgUrl"] + '" width="150" height="150"></div>';
-					productLi.innerHTML += '<h3 id="h3" class="productName"><a rel="nofollow" href="#">' + data["proName"] + '</a></h3>';
-					productLi.innerHTML += '<p class="productPrice">' + data["proPrice"] + '元</p>';
-					productLi.innerHTML += '<div class="addBtn">加入購物車</div>';
+					productLi.innerHTML += '<div class="pro_img"><img src="' + data["imgUrl"] + '" width="150" height="150"></div>';
+					productLi.innerHTML += '<h3 id="h3" class="pro_name"><a rel="nofollow" href="#">' + data["proName"] + '</a></h3>';
+					productLi.innerHTML += '<p class="pro_price">' + data["proPrice"] + '元</p>';
+					productLi.innerHTML += '<div class="add_btn">加入購物車</div>';
 					productUl.appendChild(productLi);
 
 				}
-				var aBtn = getClass(productBox, "addBtn");//获取box下的所有添加购物车按钮
+				var aBtn = getClass(productBox, "add_btn");//获取box下的所有添加购物车按钮
 				var number = 0;//初始化商品数量
-				//產生div，畫面上方購物車部分，目前點同一個資料多次不會合成同一筆
+				//產生div，畫面上方購物車部分
 				for (var i = 0; i < aBtn.length; i++) {
 					number++;
 					aBtn[i].index = i;
@@ -451,7 +469,7 @@
 						createDiv.innerHTML += '<div class="img left"><img src="' + data["imgUrl"] + '" width="80" height="80"></div>';
 						createDiv.innerHTML += '<div class="name left"><span>' + data["proName"] + '</span></div>';
 						createDiv.innerHTML += '<div class="price left"><span>' + data["proPrice"] + '元</span></div>';
-						createDiv.innerHTML +=' <div class="quantityDiv"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><div class="quantity">1</div><div class="quantityIncrease">+</div></div> </div>'
+						createDiv.innerHTML +=' <div class="item_count_i"><div class="num_count"><div class="count_d">-</div><div class="c_num">1</div><div class="count_i">+</div></div> </div>'
 						createDiv.innerHTML += '<div class="subtotal left"><span>' + data["proPrice"] + '元</span></div>'
 						createDiv.innerHTML += '<div class="ctrl left"><a rel="nofollow" href="javascript:;">×</a></div>';
 						cart.appendChild(createDiv);
@@ -475,7 +493,7 @@
 								getAmount();
 							}
 						}
-						var i_btn = document.getElementsByClassName("quantityIncrease");
+						var i_btn = document.getElementsByClassName("count_i");
 						for (var k = 0; k < i_btn.length; k++) {
 							i_btn[k].onclick = function() {
 								bt = this;
@@ -500,7 +518,7 @@
 							}
 						}
 						//获取所有的数量减号按钮
-						var d_btn = document.getElementsByClassName("quantityDecrease");
+						var d_btn = document.getElementsByClassName("count_d");
 						for (k = 0; k < i_btn.length; k++) {
 							d_btn[k].onclick = function() {
 								bt = this;
@@ -508,7 +526,7 @@
 								at = this.parentElement.parentElement.nextElementSibling;
 								//获取单价节点
 								pt = this.parentElement.parentElement.previousElementSibling;
-								//获取quantity节点
+								//获取c_num节点
 								node = bt.parentNode.childNodes[1];
 								num = node.innerText;
 								num = parseInt(num);
@@ -603,9 +621,9 @@
 <%-- 			<% for(CartItem cartItem: cart.getCartItemsSet()){ %> --%>
 			<%if(cart==null || cart.isEmpty()){ %>
 				<div>購物車目前沒有商品</div>
-			<%}else{
+			<%}else{%>
+			
 
-			%>
 				<div>共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件, 
 			總金額: <%=cart.getTotalAmount() %>元
 			<%}  %>
@@ -631,7 +649,7 @@
 		
 			</div>
 			<div id="sumArea">
-				<div><button type='submit' id="checkOutBtn" name='submitPath' value='check_out.jsp'>去結帳</button></div>
+				<div id="checkOutBtn">去結帳</div>
 				<div id="checkOutAmountDiv">
 					合計：<span id="checkOutAmount">0</span>元
 				</div>
@@ -647,77 +665,6 @@
 				</ul>
 			</div>
 		</article>
-<!-- 		老師的程式碼 -->
-		<article>
-	<%-- 		<%=cart %> --%>
-			<%if(cart==null || cart.isEmpty()) {%>
-				<div>購物車是空的，請先至書店購物</div>
-			<%}else{ 
-
-			%>
-				<form action='update_cart.do' id='cartForm' method='POST'>
-				<table id='cartTable'>
-					<caption>購物明細</caption>
-					<tfoot>
-						<tr>
-							<td colspan='4'>
-							共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件, 
-							總金額: <%=cart.getTotalAmount() %>元						
-							</td>						
-						</tr>
-						<tr>
-							<td colspan='4' class='buttonsTd'>
-							<span><input type='button' value='繼續購物' onclick='location.href="../products_list.jsp";'></span>
-							<span><input type='submit' value='修改購物車'></span>
-							<span><button type='submit' name='submitPath' value='check_out.jsp'>我要結帳</button></span>
-							</td>
-						</tr>
-					</tfoot>
-					<thead>
-						<tr>
-							<th>產 品</th>
-							<th>價 格</th>
-							<th>數 量</th>
-							<th>刪除</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% for(CartItem cartItem:cart.getCartItemsSet()) {%>
-						<tr>
-							<td>
-								<img src='<%= cartItem.getPhotoUrl() %>'>
-								<div><%= cartItem.getProductName() %></div>
-								<div>
-									<span class='colorSizeSpan'>
-										<%= cartItem.getSizeName() %>
-									</span> 
-									<span style='font-size:small'>
-										庫存:<span class='stockSpan'></span>
-									</span>
-								</div>
-							</td>
-							<td>
-								<div>售價: <%=cart.getUnitPrice(cartItem) %>元</div>
-								<div style='font-size: smaller'>
-									<span style='text-decoration:line-through;color:gray'>定價: <%=cartItem.getListPrice() %>元</span>, 
-									<span style='color:blue'><%=cart.getDiscountString(cartItem) %></span>
-								</div>							
-							</td>
-							<td>
-							
-								<div style='font-size: smaller'>小計: <%=cart.getAmount(cartItem) %>元</div>
-							</td>
-							<td style='text-align: center'>
-								<input type='checkbox' name='delete<%=cartItem.hashCode() %>'>
-							</td>
-						</tr>	
-						<% } %>	
-					</tbody>	
-				</table>
-				</form>
-			<%} %>
-		</article>
-		
 		<%@include file='/subviews/footer.jsp' %>   
 	</body>
 </html>

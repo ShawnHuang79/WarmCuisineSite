@@ -33,6 +33,10 @@ public class CartItem implements Comparable<CartItem>{
 			return "";
 		}
 	}
+	public String getPhotoUrl() {
+		String url = product.getPhotoUrl();
+		return url;
+	}
 	public double getListPrice() {
 		if(size!=null) {
 			return size.getListPrice();
@@ -60,7 +64,7 @@ public class CartItem implements Comparable<CartItem>{
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + "產品名稱: " + getProductId() + ", 購買Size: " + getSizeName() + ", 定價: "
-				+ getListPrice() + ", 折扣: " + getDiscountString() + ", 售價: " + getUnitPrice();
+				+ getListPrice() + ", 折扣: " + getDiscountString() + "圖片url: "+ getPhotoUrl() + ", 售價: " + getUnitPrice();
 	}
 	@Override
 	public int hashCode() {

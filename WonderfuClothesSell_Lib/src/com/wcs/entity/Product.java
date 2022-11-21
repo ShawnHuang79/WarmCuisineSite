@@ -20,7 +20,7 @@ public class Product {
 	private String category;
 	//discount好像被移到其他地方了
 	private int discount;
-	//private boolean hasSize;
+	private boolean hasSize;
 	private List<Size> sizesList = new ArrayList<>();
 	
 	public List<Size> getSizesList() {
@@ -129,12 +129,12 @@ public class Product {
 	}
 	
 	//上面還寫了一個isMultiSize，是否有重複再看看
-	/*public boolean hasSize() {
+	public boolean hasSize() {
 		return hasSize;
 	}
 	public void setHasSize(boolean hasSize) {
 		this.hasSize = hasSize;
-	}*/
+	}
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName()
