@@ -101,7 +101,7 @@
 			#moreProductBox li:hover .addBtn {
 				display: block;
 			}
-			/*沒有pro_rank但移除他卻會影響product列表的opacity?*/
+			
 			#moreProductBox li:hover .addBtnrank {
 				opacity: 0;
 			}
@@ -203,13 +203,13 @@
 				width: 130px;
 			}
 			
-			.cart .ctrl {
+			.cart .delete {
 				width: 105px;
 				padding-right: 25px;
 				text-align: center;
 			}
 			
-			.cart .ctrl a {
+			.cart .delete a {
 				font-size: 20px;
 				cursor: pointer;
 				display: block;
@@ -219,7 +219,7 @@
 				line-height: 26px;
 			}
 			
-			.cart .ctrl a:hover {
+			.cart .delete a:hover {
 				color: #FFF;
 				background: #ff6700;
 				border-radius: 50%;
@@ -359,234 +359,7 @@
 	    </style>
 
 	    <script>
-			window.onload = function() {
-				//預設測試資料
-				var productData = [{
-						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/40237680.jpg",
-						"proName": " 小米手環4 NFC版 ",
-						"proPrice": "229",
-						"proComm": "1"
-					},
-					{
-						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/LH/p6lj-hero.jpg",
-						"proName": " Redmi AirDots真無線藍芽耳機 ",
-						"proPrice": "99.9",
-						"proComm": "9.7"
-					},
-					{
-						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/40237680.jpg",
-						"proName": " 米家藍芽溫度計 ",
-						"proPrice": "65",
-						"proComm": "1.3"
-					},
-					{
-						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/LH/p6lj-hero.jpg",
-						"proName": " 小米智能鬧鐘 ",
-						"proPrice": "149",
-						"proComm": "1.1"
-					},
-					{
-						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/40237680.jpg",
-						"proName": "米家電子溫度計Pro  ",
-						"proPrice": "750",
-						"proComm": "0.3"
-					},
-					{
-						"imgUrl": "https://images.deliveryhero.io/image/fd-tw/LH/p6lj-hero.jpg",
-						"proName": " 小米手環3 NFC版 Pro  ",
-						"proPrice": "199",
-						"proComm": "3.3"
-					},
-					{
-						"imgUrl": "img/03-car-07.png",
-						"proName": " 小米手環3 / 4 通用腕帶",
-						"proPrice": "19.9",
-						"proComm": "1.2"
-					},
-					{
-						"imgUrl": "img/03-car-08.png",
-						"proName": "  米家溫度度計 ",
-						"proPrice": "45",
-						"proComm": "0.6"
-					},
-					{
-						"imgUrl": "img/03-car-09.png",
-						"proName": "  米家電子溫濕度計Pro 3個  ",
-						"proPrice": "207",
-						"proComm": "0.3"
-					},
-					{
-						"imgUrl": "img/03-car-10.png",
-						"proName": " 小米手環3 ",
-						"proPrice": "199",
-						"proComm": "7.2"
-					}
-				];
-				var productBox = document.getElementById("moreProductBox");
-				var cart = document.getElementById("cart");
-				var productUl = document.getElementsByTagName("ul")[0];
-				//產生li，畫面下方加購區	
-				for (var i = 0; i < productData.length; i++) {
-					var productLi = document.createElement("li");
-					var data = productData[i];
 
-					productLi.innerHTML += '<div class="productImg"><img src="' + data["imgUrl"] + '" width="150" height="150"></div>';
-					productLi.innerHTML += '<h3 id="h3" class="productName"><a rel="nofollow" href="#">' + data["proName"] + '</a></h3>';
-					productLi.innerHTML += '<p class="productPrice">' + data["proPrice"] + '元</p>';
-					productLi.innerHTML += '<div class="addBtn">加入購物車</div>';
-					productUl.appendChild(productLi);
-
-				}
-				var aBtn = getClass(productBox, "addBtn");//获取box下的所有添加购物车按钮
-				var number = 0;//初始化商品数量
-				//產生div，畫面上方購物車部分，目前點同一個資料多次不會合成同一筆
-				for (var i = 0; i < aBtn.length; i++) {
-					number++;
-					aBtn[i].index = i;
-					aBtn[i].onclick = function() {
-						var createDiv = document.createElement("div");
-						var data = productData[this.index];
-						createDiv.className = "row hide";
-						createDiv.innerHTML += '<div class="check left"> <i class="i_check" id="i_check" onclick="i_check()" >√</i></div>';
-						createDiv.innerHTML += '<div class="img left"><img src="' + data["imgUrl"] + '" width="80" height="80"></div>';
-						createDiv.innerHTML += '<div class="name left"><span>' + data["proName"] + '</span></div>';
-						createDiv.innerHTML += '<div class="price left"><span>' + data["proPrice"] + '元</span></div>';
-						createDiv.innerHTML +=' <div class="quantityDiv"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><div class="quantity">1</div><div class="quantityIncrease">+</div></div> </div>'
-						createDiv.innerHTML += '<div class="subtotal left"><span>' + data["proPrice"] + '元</span></div>'
-						createDiv.innerHTML += '<div class="ctrl left"><a rel="nofollow" href="javascript:;">×</a></div>';
-						cart.appendChild(createDiv);
-						var check = createDiv.firstChild.getElementsByTagName("i")[0];
-						check.onclick = function() {
-							// console.log(check.className);
-							if (check.className == "i_check tick") {
-								check.classList.remove("tick");
-
-							} else {
-								check.classList.add("tick");
-							}
-							getAmount();
-						}
-						var delBtn = createDiv.lastChild.getElementsByTagName("a")[0];
-						delBtn.onclick = function() {
-							var result = confirm("確定刪除嗎?");
-							if (result) {
-								cart.removeChild(createDiv);
-								number--;
-								getAmount();
-							}
-						}
-						var i_btn = document.getElementsByClassName("quantityIncrease");
-						for (var k = 0; k < i_btn.length; k++) {
-							i_btn[k].onclick = function() {
-								bt = this;
-								//获取小计节点
-								at = this.parentElement.parentElement.nextElementSibling;
-								//获取单价节点
-								pt = this.parentElement.parentElement.previousElementSibling;
-								//获取数量值
-								node = bt.parentNode.childNodes[1];
-								console.log(node);
-								num = node.innerText;
-								num = parseInt(num);
-								num++;
-								node.innerText = num;
-								//获取单价
-								price = pt.innerText;
-								price = price.substring(0, price.length - 1);
-								//计算小计值
-								at.innerText = price * num + "元";
-								//计算总计值
-								getAmount();
-							}
-						}
-						//获取所有的数量减号按钮
-						var d_btn = document.getElementsByClassName("quantityDecrease");
-						for (k = 0; k < i_btn.length; k++) {
-							d_btn[k].onclick = function() {
-								bt = this;
-								//获取小计节点
-								at = this.parentElement.parentElement.nextElementSibling;
-								//获取单价节点
-								pt = this.parentElement.parentElement.previousElementSibling;
-								//获取quantity节点
-								node = bt.parentNode.childNodes[1];
-								num = node.innerText;
-								num = parseInt(num);
-								if (num > 1) {
-									num--;
-								}
-								node.innerText = num;
-								//获取单价
-								price = pt.innerText;
-								price = price.substring(0, price.length - 1);
-								//计算小计值		
-								at.innerText = price * num + "元";
-								//计算总计值
-								getAmount();
-							}
-						}
-
-						delBtn.onclick = function() {
-							var result = confirm("確定刪除嗎?");
-							if (result) {
-								cart.removeChild(createDiv);
-								number--;
-								getAmount();
-							}
-						}
-
-					}
-				}
-
-			}
-
-			function getClass(oBox, tagname) {
-				var aTag = oBox.getElementsByTagName("*");
-				var aBox = [];
-				for (var i = 0; i < aTag.length; i++) {
-					if (aTag[i].className == tagname) {
-						aBox.push(aTag[i]);
-					}
-				}
-				return aBox;
-			}
-
-
-			var index = false;
-			function checkAll() {
-				var choose = document.getElementById("cart").getElementsByTagName("i");
-				if (choose.length != 1) {
-					for (i = 1; i < choose.length; i++) {
-						if (!index) {
-							choose[0].classList.add("tick2")
-							choose[i].classList.add("tick");
-						} else {
-							choose[i].classList.remove("tick");
-							choose[0].classList.remove("tick2")
-						}
-					}
-					index = !index;
-				}
-				getAmount();
-			}
-
-
-
-			//進行價格合計
-			function getAmount() {
-				// console.log(ys);
-				ns = document.getElementsByClassName("tick");
-				sum = 0;
-				//选中框
-				document.getElementById("checkOutAmount").innerText = sum;
-				for (y = 0; y < ns.length; y++) {
-					//小计
-					amount_info = ns[y].parentElement.parentElement.lastElementChild.previousElementSibling;
-					num = parseInt(amount_info.innerText);
-					sum += num;
-					document.getElementById("checkOutAmount").innerText = sum;
-				}
-			}
 		</script>
 	</head>
 	<body>
@@ -594,27 +367,21 @@
 			<jsp:param value="購物車" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
-
 		<%
-			ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-		%>
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+		Customer member = (Customer)session.getAttribute("member");
+		%>	
 		<article>
-<%-- 			<%=cart %> --%>
-<%-- 			<% for(CartItem cartItem: cart.getCartItemsSet()){ %> --%>
 			<%if(cart==null || cart.isEmpty()){ %>
 				<div>購物車目前沒有商品</div>
 			<%}else{
-
+				cart.setMember(member);
 			%>
-				<div>共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件, 
-			總金額: <%=cart.getTotalAmount() %>元
-			<%}  %>
-			<form action='update_cart.do'>
+
+			
+			<form action='update_cart.do' method='POST'>
 			<div id="cart" class="cart">
 		
-<%-- 				<div>共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件,  --%>
-<%-- 						總金額: <%=cart.getTotalAmount() %>元 --%>
-<%--				</div>--%>
 				<div class="cartHead hide">
 					<div class="check left">
 						<i onclick="checkAll()">√</i>
@@ -625,102 +392,41 @@
 					<div class="number left">數量</div>
 					<div class="size left">尺寸</div>
 					<div class="subtotal left">小計</div>
-					<div class="ctrl left">操作</div>
+					<div class="delete left">刪除</div>
 				</div>
-		
-		
+				<%for(CartItem cartItem:cart.getCartItemsSet()) {%>
+					<div class="row hide">
+						<div class="check left">
+							<i class="i_check" id="i_check" onclick="i_check()">√</i>
+						</div>
+						<div class="img left"><img src='<%= cartItem.getPhotoUrl() %>' width="80" height="80"></div>
+						<div class="name left"><%= cartItem.getProductName() %></div>
+						<div class="price left"><%=cart.getUnitPrice(cartItem) %></div>
+						<div class="number left"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><input type='number' class="quantity" value='<%=cart.getQuantity(cartItem) %>' name='quantity<%=cartItem.hashCode() %>' required><div class="quantityIncrease">+</div></div> </div>
+						<div class="size left"><%= cartItem.getSizeName() %></div>
+						<div class="subtotal left"><%=cart.getUnitPrice(cartItem) %></div>
+						<div class="delete left"><input type='checkbox' name='delete<%=cartItem.hashCode() %>'></div>
+<!-- 						<div class="delete left"><a rel="nofollow" href="javascript:;">×</a></div> -->
+					</div>
+				<%} %>
 			</div>
 			<div id="sumArea">
 				<div><button type='submit' id="checkOutBtn" name='submitPath' value='check_out.jsp'>去結帳</button></div>
 				<div id="checkOutAmountDiv">
-					合計：<span id="checkOutAmount">0</span>元
+					合計：<span id="checkOutAmount"><%=cart.getTotalAmount() %></span>元
 				</div>
+				<span><input type='submit' value='修改購物車'></span>
 			</div>
 			</form>
-		
-		
-			<div id="moreProductBox">
-				<h2 class="moreProductBoxHead">
-					<span>買購物車中商品的人還買了</span>
-				</h2>
-				<ul>
-				</ul>
-			</div>
-		</article>
-<!-- 		老師的程式碼 -->
-		<article>
-	<%-- 		<%=cart %> --%>
-			<%if(cart==null || cart.isEmpty()) {%>
-				<div>購物車是空的，請先至書店購物</div>
-			<%}else{ 
-
-			%>
-				<form action='update_cart.do' id='cartForm' method='POST'>
-				<table id='cartTable'>
-					<caption>購物明細</caption>
-					<tfoot>
-						<tr>
-							<td colspan='4'>
-							共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件, 
-							總金額: <%=cart.getTotalAmount() %>元						
-							</td>						
-						</tr>
-						<tr>
-							<td colspan='4' class='buttonsTd'>
-							<span><input type='button' value='繼續購物' onclick='location.href="../products_list.jsp";'></span>
-							<span><input type='submit' value='修改購物車'></span>
-							<span><button type='submit' name='submitPath' value='check_out.jsp'>我要結帳</button></span>
-							</td>
-						</tr>
-					</tfoot>
-					<thead>
-						<tr>
-							<th>產 品</th>
-							<th>價 格</th>
-							<th>數 量</th>
-							<th>刪除</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% for(CartItem cartItem:cart.getCartItemsSet()) {%>
-						<tr>
-							<td>
-								<img src='<%= cartItem.getPhotoUrl() %>'>
-								<div><%= cartItem.getProductName() %></div>
-								<div>
-									<span class='colorSizeSpan'>
-										<%= cartItem.getSizeName() %>
-									</span> 
-									<span style='font-size:small'>
-										庫存:<span class='stockSpan'></span>
-									</span>
-								</div>
-							</td>
-							<td>
-							<div>售價: <%=cart.getUnitPrice(cartItem) %>元</div>
-							<div style='font-size: smaller'>
-								<span style='text-decoration:line-through;color:gray'>定價: <%=cartItem.getListPrice() %>元</span>, 
-								<span style='color:blue'><%=cart.getDiscountString(cartItem) %></span>
-							</div>							
-						</td>
-						<td>
-							<div>數量:
-								<input type='number' value='<%=cart.getQuantity(cartItem) %>' 
-									name='quantity<%=cartItem.hashCode() %>' min='0' max='10' required> 
-							</div>
-							<div style='font-size: smaller'>小計: <%=cart.getAmount(cartItem) %>元</div>
-						</td>
-						<td style='text-align: center'>
-							<input type='checkbox' name='delete<%=cartItem.hashCode() %>'>
-						</td>
-					</tr>	
-					<% } %>	
-					</tbody>	
-				</table>
-				</form>
 			<%} %>
-		</article>
-		
+<!-- 			<div id="moreProductBox"> -->
+<!-- 				<h2 class="moreProductBoxHead"> -->
+<!-- 					<span>買購物車中商品的人還買了</span> -->
+<!-- 				</h2> -->
+<!-- 				<ul> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
 		<%@include file='/subviews/footer.jsp' %>   
+		</article>
 	</body>
 </html>

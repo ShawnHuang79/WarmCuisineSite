@@ -29,7 +29,7 @@ public class UpdateCartServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 		if(cart!=null) {
@@ -51,7 +51,12 @@ public class UpdateCartServlet extends HttpServlet {
 			}
 		}
 		//3.redirect to /member/cart.jsp
-		response.sendRedirect("cart.jsp");
+		String submitPath = request.getParameter("submitPath");
+		if(submitPath!=null) {
+			response.sendRedirect(submitPath);
+			return;
+		}
+		response.sendRedirect("cart.jsp");		
 	}
 
 }

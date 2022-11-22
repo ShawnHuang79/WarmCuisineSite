@@ -62,17 +62,15 @@
 		<img id='theProductPhoto' src='<%=p.getPhotoUrl()+ "?width=400&height=400&quality=45"%>'>
 		<h3><%= p.getName()%></h3>
 		<%if(p instanceof Outlet){ %>
-		<div>定價:<%= ((Outlet)p).getUnitPrice()%></div>
-		<div>折扣:<%= ((Outlet)p).getDiscount()%></div>
+		<div>定價:<%= ((Outlet)p).getListPrice()%></div>
+		<div>折扣:<%= ((Outlet)p).getDiscount()%>%</div>
+		<div>售價:<%= ((Outlet)p).getUnitPrice()%></div>
 		<%}else{ %>
 		<div>定價:<%= p.getUnitPrice()%></div>
-		<div>折扣:<%= p.getDiscount()%></div>
 		<%} %>
-		<div>售價:79</div>
-		<div>庫存: 1</div>
+
 		<form method='GET' action='/wcs/add_cart.do'>
-			<input type='text' name='productId' value='<%=productId%>'>
-			<label>顏色:</label>
+			<input type='hidden' name='productId' value='<%=productId%>'>
 			<div>
 				<label>容量:</label>
  				<%for (Size size:p.getSizesList()){ 
