@@ -34,6 +34,7 @@ public class UpdateCartServlet extends HttpServlet {
 		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 		if(cart!=null) {
 			for(CartItem cartItem:cart.getCartItemsSet()) {
+				//為了判斷是否重複，在cart那邊就已經把name設定成加入了hashcode，所以這邊getParameter也要加
 				String quantity = request.getParameter("quantity"+cartItem.hashCode());
 				String delete = request.getParameter("delete"+cartItem.hashCode());
 				if(delete==null && quantity!=null && quantity.matches("\\d+")) {

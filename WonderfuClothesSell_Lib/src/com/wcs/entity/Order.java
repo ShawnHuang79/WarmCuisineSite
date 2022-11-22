@@ -169,6 +169,10 @@ public class Order {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public String getStatusString() {
+		return Status
+	}
 
 	public String getRecipientName() {
 		return recipientName;
@@ -231,5 +235,19 @@ public class Order {
 				+ ", 訂購明細=\n" + orderItemsSet 
 				+ ",\n 共" + size() + "項, "+ getTotalQuantity() + "件 總金額=" + getTotalAmount()+ "元";
 	}	
+	//巢狀類別
+	public enum Status{
+		NEW("新訂單"), TRANSFERED, PAID, SHIPPED, ARRIVED, CHECKED, COMPLETE;
+		private final String description;
+		
+		private Status(String description) {
+			this.description = description;
+		}
+		
+		public String getDescription() {
+			return description;
+		}
+		
+	}
 	
 }

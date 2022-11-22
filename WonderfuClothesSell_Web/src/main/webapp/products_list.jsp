@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Outlet"%>
 <%@page import="com.wcs.exception.WCSInvalidDataException"%>
 <%@page import="com.wcs.entity.Product"%>
 <%@page import="java.util.List"%>
@@ -16,6 +17,9 @@
 	        }
 			body {
 				margin: 0px;
+			}
+			a {
+    			text-decoration:none;
 			}
 			.vendor-list{
 				list-style: none;
@@ -37,7 +41,10 @@
 				width: 200px;
 				height: 150px;
 			}
-			
+			.productDescription{
+				color:#333
+			}
+
 			/*.photo{
 				width: 200px;
 				height: 150px;
@@ -172,9 +179,16 @@
 								</a>
 								<a href='javascript:getProductData(<%= p.getId() %>, true)'>
 								<figcaption class="vendor-info">
-									<span class="headline"><%= p.getName()%></span>
-									<p>&lt;店內價&gt;台式</p>
-									<p><strong>免費</strong> 外送</p>
+									<span class="productDescription"><%= p.getName()%></span>
+									<p class="productDescription">
+									<% if(p instanceof Outlet){%>
+										<%=((Outlet)p).getListPrice()%>
+									<%}else{ %>
+										<%=p.getUnitPrice() %>
+									<%} %>元起
+									</p>
+									<p class="productDescription"><%=p.getDescription() %></p>
+									
 								</figcaption>
 								</a>
 							</figure>

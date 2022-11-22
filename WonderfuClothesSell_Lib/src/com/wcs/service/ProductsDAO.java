@@ -10,6 +10,7 @@ import com.wcs.entity.Product;
 import com.wcs.entity.Size;
 import com.wcs.exception.WCSException;
 
+
 class ProductsDAO {
 	private static final String SELECT_All_products = "SELECT id, name, unit_price, stock, "
 			+ "	photo_url, description, launch_date, category, discount "
@@ -28,7 +29,7 @@ class ProductsDAO {
 			+ " FROM wcs.products_join_size_view"
 			+ "    WHERE id= ?"
 			+ "    ORDER BY price DESC";
-	
+
 	List<Product> selectAllProducts() throws WCSException{
 		List<Product> list = new ArrayList<>();
 		try (
@@ -179,10 +180,41 @@ class ProductsDAO {
 		}
 		return p;
 	}
-	//TODO 從view把sizelist回傳
-	List<Size> selectSizeList(String productId) {
-		return null;
+	//TODO 從view把sizelist回傳，要再調整。
+	private static final String SELECT_SIZE_LIST = "SELECT id, "
+			+ " size, discount, price "
+			+ " FROM wcs.products_join_size_view"
+			+ "    WHERE id= ?"
+			+ "    ORDER BY price DESC";
+	List<Size> selectSizeList(String productId) throws WCSException{
+		List<Size> list = new ArrayList<>();
+		
+		try (	Connection connection = MySQLConnection.getConnection(); //1, 2 取得連線
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_SIZE_LIST); //3.準備指令
+				){
+			//3.1傳入?的值
+			pstmt.setString(1, productId);
+			
+			try(	ResultSet rs= pstmt.executeQuery(); //4.執行指令
+					){
+				//5.處理rs
+				while(rs.next()) {					
+					Size size = new Size();
+					size.setProductId(rs.getInt("id"));
+					size.setSizeName(rs.getString("size"));
+					//size.setListPrice(rs.getDouble("list_price"));
+					size.setUnitPrice(rs.getDouble("price"));
+					//size.setOrdinal(rs.getInt("size_ordinal"));
+					
+					list.add(size);					
+				}				
+			}			
+		} catch (SQLException e) {
+			throw new WCSException("查詢產品尺寸失敗", e);
+		}
+		return list;
 	}
+	
 	
 	private Product productEntireData(ResultSet rs) throws SQLException {
 		

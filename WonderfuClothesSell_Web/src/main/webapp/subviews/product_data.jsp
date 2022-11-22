@@ -11,10 +11,11 @@
 	$(document).ready(init);
 	
 	function init(){
-		$(".productVolumnRadio").on('change', changeProductHandler)
-		<%if(request.getMethod().equals("POST")){%>
-			repopulateForm();
-		<%}%>
+		//$("#productSizeRadio").on('change', changeProductHandler)
+		
+		<%--<%if(request.getMethod().equals("POST")){%>
+			//repopulateForm();
+		<%}%> 用在點擊選項時更換圖片--%>
 	}
 	function repopulateForm(){
 <%-- 		$("input[value='<%= request.getParameter()]"); --%>
@@ -69,14 +70,14 @@
 		<%} %>
 		<div>售價:79</div>
 		<div>庫存: 1</div>
-		<form method='POST' action='/wcs/add_cart.do'>
+		<form method='GET' action='/wcs/add_cart.do'>
 			<input type='text' name='productId' value='<%=productId%>'>
 			<label>顏色:</label>
 			<div>
 				<label>容量:</label>
  				<%for (Size size:p.getSizesList()){ 
 				%>
-				<input class='productVolumnRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
+				<input id='productSizeRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
 					data-price='<%=size.getUnitPrice() %>'
 				>
 				<label><%=size.getSizeName() %></label>

@@ -697,21 +697,24 @@
 								</div>
 							</td>
 							<td>
-								<div>售價: <%=cart.getUnitPrice(cartItem) %>元</div>
-								<div style='font-size: smaller'>
-									<span style='text-decoration:line-through;color:gray'>定價: <%=cartItem.getListPrice() %>元</span>, 
-									<span style='color:blue'><%=cart.getDiscountString(cartItem) %></span>
-								</div>							
-							</td>
-							<td>
-							
-								<div style='font-size: smaller'>小計: <%=cart.getAmount(cartItem) %>元</div>
-							</td>
-							<td style='text-align: center'>
-								<input type='checkbox' name='delete<%=cartItem.hashCode() %>'>
-							</td>
-						</tr>	
-						<% } %>	
+							<div>售價: <%=cart.getUnitPrice(cartItem) %>元</div>
+							<div style='font-size: smaller'>
+								<span style='text-decoration:line-through;color:gray'>定價: <%=cartItem.getListPrice() %>元</span>, 
+								<span style='color:blue'><%=cart.getDiscountString(cartItem) %></span>
+							</div>							
+						</td>
+						<td>
+							<div>數量:
+								<input type='number' value='<%=cart.getQuantity(cartItem) %>' 
+									name='quantity<%=cartItem.hashCode() %>' min='0' max='10' required> 
+							</div>
+							<div style='font-size: smaller'>小計: <%=cart.getAmount(cartItem) %>元</div>
+						</td>
+						<td style='text-align: center'>
+							<input type='checkbox' name='delete<%=cartItem.hashCode() %>'>
+						</td>
+					</tr>	
+					<% } %>	
 					</tbody>	
 				</table>
 				</form>
