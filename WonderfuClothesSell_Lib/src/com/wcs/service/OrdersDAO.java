@@ -123,8 +123,6 @@ class OrdersDAO {
 					order.setCreatedDate(LocalDate.parse(rs.getString("created_date")));
 					order.setCreatedTime(LocalTime.parse(rs.getString("created_time")));					
 					order.setTotalAmount(rs.getDouble("total_amount"));
-					//System.out.println(rs.getDouble("total_amount"));
-					System.out.println(order.getOrderItemsSet());
 					order.setStatus(rs.getInt("status"));
 					
 					order.setShippingType(ShippingType.valueOf(rs.getString("shipping_type")));
@@ -134,7 +132,6 @@ class OrdersDAO {
 					order.setPaymentFee(rs.getDouble("payment_fee"));					
 					
 					list.add(order);
-					System.out.println(list.get(0).getTotalAmount());
 				}
 			}
 		} catch (SQLException e) {

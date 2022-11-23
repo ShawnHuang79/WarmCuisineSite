@@ -108,13 +108,13 @@
 			<jsp:param value="Product" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
-<!-- fancybox -->
+<!-- lightbox 要和header整合-->
 		<div id="myModal" class="modal">
 	 		<span class="close cursor" onclick="closeModal()">&times;</span>
 	  		<div id='getProductData_Div' class="modal-content">
 			</div>
 		</div>
-<!-- fancybox -->
+<!-- lightbox -->
 
 		<script>
 

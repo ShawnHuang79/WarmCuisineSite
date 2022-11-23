@@ -97,7 +97,6 @@ public class CaptchaServlet extends HttpServlet {
         //出現太水平的結果就重來
         while(randRotate<0.15 && randRotate >(-0.15)) {
         	randRotate = ((random.nextInt(100))-50)/100d;
-        	System.out.println(randRotate);
         }
         g2d.rotate(randRotate);//旋轉角度
         if(randRotate>0) {

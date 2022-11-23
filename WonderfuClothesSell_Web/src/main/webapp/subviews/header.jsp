@@ -29,6 +29,7 @@
 	function openModal() {
 		  document.getElementById("myModal").style.display = "block";
 		  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
+		  
 		}
 	function closeModal() {
 	    document.getElementById("myModal").style.opacity = 0
@@ -40,7 +41,7 @@
 <header>
 	<div id="myModal" class="modal">
  		<span class="close cursor" onclick="closeModal()">&times;</span>
-  		<div id='getProductData_Div' class="modal-content">
+ 		<div id='getProductData_Div' class="modal-content">
 		</div>
 	</div>	
 	<h1><a href='/wcs'>Eat Food</a> 
