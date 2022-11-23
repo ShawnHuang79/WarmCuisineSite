@@ -9,17 +9,17 @@
 		<style>
 			@import url(/wcs/css/wcs.css);
 			* {
-				margin: 0;
-				padding: 0;
 				list-style: none;
-				color: #666;
 				text-decoration: none;
-				font-size: 14px;
+				/*margin: 0;
+				padding: 0;
+				color: #666;
+				font-size: 14px;*/
 			}
 			
 			body {
-				background: #f5f5f5;
-				height: 100%;
+				/*background: #f5f5f5;
+				height: 100%;*/
 			}	
 			.hide {
 				overflow: hidden;

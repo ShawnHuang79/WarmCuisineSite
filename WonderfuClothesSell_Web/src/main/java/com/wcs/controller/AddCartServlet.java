@@ -61,9 +61,10 @@ public class AddCartServlet extends HttpServlet {
 						session.setAttribute("cart", cart);
 					}
 					Size size = null;
-					if(p.hasSize() && sizeName!=null)
+					if(p.hasSize() && sizeName!=null) {
 						size = pService.getSize(productId, sizeName);
-					
+			
+					}
 					cart.add(p, size, qty);
 				}else {
 					errorList.add("加入購物車失敗productId: " + productId + "查無資料!");

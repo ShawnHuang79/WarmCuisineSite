@@ -165,13 +165,16 @@ class ProductsDAO {
 						p.setCategory(rs.getString("category"));
 						p = productEntireData(rs);
 					}
-						String sizeName = rs.getString("size");
-						if(sizeName!=null) {
-							Size size = new Size();
-							size.setSizeName(sizeName);
-							size.setUnitPrice(rs.getDouble("price"));
-							p.addSize(size);
-					
+					String sizeName = rs.getString("size");
+					if(sizeName!=null) {
+						Size size = new Size();
+						size.setSizeName(sizeName);
+						size.setUnitPrice(rs.getDouble("price"));
+						p.addSize(size);
+					}
+					//sizesList中有size代表這個product有不同size
+					if(p.getSizesList().size()>0) {
+						p.setHasSize(true);
 					}
 				}
 			}

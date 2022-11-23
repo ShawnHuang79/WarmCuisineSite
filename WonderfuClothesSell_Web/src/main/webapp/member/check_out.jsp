@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.ShippingType"%>
 <%@page import="com.wcs.entity.CartItem"%>
 <%@page import="com.wcs.entity.ShoppingCart"%>
 <%@page import="com.wcs.entity.Order"%>
@@ -9,18 +10,18 @@
 		<title>Check out</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
-						* {
-				margin: 0;
-				padding: 0;
+			* {
 				list-style: none;
-				color: #666;
 				text-decoration: none;
-				font-size: 14px;
+				/*margin: 0;
+				padding: 0;
+				color: #666;
+				font-size: 14px;*/
 			}
 			
 			body {
-				background: #f5f5f5;
-				height: 100%;
+				/*background: #f5f5f5;
+				height: 100%;*/
 			}	
 			.hide {
 				overflow: hidden;
@@ -358,10 +359,24 @@
 				background-color: #ff6700 !important;
 			}
 	    </style>
+	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
+				integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+				crossorigin="anonymous"></script>
+		<script>
+			 function copyMember(){
+				$("input[name='recipientName']").val('${sessionScope.member.name}');
+				$("input[name='recipientEmail']").val('${sessionScope.member.email}');
+				$("input[name='recipientPhone']").val('${sessionScope.member.phone}');
+				var shippingOpt = $("select[name='shippingType'] option:selected").val();
+				if(shippingOpt == '<%= ShippingType.HOME.name() %>'){
+					$("input[name='shippingAddress']").val('${sessionScope.member.address}');
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<jsp:include page='/subviews/header.jsp' > 
-			<jsp:param value="修改成本頁需要的內容" name="subtitle"/>
+			<jsp:param value="結帳" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
 		<%

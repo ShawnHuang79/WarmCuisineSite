@@ -68,7 +68,7 @@ public class CheckOutServlet extends HttpServlet {
 			shType=ShippingType.valueOf(shippingType);
 			}catch(RuntimeException e) {
 				errorList.add("取件方式:" + shippingType + "不正確!");
-			}			
+			}
 		}
 		
 		PaymentType pType = null;

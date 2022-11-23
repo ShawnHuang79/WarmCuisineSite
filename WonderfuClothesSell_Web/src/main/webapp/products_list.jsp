@@ -31,18 +31,21 @@
 			}
 			.vendor-list li{
 				width: 400px;
-				border: 1px solid black;
+				/*border: 1px solid black;*/
 				padding-top: 30px;
-				background: #F0F0FF;
+				/*background: #F0F0FF;*/
 				text-align: center;
 				margin: 10px;
 			}
 			.vendor-tile img{
-				width: 200px;
-				height: 150px;
+				width: 300px;
+				height: 220px;
 			}
 			.productDescription{
 				color:#333
+			}
+			#productDescriptionName{
+				font-weight:bold;
 			}
 
 			/*.photo{
@@ -155,9 +158,9 @@
  			<a href='?'>全部產品</a><br> <%--query string --%>
 			<a href='?newest='>最新上架</a><br>
 			<a href='?category=餐點'>餐點</a><br>
-			<a href='javascript:getProductByCategory("飲料")'>飲料</a><br>
+			<a href='?category=飲料'>飲料</a><br>
+<!-- 			<a href='javascript:getProductByCategory("飲料")'>飲料</a><br> -->
 		</aside>
-		
 		<article>
 
 			<ul class="vendor-list" data-title-pickup=""
@@ -179,7 +182,7 @@
 								</a>
 								<a href='javascript:getProductData(<%= p.getId() %>, true)'>
 								<figcaption class="vendor-info">
-									<span class="productDescription"><%= p.getName()%></span>
+									<span class="productDescription" id='productDescriptionName'><%= p.getName()%></span>
 									<p class="productDescription">
 									<% if(p instanceof Outlet){%>
 										<%=((Outlet)p).getListPrice()%>

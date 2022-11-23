@@ -93,7 +93,12 @@ public class CaptchaServlet extends HttpServlet {
         Graphics2D g2d = (Graphics2D)g;//改成2D方法
         g2d.setFont(new Font("Arial", Font.PLAIN, 18));//設定字體，Arial寬度不一，要小心突出去。
         g2d.setColor(getRandomColor(20, 140));//換更深的顏色寫字
-        double randRotate = ((random.nextInt(10))-5)/10d;
+        double randRotate = 0;
+        //出現太水平的結果就重來
+        while(randRotate<0.15 && randRotate >(-0.15)) {
+        	randRotate = ((random.nextInt(100))-50)/100d;
+        	System.out.println(randRotate);
+        }
         g2d.rotate(randRotate);//旋轉角度
         if(randRotate>0) {
         	g2d.drawString(rand, 15, 25);

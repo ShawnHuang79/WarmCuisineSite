@@ -68,6 +68,7 @@
 	<a href='/wcs/register.jsp'>註冊</a>|
 	<a id='login'>登入</a>|
 	<%}else{%>
+	<a href='/wcs/member/orders_history.jsp'>歷史訂單</a> |
 	<a href='/wcs/member/update.jsp'>修改會員</a>|
 	<a href='/wcs/logout.do' onclick="logoutSnackbar()" >登出</a>|
 	<%} %>

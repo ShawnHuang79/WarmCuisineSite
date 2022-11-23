@@ -7,40 +7,29 @@ import java.util.Set;
 
 public class Order {
 	private int id;
-	 
-	private Customer member;
-	 
+	private Customer member;//PKEY, Auto-increment
 	private LocalDate createdDate;
-	 
 	private LocalTime createdTime;
-	 
 	private ShippingType shippingType;
-	
 	private PaymentType paymentType;
-	 
 	private double shippingFee;
-	 
 	private double paymentFee;
 	 
 	private String shippingNote;
-	 
 	private String paymentNote;
 	 
-	private int status;
+	private int status;//0:新訂單, 1:已付款, 2:已入帳, 3:已出貨...
 	 
 	private String recipientName;
-	 
 	private String recipientEmail;
-	 
 	private String recipientPhone;
-	 
+	
 	private String shippingAddress;
-	 
 	private double totalAmount;
-	 
+	//訂單的項目資料
 	private Set<OrderItem> orderItemsSet = new HashSet<>();
 	
-	//回傳副本
+	//orderItemsSet's getter,回傳複本
 	public Set<OrderItem> getOrderItemsSet(){
 		return new HashSet<>(orderItemsSet);
 	}
@@ -58,7 +47,6 @@ public class Order {
 		return sum;
 	}
 	
-	//TODO 還有缺一個set的程式
 	
 	//orderItemsSet的setter
 	//ordersDAO將資料庫的明細讀出來時，會用此方法加入訂單。
@@ -85,7 +73,6 @@ public class Order {
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -93,7 +80,6 @@ public class Order {
 	public Customer getMember() {
 		return member;
 	}
-
 	public void setMember(Customer member) {
 		this.member = member;
 	}
@@ -101,7 +87,6 @@ public class Order {
 	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
-
 	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
@@ -171,7 +156,10 @@ public class Order {
 	}
 	
 	public String getStatusString() {
-		return Status
+		return Status.values()[status].getDescription();
+	}
+	public String getStatusString(int status) {
+		return Status.values()[status].getDescription();
 	}
 
 	public String getRecipientName() {
@@ -207,20 +195,21 @@ public class Order {
 	}
 
 	public double getTotalAmount() {
-		if(orderItemsSet==null &&orderItemsSet.size()==0) {
+		if(orderItemsSet==null || orderItemsSet.size()==0) {
 			return totalAmount;
 		}else {
 			double sum=0;
 			for(OrderItem orderItem: orderItemsSet) {
 				sum += orderItem.getPrice() * orderItem.getQuantity();
 			}
-			return sum;
+			return Math.round(sum);
 		}
-		
 	}
-
 	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
+	}
+	public double getTotalAmountWithFee() {		
+		return Math.round(getTotalAmount()+paymentFee+shippingFee);
 	}
 	@Override
 	public String toString() {
@@ -237,7 +226,7 @@ public class Order {
 	}	
 	//巢狀類別
 	public enum Status{
-		NEW("新訂單"), TRANSFERED, PAID, SHIPPED, ARRIVED, CHECKED, COMPLETE;
+		NEW("新訂單"), TRANSFERED("已轉帳"),PAID("已付款"), SHIPPED("已出貨"),ARRIVED("已送達"),CHECKED("已簽收"),COMPLETE("已完成");
 		private final String description;
 		
 		private Status(String description) {
