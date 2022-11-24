@@ -14,7 +14,7 @@ header h1{
 }
 
 header div{
-	width: 600px;
+	width: 400px;
 }
 
 header form{
@@ -22,7 +22,12 @@ header form{
 }
 header a{
 	min-width: 35px;
+	max-height: 40px;
 }
+.headerImgs{
+	max-width: 35px;
+}
+
 /* 登出跳窗start */
 #snackbar{
 	visibility: hidden;

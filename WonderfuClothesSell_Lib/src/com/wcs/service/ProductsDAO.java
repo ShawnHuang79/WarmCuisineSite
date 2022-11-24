@@ -24,11 +24,11 @@ class ProductsDAO {
 			+ "    WHERE category = ?";
 	private static final String SELECT_Price_Inteval_products = SELECT_All_products
 			+ "    WHERE unit_price BETWEEN ? AND ?";
-	private static final String SELECT_Id_products = "SELECT id, name, unit_price, discount, photo_url, "
-			+ "	description, launch_date, category, size, price "
+	private static final String SELECT_Id_products = "SELECT id, name, min_price, discount, photo_url, "
+			+ "	description, launch_date, category, size, list_price, unit_price"
 			+ " FROM wcs.products_join_size_view"
 			+ "    WHERE id= ?"
-			+ "    ORDER BY price DESC";
+			+ "    ORDER BY list_price DESC";
 
 	List<Product> selectAllProducts() throws WCSException{
 		List<Product> list = new ArrayList<>();
@@ -157,7 +157,7 @@ class ProductsDAO {
 						}
 						p.setId(rs.getInt("id"));
 						p.setName(rs.getString("name"));
-						p.setUnitPrice(rs.getDouble("unit_price"));
+						p.setUnitPrice(rs.getDouble("min_price"));
 						//p.setStock(rs.getInt("stock"));
 						p.setPhotoUrl(rs.getString("photo_url"));
 						p.setDescription(rs.getString("description"));
@@ -169,7 +169,8 @@ class ProductsDAO {
 					if(sizeName!=null) {
 						Size size = new Size();
 						size.setSizeName(sizeName);
-						size.setUnitPrice(rs.getDouble("price"));
+						size.setListPrice(rs.getDouble("list_price"));
+						size.setUnitPrice(rs.getDouble("unit_price"));
 						p.addSize(size);
 					}
 					//sizesList中有size代表這個product有不同size

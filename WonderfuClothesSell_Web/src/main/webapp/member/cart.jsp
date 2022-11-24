@@ -402,7 +402,7 @@
 						<div class="img left"><img src='<%= cartItem.getPhotoUrl() %>' width="80" height="80"></div>
 						<div class="name left"><%= cartItem.getProductName() %></div>
 						<div class="price left"><%=cart.getUnitPrice(cartItem) %></div>
-						<div class="number left"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><input type='number' class="quantity" value='<%=cart.getQuantity(cartItem) %>' name='quantity<%=cartItem.hashCode() %>' required><div class="quantityIncrease">+</div></div> </div>
+						<div class="quantityDiv"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><div class='quantity'><input type='number' class='quantity' value='<%=cart.getQuantity(cartItem) %>' name='quantity<%=cartItem.hashCode() %>' required></div><div class="quantityIncrease">+</div></div> </div>
 						<div class="size left"><%= cartItem.getSizeName() %></div>
 						<div class="subtotal left"><%=cart.getUnitPrice(cartItem) %></div>
 						<div class="delete left"><input type='checkbox' name='delete<%=cartItem.hashCode() %>'></div>

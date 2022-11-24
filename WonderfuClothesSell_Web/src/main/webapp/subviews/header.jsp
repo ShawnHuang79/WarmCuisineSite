@@ -60,17 +60,19 @@
 		<input type='search' name='maxPrice' placeholder='請輸入最低價格' value='${param.maxPrice}' >
 		<input type='submit' value='價格查詢'>
 	</form>
-	<a href='/wcs/member/cart.jsp'>購物車</a>
-	<span class='cartQuantitySpan'>
-		${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity) } <!-- 要把搜尋結果帶回框框內，注意EL無法做字串相加  -->
-	</span>|
+	<a href='/wcs/member/cart.jsp'>
+		<img id='cartImg' class='headerImgs' src='/wcs/images/shopping_cart.png'>
+		<span class='cartQuantitySpan'>
+			${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity) } <!-- 要把搜尋結果帶回框框內，注意EL無法做字串相加  -->
+		</span>
+	</a>|
 <!-- 	改購物車圖示<img src='/wcs/images/cart.png> -->
 	<% 
 	Customer c = (Customer)session.getAttribute("member");
 	if(c==null){
 	%>
 	<a href='/wcs/register.jsp'>註冊</a>|
-	<a id='login'>登入</a>|
+	<a id='login'><img id='membertImg' class='headerImgs' src='/wcs/images/membertImg.png'>登入</a>|
 	<%}else{%>
 	<a href='/wcs/member/orders_history.jsp'>歷史訂單</a> |
 	<a href='/wcs/member/update.jsp'>修改會員</a>|

@@ -13,9 +13,19 @@
 	function init(){
 		//$("#productSizeRadio").on('change', changeProductHandler)
 		//$("cartForm").on("submit", addToCart); //會多重註冊同一個程式，會出問題。
+		$("input[name='sizeName']").on('change',changeSizeData);
+		
 		<%--<%if(request.getMethod().equals("POST")){%>
 			//repopulateForm();
 		<%}%> 用在點擊選項時更換圖片--%>
+	}
+	function changeSizeData(){
+		var theOption = $(this);
+		var listPrice = theOption.attr('data-listPrice');
+		var unitPrice = theOption.attr('data-unitPrice');
+		
+		$("#listPriceSpan").text(listPrice);
+		$("#unitPriceSpan").text(unitPrice);
 	}
 
 	function repopulateForm(){
@@ -43,10 +53,7 @@
 		alert("加入購物車成功");//考慮改和登出一樣snackbar
 		$(".cartQuantitySpan").text("("+response.totalQuantity+")");
 	}
-	
 	//改Json回傳格式用
-	
-	
 	/*function getSizeJsonDataDoneHandler(data){
 		var jsonSizeArray = data.sizeArray;
 		$("#sizeDiv>div").html('');
@@ -79,23 +86,32 @@
 		<img id='theProductPhoto' src='<%=p.getPhotoUrl()+ "?width=400&height=400&quality=45"%>'>
 		<h3><%= p.getName()%></h3>
 		<%if(p instanceof Outlet){ %>
-		<div>定價:<%= ((Outlet)p).getListPrice()%></div>
+		<div>定價:<span id='listPriceSpan'><%= ((Outlet)p).getListPrice()%></span>元</div>
 		<div>折扣:<%= ((Outlet)p).getDiscount()%>%</div>
-		<div>售價:<%= ((Outlet)p).getUnitPrice()%></div>
+		<div>售價:<span id='unitPriceSpan'><%= ((Outlet)p).getUnitPrice()%></span>元</div>
 		<%}else{ %>
-		<div>定價:<%= p.getUnitPrice()%></div>
+		<div>定價:<span id='unitPriceSpan'><%= p.getUnitPrice()%></span>元</div>
 		<%} %>
 
 		<form method='GET' action='/wcs/add_cart.do' id='cartForm' onsubmit="addToCart(event)"><%--希望能資料檢查，但不送出請求，event是預設全域變數? --%>
 			<input type='hidden' name='productId' value='<%=productId%>'>
 			<div>
+<!-- 				size中的unitPrice其實是listPrice -->
 				<label>容量:</label>
+<%--  				<%for (int i=0; i<p.getSizesList().size(); i++){  --%>
+<%-- 				%> --%>
+<%-- 				<input id='productSizeRadio' type='radio' name='sizeName' value='<%=p.getSizesList().get(i).getSizeName() %>' data-photo='' required --%>
+<%-- 					 data-listPrice='<%=p.getSizesList().get(i).getUnitPrice() %>'  --%>
+<!-- 				> -->
+<%-- 				<label><%=size.getSizeName() %>及<%=size.getUnitPrice() %></label> --%>
+					
+<%-- 				<% }%> --%>
  				<%for (Size size:p.getSizesList()){ 
-				%>
+				%> 
 				<input id='productSizeRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
-					data-price='<%=size.getUnitPrice() %>'
+					 data-listPrice='<%=size.getListPrice() %>' data-unitPrice='<%=size.getUnitPrice() %>' 
 				>
-				<label><%=size.getSizeName() %></label>
+				<label><%=size.getSizeName() %>額外資訊<%=size.getListPrice() %>、<%=size.getUnitPrice() %>、</label>
 					
 				<% }%>
 				

@@ -52,13 +52,13 @@ public class BookingServlet extends HttpServlet {
 				}
 				seatMap.get(seatList[i].substring(0, 1)).add(seatList[i].charAt(1));
 			}
-			//System.out.println("前端傳來的map:" +seatMap);
+			System.out.println("前端傳來的map:" +seatMap);
 			//用使用者輸入的key(A、B、C)去找"查詢"資料庫吻合的PKey的值出來做後續處理
 			try {
 				Map<String, Byte> seatMapFromDB = service.read(seatMap.keySet());
 				
 				
-				//System.out.println("seatMapFromDB回傳結果:" + seatMapFromDB);
+				System.out.println("seatMapFromDB回傳結果:" + seatMapFromDB);
 				
 				
 				//TODO 比對seatMapFromDB和seatMap取出的value，
