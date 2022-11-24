@@ -329,6 +329,7 @@
 				font-size: 16px;
 				color: #747474;
 			}
+					
 			
 			.quantityDecrease {
 				width: 30%;

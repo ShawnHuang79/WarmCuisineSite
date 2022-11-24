@@ -61,6 +61,7 @@ public class AddCartServlet extends HttpServlet {
 						cart = new ShoppingCart();
 						session.setAttribute("cart", cart);
 					}
+					//其實p裡面就有size了
 					Size size = null;
 					if(p.hasSize() && sizeName!=null) {
 						size = pService.getSize(productId, sizeName);
