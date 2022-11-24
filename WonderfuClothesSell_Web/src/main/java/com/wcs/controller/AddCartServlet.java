@@ -43,6 +43,7 @@ public class AddCartServlet extends HttpServlet {
 		String productId = request.getParameter("productId");
 		String sizeName = request.getParameter("sizeName");
 		String quantity = request.getParameter("quantity");
+		String ajax = request.getParameter("ajax");
 		
 		//從前端傳過來的是某個產品的"中"這個size以及需要數量，要用product service去找DAO要資料庫
 		//裏面size的相關資料，比對是"中"再連同"中"相關的價格拿出來放在size物件裡面才能夠給cart進行add
@@ -79,8 +80,11 @@ public class AddCartServlet extends HttpServlet {
 		}else {
 			errorList.add("加入購物車失敗 productId: " + productId + ", quantity" + quantity + "無法處理!");
 		}
-		//無論對錯都Redirect給購物車
-		response.sendRedirect("member/cart.jsp");
+		//如果有ajax請求就把資料傳到small_cart.jsp且不進行Redirect，無論對錯都Redirect給購物車
+		if(ajax!=null && Boolean.parseBoolean(ajax)) {
+			request.getRequestDispatcher("small_cart.jsp").forward(request, response);
+		}else {
+			response.sendRedirect("member/cart.jsp");
+		}
 	}
-
 }

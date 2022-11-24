@@ -76,7 +76,7 @@
 	    	}
 	    	function getProductData(pid, doAjax){ //如果需要p的資料，就從參數pid送來，doAjax控制同步非同步，
 	    		//
-	    		var urlPath = 'product_div.jsp?productId='+pid;
+	    		var urlPath = 'product_div.jsp?productId='+pid;/*product_div是ajax中顯示的內容*/
 	    		if(doAjax){
 	    			$.ajax({
 	    				url: urlPath,
@@ -110,7 +110,7 @@
 		<%@include file='/subviews/nav.jsp' %> 
 <!-- lightbox 要和header整合-->
 		<div id="myModal" class="modal">
-	 		<span class="close cursor" onclick="closeModal()">&times;</span>
+	 		<div class="close cursor" onclick="closeModal()">&times;</div>
 	  		<div id='getProductData_Div' class="modal-content">
 			</div>
 		</div>

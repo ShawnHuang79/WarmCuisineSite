@@ -40,7 +40,7 @@
 <!-- /subviews/header.jsp start -->
 <header>
 	<div id="myModal" class="modal">
- 		<span class="close cursor" onclick="closeModal()">&times;</span>
+ 		<div class="close cursor" onclick="closeModal()">&times;</div>
  		<div id='getProductData_Div' class="modal-content">
 		</div>
 	</div>	
@@ -60,7 +60,10 @@
 		<input type='search' name='maxPrice' placeholder='請輸入最低價格' value='${param.maxPrice}' >
 		<input type='submit' value='價格查詢'>
 	</form>
-	<a href='/wcs/member/cart.jsp'>購物車</a>|
+	<a href='/wcs/member/cart.jsp'>購物車</a>
+	<span class='cartQuantitySpan'>
+		${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity) } <!-- 要把搜尋結果帶回框框內，注意EL無法做字串相加  -->
+	</span>|
 <!-- 	改購物車圖示<img src='/wcs/images/cart.png> -->
 	<% 
 	Customer c = (Customer)session.getAttribute("member");
