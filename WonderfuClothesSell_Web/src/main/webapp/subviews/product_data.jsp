@@ -111,7 +111,7 @@
 				<input id='productSizeRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
 					 data-listPrice='<%=size.getListPrice() %>' data-unitPrice='<%=size.getUnitPrice() %>' 
 				>
-				<label><%=size.getSizeName() %>額外資訊<%=size.getListPrice() %>、<%=size.getUnitPrice() %>、</label>
+				<label><%=size.getSizeName() %></label>
 					
 				<% }%>
 				

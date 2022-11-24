@@ -151,7 +151,7 @@ class ProductsDAO {
 						int discount = rs.getInt("discount");
 						if(discount>0) {
 							p = new Outlet();
-							((Outlet)p).setDiscount(discount);				
+							((Outlet)p).setDiscount(discount);
 						}else {
 							p = new Product();//如果沒有discount的就是一般商品
 						}
@@ -163,12 +163,12 @@ class ProductsDAO {
 						p.setDescription(rs.getString("description"));
 						p.setLaunchDate(rs.getString("launch_date"));
 						p.setCategory(rs.getString("category"));
-						p = productEntireData(rs);
 					}
 					String sizeName = rs.getString("size");
 					if(sizeName!=null) {
 						Size size = new Size();
 						size.setSizeName(sizeName);
+
 						size.setListPrice(rs.getDouble("list_price"));
 						size.setUnitPrice(rs.getDouble("unit_price"));
 						p.addSize(size);
