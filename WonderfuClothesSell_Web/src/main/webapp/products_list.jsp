@@ -12,9 +12,6 @@
 		<style>
 			@import url(/wcs/css/wcs.css);
 			@import url(/wcs/css/lightbox.css);
-			body{
-	            background-color: white;
-	        }
 			body {
 				margin: 0px;
 			}
@@ -23,23 +20,42 @@
 			}
 			.vendor-list{
 				list-style: none;
-				border: 1px dashed black;
 				display: flex;
 				flex-direction: row; /*row column row-reverse column-reverse*/
 				flex-wrap: wrap;
+				justify-content: center;
 			
 			}
 			.vendor-list li{
-				width: 400px;
-				/*border: 1px solid black;*/
+				width: 650px;
+				border: 1px solid ;
+				border-color: rgba(0,0,0,0.2);
 				padding-top: 30px;
+				border-radius: 10px;
 				/*background: #F0F0FF;*/
 				text-align: center;
 				margin: 10px;
+				
+				
 			}
-			.vendor-tile img{
-				width: 300px;
-				height: 220px;
+			.vendor-tile{
+				display: flex;
+				flex-direction: row; /*row column row-reverse column-reverse*/
+				justify-content: space-between;
+
+				
+			}
+			
+			.vendor-tile img, .vendor-info, #Description{
+				width: 250px;
+				height: 180px;
+			}
+			.vendor-info{
+				display:flex;
+				flex-direction: column; /*row column row-reverse column-reverse*/
+				justify-content: space-around;
+				text-align:left;
+				
 			}
 			.productDescription{
 				color:#333
@@ -47,6 +63,7 @@
 			#productDescriptionName{
 				font-weight:bold;
 			}
+
 
 			/*.photo{
 				width: 200px;
@@ -175,27 +192,36 @@
 					%>	
 						<li>
 							<figure class="vendor-tile">
-								<a href='javascript:getProductData(<%= p.getId() %>)'> 
-									<picture class="vendor-picture">
-										<img src='<%= p.getPhotoUrl() %>' onerror='getBookPng(this)'> <%--加入圖片的error處理 --%>
-									</picture>
-								</a>
-								<a href='javascript:getProductData(<%= p.getId() %>, true)'>
-								<figcaption class="vendor-info">
-									<span class="productDescription" id='productDescriptionName'><%= p.getName()%></span>
-									<p class="productDescription">
-									<% if(p instanceof Outlet){%>
-										<%=((Outlet)p).getListPrice()%>
-									<%}else{ %>
-										<%=p.getUnitPrice() %>
-									<%} %>元起
-									</p>
-									<p class="productDescription"><%=p.getDescription() %></p>
-									
-								</figcaption>
-								</a>
+
+								<div id='Description'>
+									<a href='javascript:getProductData(<%= p.getId() %>, true)'>
+										<div class="vendor-info">
+											<div>
+												<span class="productDescription" id='productDescriptionName'><%= p.getName()%></span>
+												<p class="productDescription"><%=p.getDescription() %></p>
+											</div>
+											<div>
+												<p class="productDescription">
+													<% if(p instanceof Outlet){%>
+														<%=((Outlet)p).getListPrice()%>
+													<%}else{ %>
+														<%=p.getUnitPrice() %>
+													<%} %>元起
+												</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div>
+									<a href='javascript:getProductData(<%= p.getId() %>)'> 
+										<picture class="vendor-picture">
+											<img src='<%= p.getPhotoUrl() %>' onerror='getBookPng(this)'> <%--加入圖片的error處理 --%>
+										</picture>
+									</a>
+								</div>
 							</figure>
-						</li>						
+						</li>
+						<br>						
 					<%
 					}
 				}
