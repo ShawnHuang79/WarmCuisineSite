@@ -186,10 +186,10 @@ class ProductsDAO {
 	}
 	//TODO 從view把sizelist回傳，要再調整。
 	private static final String SELECT_SIZE_LIST = "SELECT id, "
-			+ " size, discount, price "
+			+ " size, discount, list_price, unit_price "
 			+ " FROM wcs.products_join_size_view"
 			+ "    WHERE id= ?"
-			+ "    ORDER BY price DESC";
+			+ "    ORDER BY unit_price DESC";
 	List<Size> selectSizeList(String productId) throws WCSException{
 		List<Size> list = new ArrayList<>();
 		
@@ -206,8 +206,8 @@ class ProductsDAO {
 					Size size = new Size();
 					size.setProductId(rs.getInt("id"));
 					size.setSizeName(rs.getString("size"));
-					//size.setListPrice(rs.getDouble("list_price"));
-					size.setUnitPrice(rs.getDouble("price"));
+					size.setListPrice(rs.getDouble("list_price"));
+					size.setUnitPrice(rs.getDouble("unit_price"));
 					//size.setOrdinal(rs.getInt("size_ordinal"));
 					
 					list.add(size);					
