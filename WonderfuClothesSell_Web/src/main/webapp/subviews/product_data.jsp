@@ -84,17 +84,16 @@
 <%}else{ %>
 	<div class='productDetails'>
 		<div id='theProductPhoto' style="background-image: url(<%=p.getPhotoUrl()%>)">
-<!-- 			右上角購物車小圖示 -->
 
-			<span style='float:right' class='cartQuantitySpan' > 
-				${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity)}
-			</span> 
-			<a href='/wcs/member/cart.jsp' style='float:right'>購物車</a>
-			<br>
-			<br>
 <%-- 			<img  src='<%=p.getPhotoUrl()+ "?width=400&height=400&quality=45"%>'> --%>
 		</div>
 		<h3><%= p.getName()%></h3>
+		<!-- 			右上角購物車小圖示 -->
+
+		<span style='float:right' class='cartQuantitySpan' > 
+			${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity)}
+		</span> 
+		<a href='/wcs/member/cart.jsp' style='float:right'>購物車</a>
 		<%if(p instanceof Outlet){ %>
 		<div>定價:<span id='listPriceSpan'><%= ((Outlet)p).getListPrice()%></span>元</div>
 		<div>折扣:<%= ((Outlet)p).getDiscount()%>%</div>

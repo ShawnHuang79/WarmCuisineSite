@@ -5,8 +5,12 @@
 <%--這裡的css是用來控制product_data的，用在產品id查詢的ajax中 --%>
 <style>
 	#theProductPhoto{
-		width: 480px;
-		height: 350px;
+
+		height: 300px;
+		background-position: 50%;
+		background-size: cover;
+		border-radius: 10px 10px 0px 0px;
+		
 	}
 </style>
 

@@ -131,7 +131,7 @@
 		<%@include file='/subviews/nav.jsp' %> 
 <!-- lightbox -->
 		<div id="myModal" class="modal">
-	 		<div class="close" onclick="closeLightboxForProduct()">&times;</div>
+	 		<div class="close" onclick="closeLightboxForProduct()"><span class="closeCircle">&times;</span></div>
 	  		<div id='getProductData_Div' class="modal-content">
 			</div>
 		</div>
