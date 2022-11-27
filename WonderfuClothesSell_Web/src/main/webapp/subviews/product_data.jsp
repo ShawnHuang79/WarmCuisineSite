@@ -33,7 +33,7 @@
 		//$ .trigger  //模仿使用者點選的動作。
 	}
 	function changeProductHandler(){
-		$("#theProductPhoto").attr('src', $(this).attr('data-photo'));
+		//$("#theProductPhoto").attr('src', $(this).attr('data-photo'));
 		//$("#colorStockSpan").html('('color+":"+stock+ '個)')
 		
 		//$("select[name='colorName'] option:selected")如果用select+option的寫法。
@@ -83,7 +83,17 @@
 	<p>查無此產品(產品編號為: <%= productId %>).<p>
 <%}else{ %>
 	<div class='productDetails'>
-		<img id='theProductPhoto' src='<%=p.getPhotoUrl()+ "?width=400&height=400&quality=45"%>'>
+		<div id='theProductPhoto' style="background-image: url(<%=p.getPhotoUrl()%>)">
+<!-- 			右上角購物車小圖示 -->
+
+			<span style='float:right' class='cartQuantitySpan' > 
+				${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity)}
+			</span> 
+			<a href='/wcs/member/cart.jsp' style='float:right'>購物車</a>
+			<br>
+			<br>
+<%-- 			<img  src='<%=p.getPhotoUrl()+ "?width=400&height=400&quality=45"%>'> --%>
+		</div>
 		<h3><%= p.getName()%></h3>
 		<%if(p instanceof Outlet){ %>
 		<div>定價:<span id='listPriceSpan'><%= ((Outlet)p).getListPrice()%></span>元</div>

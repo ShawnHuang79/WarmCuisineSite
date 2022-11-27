@@ -368,9 +368,35 @@
 				background-color: #ff6700 !important;
 			}
 	    </style>
-
+		<script src="https://code.jquery.com/jquery-3.0.0.js" 
+				integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+				crossorigin="anonymous">
+		</script>
 	    <script>
-
+			$(document).ready(init);
+			function init(){
+				$(".quantityIncrease").click(quantityIncreaseHandler);
+				$(".quantityDecrease").click(quantityDecreaseHandler);
+			}
+			function quantityIncreaseHandler(){
+				node = this.parentNode.childNodes[1].childNodes[0];
+				//console.log(this.parentNode);
+				//console.log(node);
+				num = node.value;
+				num++;
+				node.value = num;
+			}
+			function quantityDecreaseHandler(){
+				node = this.parentNode.childNodes[1].childNodes[0];
+				//console.log(this.parentNode);
+				//console.log(node);
+				num = node.value;
+				if (num > 1) {
+					num--;
+				}
+				node.value = num;
+	}
+	    	
 		</script>
 	</head>
 	<body>
@@ -416,7 +442,7 @@
 						<div class="quantityDiv"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><div class='quantity'><input type='number' class='quantity' value='<%=cart.getQuantity(cartItem) %>' name='quantity<%=cartItem.hashCode() %>' required></div><div class="quantityIncrease">+</div></div> </div>
 						<div class="size left"><%= cartItem.getSizeName() %></div>
 						<div class="subtotal left"><%=cart.getUnitPrice(cartItem) %></div>
-						<div class="delete left"><input type='checkbox' name='delete<%=cartItem.hashCode() %>'></div>
+						<div class="delete left"><input class="delete" type='submit' name='delete<%=cartItem.hashCode() %>' value='×'></div>
 <!-- 						<div class="delete left"><a rel="nofollow" href="javascript:;">×</a></div> -->
 					</div>
 				<%} %>

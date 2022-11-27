@@ -29,21 +29,20 @@
 			.vendor-list li{
 				width: 650px;
 				border: 1px solid ;
-				border-color: rgba(0,0,0,0.2);
-				padding-top: 30px;
+				border-color: rgba(0,0,0,0.1);
+				padding: 20px 0px;
 				border-radius: 10px;
 				/*background: #F0F0FF;*/
 				text-align: center;
 				margin: 10px;
-				
-				
+			}
+			.vendorListLi:hover{
+				box-shadow: rgba(0,0,0,0.15) 0px 15px 25px, rgba(0,0,0,0.05) 0px 5px 10px
 			}
 			.vendor-tile{
 				display: flex;
 				flex-direction: row; /*row column row-reverse column-reverse*/
 				justify-content: space-between;
-
-				
 			}
 			
 			.vendor-tile img, .vendor-info, #Description{
@@ -57,23 +56,28 @@
 				text-align:left;
 				
 			}
-			.productDescription{
+			.productDiv{
 				color:#333
 			}
 			#productDescriptionName{
 				font-weight:bold;
+				padding-bottom: 10px;
+			}
+			#productDescription{
+				font-size: 0.9em;
+				min-height:80px;
+			}
+			#productIncrease{
+				width: 24px;
+				height: 24px;
+				text-align: center;
+				border-radius: 4px;
+				color:white;
+				background-color: #984B4B;
+				cursor: pointer;
+
 			}
 
-
-			/*.photo{
-				width: 200px;
-				height: 150px;
-			}*/
-			/*.column {
-			  float: left;
-			  width: 25%;
-			}*/
-			
 
 	    </style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
@@ -107,13 +111,13 @@
 	    	function getProductDataDoneHandler(response){
 
 	    		$("#getProductData_Div").html(response);
-				openModal()
+				openLightboxForProduct()
 	    	}
-			function openModal() {
+			function openLightboxForProduct() {
 				  document.getElementById("myModal").style.display = "block";
 				  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
 				}
-			function closeModal() {
+			function closeLightboxForProduct() {
 			    document.getElementById("myModal").style.opacity = 0
 			    setTimeout(function(){document.getElementById("myModal").style.display = "none";},300);
 			}
@@ -125,9 +129,9 @@
 			<jsp:param value="Product" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
-<!-- lightbox 要和header整合-->
+<!-- lightbox -->
 		<div id="myModal" class="modal">
-	 		<div class="close cursor" onclick="closeModal()">&times;</div>
+	 		<div class="close" onclick="closeLightboxForProduct()">&times;</div>
 	  		<div id='getProductData_Div' class="modal-content">
 			</div>
 		</div>
@@ -185,29 +189,34 @@
 				<% if(list==null||list.size()==0){ %>
 					<h2>查無產品</h2>
 				<%}else{ %>
-					<%-- for(int i=0;i<list.size();i++){
-						Product p = list.get(i);--%>
 					<%
 						for(Product p:list){
 					%>	
-						<li>
+						<li class="vendorListLi">
 							<figure class="vendor-tile">
 
 								<div id='Description'>
 									<a href='javascript:getProductData(<%= p.getId() %>, true)'>
 										<div class="vendor-info">
-											<div>
-												<span class="productDescription" id='productDescriptionName'><%= p.getName()%></span>
-												<p class="productDescription"><%=p.getDescription() %></p>
+											<div class="productDiv" id='productDescriptionName'>
+												<%= p.getName()%>
+												
 											</div>
-											<div>
-												<p class="productDescription">
+											
+											<div class="productDiv" id='productDescription'>
+												<%=p.getDescription() %>
+											</div>
+											<div class="productDiv">
+												<button id="productIncrease">
+													<span>+</span>
+												</button>
+												<span class="productDiv">
 													<% if(p instanceof Outlet){%>
 														<%=((Outlet)p).getListPrice()%>
 													<%}else{ %>
 														<%=p.getUnitPrice() %>
 													<%} %>元起
-												</p>
+												</span>
 											</div>
 										</div>
 									</a>
@@ -221,11 +230,42 @@
 								</div>
 							</figure>
 						</li>
-						<br>						
 					<%
 					}
 				}
-				%>		
+				%>	
+					<%--如果查出來的產品list是單數，就再加一個無內容外框讓flex排版不會留下單一個在中間 --%>
+					<%
+						if(list.size()%2 == 1){
+					%>	
+						<li style="border:none;">
+							<figure class="vendor-tile">
+
+								<div id='Description'>
+									<a>
+										<div class="vendor-info">
+											<div>
+												<span class="productDiv" id='productDescriptionName'></span>
+												<p class="productDiv"></p>
+											</div>
+											<div>
+												<p class="productDiv"></p>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div>
+									<a> 
+										<picture class="vendor-picture">
+											
+										</picture>
+									</a>
+								</div>
+							</figure>
+						</li>
+					<%
+					}
+				%>			
 			</ul>
 	    </article>    
 	</body>

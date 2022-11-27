@@ -23,28 +23,28 @@
 	}
 	function loginAjaxHandler(response){
 
-		$("#getProductData_Div").html(response);
-		openModal()
+		$("#getHeader").html(response);
+		openLightboxForHeader()
 	}
-	function openModal() {
-		  document.getElementById("myModal").style.display = "block";
-		  setTimeout(function(){document.getElementById("myModal").style.opacity = 1;},50);
+	function openLightboxForHeader() {
+		  document.getElementById("lightboxForHeader").style.display = "block";
+		  setTimeout(function(){document.getElementById("lightboxForHeader").style.opacity = 1;},50);
 		  
 		}
-	function closeModal() {
-	    document.getElementById("myModal").style.opacity = 0
-	    setTimeout(function(){document.getElementById("myModal").style.display = "none";},300);
+	function closeLightboxForHeader() {
+	    document.getElementById("lightboxForHeader").style.opacity = 0
+	    setTimeout(function(){document.getElementById("lightboxForHeader").style.display = "none";},300);
 	}
 </script>
 
 <!-- /subviews/header.jsp start -->
 <header>
-	<div id="myModal" class="modal">
- 		<div class="close cursor" onclick="closeModal()">&times;</div>
- 		<div id='getProductData_Div' class="modal-content">
+	<div id="lightboxForHeader" class="lightboxForHeaderClass">
+ 		<div class="closelightboxForHeader" onclick="closeLightboxForHeader()">&times;</div>
+ 		<div id='getHeader' class="lightboxForHeaderContent">
 		</div>
 	</div>	
-	<h1><a href='/wcs'>Eat Food</a> 
+	<h1><a href='/wcs'>Warm Cuisine Site</a> 
 		<sub>
 			<%=request.getParameter("subtitle")==null?"歡迎光臨": request.getParameter("subtitle") %>
 		</sub>
