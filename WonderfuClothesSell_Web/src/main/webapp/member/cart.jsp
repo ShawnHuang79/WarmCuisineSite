@@ -388,7 +388,7 @@
 				}
 			}*/
 			function quantityIncreaseHandler(){
-				node = this.parentNode.childNodes[1].childNodes[0];
+				node = this.parentNode.getElementsByClassName('quantity')[0].childNodes[0];
 				//console.log(this.parentNode);
 				//console.log(node);
 				num = node.value;
@@ -396,7 +396,7 @@
 				node.value = num;
 			}
 			function quantityDecreaseHandler(){
-				node = this.parentNode.childNodes[1].childNodes[0];
+				node = this.parentNode.getElementsByClassName('quantity')[0].childNodes[0];
 				//console.log(this.parentNode);
 				//console.log(node);
 				num = node.value;

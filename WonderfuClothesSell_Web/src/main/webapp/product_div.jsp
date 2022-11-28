@@ -15,6 +15,13 @@
 	#theProductDetails{
 		padding: 0px 30px 30px 30px;
 	}
+	#productDivUpper{
+		margin: 0px 0px 15px 0px;
+	}
+	#sizesDivCtrl, #sizesDiv div{
+		padding: 10px 0px;
+	}
+	
 
 	#delListPrice{
 		font-size: 14px;
@@ -65,13 +72,11 @@
 		/*color: #747474;*/
 		font-weight: bold;
 	}
-	
 	.quantityIncrease:hover {
 		color: #747474;
 		background: #E0E0E0;
 		cursor: pointer;
 	}
-	
 	.quantity {
 		width: 40%;
 		height: 40px;
@@ -90,7 +95,6 @@
 		font-size: 30px;
 		font-weight: bold;
 	}
-	
 	.quantityDecrease:hover {
 		color: #747474;
 		background: #E0E0E0;

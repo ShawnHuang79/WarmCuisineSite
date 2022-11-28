@@ -22,13 +22,13 @@
 		<%}%> 用在點擊選項時更換圖片--%>
 	}
 	function quantityIncreaseHandler(){
-		node = this.parentNode.childNodes[3].childNodes[0];
+		node = this.parentNode.getElementsByClassName('quantity')[0].childNodes[0];
 		num = node.value;
 		num++;
 		node.value = num;
 	}
 	function quantityDecreaseHandler(){
-		node = this.parentNode.childNodes[3].childNodes[0];
+		node = this.parentNode.getElementsByClassName('quantity')[0].childNodes[0];
 		//console.log(this.parentNode);
 		//console.log(node);
 		num = node.value;
@@ -128,18 +128,19 @@
 
 	
 			</div> 
-			
-			<%if(p instanceof Outlet){ %>
-			<div id='delListPrice'>定價 <del id='listPriceSpan'><%= ((Outlet)p).getListPrice()%></del>  折扣<%= ((Outlet)p).getDiscount()%>%</div>
-			<div>NT$<span id='unitPriceSpan'><%= ((Outlet)p).getUnitPrice()%></span></div>
-			<%}else{ %>
-			<div>NT$<span id='unitPriceSpan'><%= p.getUnitPrice()%></span>元</div>
-			<%} %>
-	
+			<div id='productDivUpper'>
+				<%if(p instanceof Outlet){ %>
+				<div id='delListPrice'>定價 <del id='listPriceSpan'><%= ((Outlet)p).getListPrice()%></del>  折扣<%= ((Outlet)p).getDiscount()%>%</div>
+				<div>NT$<span id='unitPriceSpan'><%= ((Outlet)p).getUnitPrice()%></span></div>
+				<%}else{ %>
+				<div>NT$<span id='unitPriceSpan'><%= p.getUnitPrice()%></span>元</div>
+				<%} %>
+			</div>
 			<form method='GET' action='/wcs/add_cart.do' id='cartForm' onsubmit="addToCart(event)"><%--希望能資料檢查，但不送出請求，event是預設全域變數? --%>
 				<div id='productDivBottom'>
 					<input type='hidden' name='productId' value='<%=productId%>'>
-					<div id='sizesDivCtrl'>容量:</div>
+					
+					<div id='sizesDivCtrl'><span style='float:right'>></span>容量:</div>
 		 			<div id='sizesDiv'>
 			 			<%for (Size size:p.getSizesList()){ 
 						%> 
@@ -156,11 +157,11 @@
 					</div>
 					<div id='theProductFooter'>
 						<div class="quantityDiv">
-								<div class="quantityDecrease">-</div>
-								<div class='quantity'><input type='number' class='quantity' value='1' min='1' max='15' name='quantity' required></div>
-								<div class="quantityIncrease">+</div>
+							<div class="quantityDecrease">-</div>
+							<div class='quantity'><input type='number' class='quantity' value='1' min='1' max='15' name='quantity' required></div>
+							<div class="quantityIncrease">+</div>
 						</div>
-						<div><input class='addToCartBtn' type='submit' value="加入購物車" onclick='ajax=true'></div>
+						<div><input id='addToCartBtn' class='addToCartBtn' type='submit' value="加入購物車" onclick='ajax=true'></div>
 						<div><input class='addToCartBtn' type='submit' value="直接結帳" onclick='ajax=false'></div>
 					</div>
 					
