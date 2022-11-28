@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Gif 4</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	
+	<script type="text/javascript">
+	var index=1;
+	$(document).ready(init);
+	function init(){
+		$("#next").click(nextHandler);
+		$("#prev").click(prevHandler);
+		for (var i=2; i<=6; i++){
+			$(".gifs4").append("<img src='halloween/"+i+".gif' />");
+		}
+		$(".gifs4 img:not(:first)").fadeOut(0);//將上面的照片全部fadeOut隱藏
+	}
+	function nextHandler(event){
+		index<6?index++:index=1;
+		$(".gifs4 img:eq("+(index-1)+")").fadeIn(400);
+		$(".gifs4 img:gt("+(index-1)+")").fadeOut(400);
+	}
+	function prevHandler(event){
+		index>1?index--:index=6;
+		$(".gifs4 img:eq("+(index-1)+")").fadeIn(400);
+		$(".gifs4 img:gt("+(index-1)+")").fadeOut(400);
+	}
+	</script>
+	<style>
+	body{
+		background:pink;
+	}
+	div{
+		display:inline-block;
+	}
+	.gifs4{
+		position:relative;
+		width:570px;
+		height:225px;
+	}
+	.gifs4 img{
+		position:absolute;
+		top:0px;
+	}
+
+	button{
+		width:100px;
+		height:100px;
+		position:relative;
+		top:-100px;
+	}
+	</style>
+	
+</head>
+<body>
+	<button id="prev">Prev</button>
+	<div class="gifs4">
+    	<img src="halloween/1.gif" />
+    </div>
+	<button id="next">next</button>
+</body>
+</html>

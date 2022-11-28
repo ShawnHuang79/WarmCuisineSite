@@ -112,16 +112,16 @@
 				function moveHandler(e){
 					clearInterval(myInterval);//reset timer
 					myInterval = setTimeout(moveHandler, 8000);//set timeer
-					$(".dot:eq("+index+")").css("backgroundColor","gray");//reset dot color
+					//$(".dot:eq("+index+")").css("backgroundColor","gray");//reset dot color
 					if(this==window){	index++;//setInterval
-					}else if($(this).attr("myIndex")){	index=Number($(this).attr("myIndex"));//.dot
+					//}else if($(this).attr("myIndex")){	index=Number($(this).attr("myIndex"));//.dot
 					}else{	index+=Number($(this).attr("direction"));}// $#prev / #next
 					if (index>2) index=0;//last image
 					if (index<0) index=2;//first image
-					$(".dot:eq("+index+")").css("backgroundColor","white");//set dot color
+					//$(".dot:eq("+index+")").css("backgroundColor","white");//set dot color
 					$("#imgs").stop().animate({"marginLeft":-index*100+"vw"},1000);
 					//$("#imgs").stop().animate({"marginLeft":-index*753+"px"},1000);//image width=735px
-					$("#outer").stop().animate({"backgroundPositionX":-index*200+"px"},1000);//map width=1000px/5=200px
+					//$("#outer").stop().animate({"backgroundPositionX":-index*200+"px"},1000);//map width=1000px/5=200px
 				}
 			// 首頁輪播
 		</script>
@@ -132,8 +132,9 @@
 		<div id="outer">
 	        <div id="imgs">
 				<img src="/wcs/images/image1.jpg"></a>
-				<img src="/wcs/images/image2.jpg"></a>
-				<img src="/wcs/images/image3.jpg"></a>
+<!-- 				留一張，其他用append上去，當頁fade in，比當頁高的頁面全部fade out -->
+<!-- 				<img src="/wcs/images/image2.jpg"></a> -->
+<!-- 				<img src="/wcs/images/image3.jpg"></a> -->
 			</div>
 	        <div id="prev" direction="-1">&ltdot;</div>
 			<div id="next" direction="1">&gtdot;</div>
