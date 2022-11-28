@@ -14,26 +14,19 @@
 			}
 			/*首頁輪撥*/
 			#outer{
-				position:relative;
-				width:100%;/*image width=753 height=357*/
-				height:100%;
-				overflow:hidden;
-				/*background-image:url(/wcs/images/image1.jpg);*/
-				/*background-color:#666;*/
-				margin:auto;
-				/*transition: background 1s linear;*/
+			position:relative;
+			width:100%;/*image width=753 height=357*/
+			height:100%;
+			overflow:hidden;
+			/*background-image:url(images/map.png);
+			background-color:#666;*/
+			margin:auto;
 			}
-			#outer:hover{
-				/*background: transparent;可能要改成更換背景圖*/ 
-			}
-			
 			#imgs{
 				position:relative;
 				width:300vw;/*image width=753x5=3765px*/
-				/*display: flex;*/
-				opacity: 0.7;
 				display: flex;
-				
+				opacity: 0.7;
 			}
 			#imgs:hover{
 				/*寫入停止程式?*/
@@ -41,8 +34,6 @@
 			#imgs img{
 				width:100vw;
 				height:100vh;
-				transition: opacity 1s linear;
-
 			}
 			#prev,#next{
 				position:absolute;
@@ -111,34 +102,26 @@
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
 	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
 		<script type="text/javascript">
+
 			// 首頁輪播
 			var myInterval, index=0;
 				$(document).ready(function init(){
-					$(".dot,#next,#prev").click(moveHandler);//run the same function
-					myInterval = setTimeout(moveHandler, 8000);//initial timer
-					$("#imgs img:not(:first)").css("opacity","0");
+						$(".dot,#next,#prev").click(moveHandler);//run the same function
+						myInterval = setTimeout(moveHandler, 8000);//initial timer
 				});
 				function moveHandler(e){
 					clearInterval(myInterval);//reset timer
 					myInterval = setTimeout(moveHandler, 8000);//set timeer
-					//$("#imgs").css("background")
 					//$(".dot:eq("+index+")").css("backgroundColor","gray");//reset dot color
 					if(this==window){	index++;//setInterval
 					//}else if($(this).attr("myIndex")){	index=Number($(this).attr("myIndex"));//.dot
 					}else{	index+=Number($(this).attr("direction"));}// $#prev / #next
 					if (index>2) index=0;//last image
 					if (index<0) index=2;//first image
-					
-					$("#imgs img:gt("+(index)+")").css("opacity","0");
-					$("#imgs img:lt("+(index)+")").css("opacity","0");
-					setTimeout(function(){
-						$("#imgs").stop().animate({"marginLeft":-index*100+"vw"},0);
-						$("#imgs img:eq("+(index)+")").css("opacity","1");
-					}, 900);
-					//$("#imgs").stop().animate({"marginLeft":-index*100+"vw"},0);
-					//$("#imgs img:gt("+(index)+")").fadeOut(500);
-					//$("#imgs img:lt("+(index)+")").fadeOut(500);
-
+					//$(".dot:eq("+index+")").css("backgroundColor","white");//set dot color
+					$("#imgs").stop().animate({"marginLeft":-index*100+"vw"},1000);
+					//$("#imgs").stop().animate({"marginLeft":-index*753+"px"},1000);//image width=735px
+					//$("#outer").stop().animate({"backgroundPositionX":-index*200+"px"},1000);//map width=1000px/5=200px
 				}
 			// 首頁輪播
 		</script>
@@ -148,14 +131,20 @@
 <!-- 		首頁輪播 -->
 		<div id="outer">
 	        <div id="imgs">
-				<img src="/wcs/images/image1.jpg">
+				<img src="/wcs/images/image1.jpg"></a>
 <!-- 				留一張，其他用append上去，當頁fade in，比當頁高的頁面全部fade out -->
-				<img src="/wcs/images/image2.jpg">
-				<img src="/wcs/images/image3.jpg">
-
+<!-- 				<img src="/wcs/images/image2.jpg"></a> -->
+<!-- 				<img src="/wcs/images/image3.jpg"></a> -->
 			</div>
-<!-- 	        <div id="prev" direction="-1">&ltdot;</div> -->
-<!-- 			<div id="next" direction="1">&gtdot;</div> -->
+	        <div id="prev" direction="-1">&ltdot;</div>
+			<div id="next" direction="1">&gtdot;</div>
+<!-- 			<div id="dots"> -->
+<!-- 				<div class="dot" myIndex="0"></div> -->
+<!-- 				<div class="dot" myIndex="1"></div> -->
+<!-- 				<div class="dot" myIndex="2"></div> -->
+<!-- 				<div class="dot" myIndex="3"></div> -->
+<!-- 				<div class="dot" myIndex="4"></div> -->
+<!-- 			</div> -->
    		</div>
 <!-- 		首頁輪播 -->
 		
