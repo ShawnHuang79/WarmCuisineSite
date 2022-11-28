@@ -11,10 +11,6 @@
 			* {
 				list-style: none;
 				text-decoration: none;
-				/*margin: 0;
-				padding: 0;
-				color: #666;
-				font-size: 14px;*/
 			}
 			
 			body {
@@ -208,7 +204,12 @@
 				padding-right: 25px;
 				text-align: center;
 			}
-			
+			#deleteBtnHidden{
+				border: none;
+    			background-color: #ffffff;
+    			font-size: 30px;
+    			cursor: pointer;
+			}
 			.cart .delete a {
 				font-size: 20px;
 				cursor: pointer;
@@ -377,7 +378,15 @@
 			function init(){
 				$(".quantityIncrease").click(quantityIncreaseHandler);
 				$(".quantityDecrease").click(quantityDecreaseHandler);
+				//$("#deleteBtn").click(deleteHandler)
+						
 			}
+			/*function deleteHandler(){
+				var result = confirm("message");
+				if(result){
+					$("#deleteBtnHidden").trigger("click");
+				}
+			}*/
 			function quantityIncreaseHandler(){
 				node = this.parentNode.childNodes[1].childNodes[0];
 				//console.log(this.parentNode);
@@ -395,7 +404,7 @@
 					num--;
 				}
 				node.value = num;
-	}
+			}
 	    	
 		</script>
 	</head>
@@ -417,6 +426,7 @@
 
 			
 			<form action='update_cart.do' method='POST'>
+			
 			<div id="cart" class="cart">
 		
 				<div class="cartHead hide">
@@ -433,6 +443,7 @@
 				</div>
 				<%for(CartItem cartItem:cart.getCartItemsSet()) {%>
 					<div class="row hide">
+						
 						<div class="check left">
 							<i class="i_check" id="i_check" onclick="i_check()">√</i>
 						</div>
@@ -442,7 +453,9 @@
 						<div class="quantityDiv"><div class="quantityInnerDiv"><div class="quantityDecrease">-</div><div class='quantity'><input type='number' class='quantity' value='<%=cart.getQuantity(cartItem) %>' name='quantity<%=cartItem.hashCode() %>' required></div><div class="quantityIncrease">+</div></div> </div>
 						<div class="size left"><%= cartItem.getSizeName() %></div>
 						<div class="subtotal left"><%=cart.getUnitPrice(cartItem) %></div>
-						<div class="delete left"><input class="delete" type='submit' name='delete<%=cartItem.hashCode() %>' value='×'></div>
+						<%-- <div class="delete left"><div id='deleteBtn'>×</div></div>--%>
+						
+						<div class="delete left"><input id='deleteBtnHidden' class="delete" type='submit' name='delete<%=cartItem.hashCode() %>' value='×'></div>
 <!-- 						<div class="delete left"><a rel="nofollow" href="javascript:;">×</a></div> -->
 					</div>
 				<%} %>
@@ -463,7 +476,7 @@
 <!-- 				<ul> -->
 <!-- 				</ul> -->
 <!-- 			</div> -->
-		<%@include file='/subviews/footer.jsp' %>   
+		<%@include file='/subviews/footer.jsp' %> 
 		</article>
 	</body>
 </html>

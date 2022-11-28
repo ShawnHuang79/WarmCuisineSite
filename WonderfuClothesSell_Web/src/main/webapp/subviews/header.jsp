@@ -61,7 +61,7 @@
 		<input type='submit' value='價格查詢'>
 	</form>
 	<a href='/wcs/member/cart.jsp'>
-		<img id='cartImg' class='headerImgs' src='/wcs/images/shopping_cart.png'>
+		<img class='headerImgs' src='/wcs/images/shopping_cart.png'>
 		<span class='cartQuantitySpan'>
 			${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity) } <!-- 要把搜尋結果帶回框框內，注意EL無法做字串相加  -->
 		</span>

@@ -75,8 +75,16 @@
 				color:white;
 				background-color: #984B4B;
 				cursor: pointer;
-
 			}
+			#search{
+				display:flex;
+				flex-direction: row; 
+				justify-content: center;
+			}
+			#search a{
+				padding: 15px 30px;
+			}
+			
 
 
 	    </style>
@@ -131,7 +139,7 @@
 		<%@include file='/subviews/nav.jsp' %> 
 <!-- lightbox -->
 		<div id="myModal" class="modal">
-	 		<div class="close" onclick="closeLightboxForProduct()"><span class="closeCircle">&times;</span></div>
+	 		<div class="close" onclick="closeLightboxForProduct()"><span class="closeCircle">&nbsp;&times;</span></div>
 	  		<div id='getProductData_Div' class="modal-content">
 			</div>
 		</div>
@@ -175,12 +183,11 @@
 				list = service.getAllProducts();
 			}
 		%>
-		<aside>
+		<aside id='search'>
  			<a href='?'>全部產品</a><br> <%--query string --%>
 			<a href='?newest='>最新上架</a><br>
 			<a href='?category=餐點'>餐點</a><br>
 			<a href='?category=飲料'>飲料</a><br>
-<!-- 			<a href='javascript:getProductByCategory("飲料")'>飲料</a><br> -->
 		</aside>
 		<article>
 
