@@ -201,7 +201,6 @@
 					%>	
 						<li class="vendorListLi">
 							<figure class="vendor-tile">
-
 								<div id='Description'>
 									<a href='javascript:getProductData(<%= p.getId() %>, true)'>
 										<div class="vendor-info">

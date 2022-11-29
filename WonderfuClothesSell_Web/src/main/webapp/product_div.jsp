@@ -51,6 +51,7 @@
 		border-top: 1px solid;
 		padding:10px;
 		border-color: rgba(0,0,0,0.1);
+		user-select: none;
 	}
 	
 	.quantityDiv {
