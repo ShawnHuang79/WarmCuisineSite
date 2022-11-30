@@ -145,9 +145,11 @@
 			 			<%for (Size size:p.getSizesList()){ 
 						%> 
 						<div>
-							<input class='productSizeRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
+							<label>
+								<input class='productSizeRadio' type='radio' name='sizeName' value='<%=size.getSizeName() %>' data-photo='' required
 								 data-listPrice='<%=size.getListPrice() %>' data-unitPrice='<%=size.getUnitPrice() %>'>
-							<label><%=size.getSizeName() %></label>
+								<%=size.getSizeName() %>
+							</label>
 						</div>	
 						<%}%>
 					</div>

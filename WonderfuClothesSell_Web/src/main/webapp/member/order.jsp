@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<jsp:include page='/subviews/header.jsp' > 
-			<jsp:param value="修改成本頁需要的內容" name="subtitle"/>
+			<jsp:param value="訂單明細" name="subtitle"/>
 		</jsp:include>
 		<%@include file='/subviews/nav.jsp' %> 
 		<%

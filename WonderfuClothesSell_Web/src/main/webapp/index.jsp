@@ -14,6 +14,11 @@
 				margin: 0px;
 			}
 			/*首頁輪撥*/
+			a {
+  			    text-decoration:none;
+  			    
+			}
+			
 			#outer{
 				position:relative;
 				width:100%;/*image width=753 height=357*/
@@ -32,7 +37,7 @@
 				position:relative;
 				width:300vw;/*image width=753x5=3765px*/
 				/*display: flex;*/
-				opacity: 0.7;
+				opacity: 0.6;
 				display: flex;
 				
 			}
@@ -42,63 +47,38 @@
 			#imgs img{
 				width:100vw;
 				height:100vh;
+				opacity: 0.2;
 				transition: opacity 1s linear;
-
 			}
-			#prev,#next{
-				position:absolute;
-				width:30px;
-				height:40px;
-				color: white;
-				cursor:pointer;
-				font-size: 3em;
-				top: 150px;
-				opacity: 0.5;
-			}
-			#prev{
-				left:0px;
-			}
-			#next{
-				right:0px;
-			}
-			#prev:hover,#next:hover{
-				opacity: 0.9;
-			}
-			#dots{
-				width: 130px; /*(16+5x2)x5=130px*/
-				margin: auto;
-				display: flex;
-			}
-			.dot{
-				width: 16px;
-				height: 16px;
-				background-color: gray;
-				border-radius: 50%;
-				margin: 5px;
-			}
-			.dot:nth-child(1){
-				background-color: white;
+			#logoAndNav{
+				opacity:0;
+				transition: opacity 1s linear;
 			}
 			/*首頁輪撥*/
-			.vendor-list{
-				list-style: none;
-				border: 1px dashed black;
-				display: flex;
-				flex-direction: row; /*row column row-reverse column-reverse*/
-				flex-wrap: wrap;
-			
+			#logo, #nav{
+				font-size:5em;
+				color:#fdf9f0;/*#fdf9f0 #984B4B*/
+				position:absolute;
+				top:15%;
+				left:30%;
+				font-weight: bolder;
+				/*background-color: ()*/
 			}
-			.vendor-list li{
-				width: 400px;
-				border: 1px solid black;
-				padding-top: 30px;
-				background: #F0F0FF;
-				text-align: center;
-				margin: 10px;
+			#nav{
+				font-size:1.3em;
+				top:40%;
+				left:40%;
+				width:400px;
+				display:flex;
+				flex-direction: row;
+				justify-content:space-between;
+				color:black;
 			}
-			.vendor-tile img{
-				width: 200px;
-				height: 150px;
+			.navText{
+				/*padding:10px;*/
+			}
+			#nav a:visited{
+				color:black;
 			}
 			.indexFooter{
 				display:flex;
@@ -106,8 +86,6 @@
 				flex-wrap: wrap;
 				justify-content: space-around;
 			}
-				
-
 	    </style>
 	    <script src="https://code.jquery.com/jquery-3.0.0.js" 
 	    integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
@@ -115,9 +93,12 @@
 			// 首頁輪播
 			var myInterval, index=0;
 				$(document).ready(function init(){
-					$(".dot,#next,#prev").click(moveHandler);//run the same function
+					//$(".dot,#next,#prev").click(moveHandler);//run the same function
 					myInterval = setTimeout(moveHandler, 8000);//initial timer
-					$("#imgs img:not(:first)").css("opacity","0");
+					$("#imgs img:first").css("opacity","1");
+					//logo可以放這裡停頓顯示，就可以讓背景先出現，再出現logo
+					$("#imgs img:not(:first)").css("opacity","0.2");
+					setTimeout(function(){$("#logoAndNav").css("opacity","1");}, 1200);
 				});
 				function moveHandler(e){
 					clearInterval(myInterval);//reset timer
@@ -130,8 +111,8 @@
 					if (index>2) index=0;//last image
 					if (index<0) index=2;//first image
 					
-					$("#imgs img:gt("+(index)+")").css("opacity","0");
-					$("#imgs img:lt("+(index)+")").css("opacity","0");
+					$("#imgs img:gt("+(index)+")").css("opacity","0.2");
+					$("#imgs img:lt("+(index)+")").css("opacity","0.2");
 					setTimeout(function(){
 						$("#imgs").stop().animate({"marginLeft":-index*100+"vw"},0);
 						$("#imgs img:eq("+(index)+")").css("opacity","1");
@@ -139,9 +120,7 @@
 					//$("#imgs").stop().animate({"marginLeft":-index*100+"vw"},0);
 					//$("#imgs img:gt("+(index)+")").fadeOut(500);
 					//$("#imgs img:lt("+(index)+")").fadeOut(500);
-
 				}
-			// 首頁輪播
 		</script>
 	</head>  
   	<body>
@@ -149,40 +128,43 @@
 <!-- 		首頁輪播 -->
 		<div id="outer">
 	        <div id="imgs">
-				<img src="/wcs/images/image1.jpg">
-<!-- 				留一張，其他用append上去，當頁fade in，比當頁高的頁面全部fade out -->
 				<img src="/wcs/images/image2.jpg">
+				<img src="/wcs/images/image1.jpg">
 				<img src="/wcs/images/image3.jpg">
-
 			</div>
-<!-- 	        <div id="prev" direction="-1">&ltdot;</div> -->
-<!-- 			<div id="next" direction="1">&gtdot;</div> -->
+			<div id='logoAndNav'>
+				<div id="logo">Warm Cuisine Site</div>
+				<div id="nav">
+					<div class='navText'><a href='/wcs/products_list.jsp'>START TASTE</a></div>
+					<div><img src="/wcs/images/fork.png"></div>
+					<div class='navText'><a href='/wcs/bookingRestaurant.jsp'>RESERVATION</a></div>
+				</div>
+			</div>
    		</div>
-<!-- 		首頁輪播 -->
-		
 	    <footer>
 	    	<div class = 'indexFooter'>
 		    	<div>
 		    		<h4>address</h4>
-		    		<p>809 W Randolph StChicago, IL</p>
+		    		<p>105 No. 99, Fuxing N. Rd.,</p>
+		    		<p> Songshan Dist., Taipei City</p>
 		    	</div>
 		    	<div>
 		    		<h4>hours</h4>
 					<p>Sunday - Thursday</p>
-					<p>4:30 pm - 10:00 pm</p>
+					<p>11:30 am - 9:00 pm</p>
 					
 					<p>Friday-Saturday</p>
-					<p>4:30 pm - 11:00 pm</p>
+					<p>11:30 am - 10:00 pm</p>
 		    	</div>
 		    	<div>
 		    		<h4>contact</h4>
-					<p>312.492.6262</p>
-					<p>info@girlandthegoat.com</p>
+					<p>02-4568989</p>
+					<p>info@wcs.com</p>
 		    	</div>
 		    </div>
 	    </footer> 
-	    <jsp:include page='/subviews/header.jsp' /> 
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 	    <jsp:include page='/subviews/header.jsp' />  
+		<%@include file='/subviews/nav.jsp' %> --%>
 	    <%@include file='/subviews/footer.jsp' %> 
  
 	</body>

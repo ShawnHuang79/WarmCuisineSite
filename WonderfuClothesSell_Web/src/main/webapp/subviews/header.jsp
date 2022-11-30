@@ -57,7 +57,7 @@
 	</form>
 	<form id='searchForm' method='GET' action='/wcs/products_list.jsp'>
  		<input type='search' name='minPrice' placeholder='請輸入最低價格' value='${param.minPrice}' ><!-- 要把搜尋結果帶回框框內  -->
-		<input type='search' name='maxPrice' placeholder='請輸入最低價格' value='${param.maxPrice}' >
+		<input type='search' name='maxPrice' placeholder='請輸入最高價格' value='${param.maxPrice}' >
 		<input type='submit' value='價格查詢'>
 	</form>
 	<a href='/wcs/member/cart.jsp'>
