@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Insert title here</title>
+		<title>Warm Cuisine Site</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
 			@import url(/wcs/css/lightbox.css);
@@ -79,10 +79,30 @@
 			#search{
 				display:flex;
 				flex-direction: row; 
-				justify-content: center;
+				justify-content: space-between;
 			}
-			#search a{
+			
+			#searchLeft, #searchRight{
+				width:20%;
+			}
+			/*#searchRight{
+				display:flex;
+				flex-direction: column; 
+				justify-content: flex-end;
+			}*/
+			
+			#searchMiddlle{
+				display:flex;
+				flex-direction: row; 
+				justify-content: center;
+				width:60%;
+			}
+			#searchMiddlle a{
 				padding: 15px 30px;
+				
+			}
+			input[type=search]{
+				width:90px;
 			}
 			
 
@@ -100,7 +120,7 @@
 	    		
 	    	}
 	    	function getBookPng(theImg){
-	    		alert(this);
+	    		//alert(this);
 	    		$(theImg).attr("src", "images/defaultpicture.png")
 	    	}
 	    	function getProductData(pid, doAjax){ //如果需要p的資料，就從參數pid送來，doAjax控制同步非同步，
@@ -136,7 +156,7 @@
 		<jsp:include page='/subviews/header.jsp' > 
 			<jsp:param value="Product" name="subtitle"/>
 		</jsp:include>
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 <!-- lightbox -->
 		<div id="myModal" class="modal">
 	 		<div class="close" onclick="closeLightboxForProduct()"><span class="closeCircle">&nbsp;&times;</span></div>
@@ -183,12 +203,28 @@
 				list = service.getAllProducts();
 			}
 		%>
-		<aside id='search'>
- 			<a href='?'>全部產品</a><br> <%--query string --%>
-			<a href='?newest='>最新上架</a><br>
-			<a href='?category=餐點'>餐點</a><br>
-			<a href='?category=飲料'>飲料</a><br>
-		</aside>
+		
+		<div id='search'>
+			<div id='searchLeft'>
+			</div>
+			<div id='searchMiddlle'>
+	 			<a href='?'>全部產品</a><br> <%--query string --%>
+				<a href='?newest='>最新上架</a><br>
+				<a href='?category=餐點'>餐點</a><br>
+				<a href='?category=飲料'>飲料</a><br>
+			</div>
+			<div id='searchRight'>
+				<form id='searchForm' method='GET' action='/wcs/products_list.jsp'>
+			 		<input type='search' name='keyword' placeholder='查詢關鍵字' value='${param.keyword}' ><!-- 要把搜尋結果帶回框框內  -->
+					<input type='submit' value='搜尋'>
+				</form>
+				<form id='searchForm' method='GET' action='/wcs/products_list.jsp'>
+			 		<input type='search' name='minPrice' placeholder='最低價格' value='${param.minPrice}' ><!-- 要把搜尋結果帶回框框內  -->
+					<input type='search' name='maxPrice' placeholder='最高價格' value='${param.maxPrice}' >
+					<input type='submit' value='價格查詢'>
+				</form>
+			</div>
+		</div>
 		<article>
 
 			<ul class="vendor-list" data-title-pickup=""

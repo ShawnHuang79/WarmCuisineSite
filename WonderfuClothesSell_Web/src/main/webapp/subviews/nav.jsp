@@ -4,7 +4,7 @@
 <nav>
 	<hr>
 	<a href='/wcs/products_list.jsp'>產品列表</a>|
-	<a href='/wcs/bookingRestaurant.jsp'>訂位</a>|
+	<a href='/wcs/booking.jsp'>訂位</a>|
 	
 	
 	

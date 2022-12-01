@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Customer"%>
 <%@page import="com.wcs.entity.Order"%>
 <%@page import="com.wcs.service.OrderService"%>
 <%@page import="java.util.List"%>
@@ -15,7 +16,7 @@
 		<jsp:include page='/subviews/header.jsp' > 
 			<jsp:param value="歷史訂單" name="subtitle"/>
 		</jsp:include>
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 		<%			
 			List<Order> list = null;
 			OrderService oService = new OrderService();

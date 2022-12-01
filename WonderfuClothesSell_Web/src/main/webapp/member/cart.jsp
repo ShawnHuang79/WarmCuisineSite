@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Customer"%>
 <%@page import="com.wcs.entity.CartItem"%>
 <%@page import="com.wcs.entity.ShoppingCart"%>
 <%@ page pageEncoding="UTF-8"%>
@@ -5,7 +6,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Insert title here</title>
+		<title>Warm Cuisine Site</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
 			* {
@@ -412,7 +413,7 @@
 		<jsp:include page='/subviews/header.jsp' > 
 			<jsp:param value="購物車" name="subtitle"/>
 		</jsp:include>
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 		<%
 		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 		Customer member = (Customer)session.getAttribute("member");

@@ -123,7 +123,13 @@
    		height: 50px;
    		cursor:pointer;
 	}
-
+	#sizesDivCtrl img{
+		float:right;
+		cursor:pointer;
+		width:30px;
+		height:30px;
+		
+	}
 	
 	
 </style>

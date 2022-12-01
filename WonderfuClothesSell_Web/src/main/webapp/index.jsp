@@ -14,10 +14,6 @@
 				margin: 0px;
 			}
 			/*首頁輪撥*/
-			a {
-  			    text-decoration:none;
-  			    
-			}
 			
 			#outer{
 				position:relative;
@@ -137,7 +133,7 @@
 				<div id="nav">
 					<div class='navText'><a href='/wcs/products_list.jsp'>START TASTE</a></div>
 					<div><img src="/wcs/images/fork.png"></div>
-					<div class='navText'><a href='/wcs/bookingRestaurant.jsp'>RESERVATION</a></div>
+					<div class='navText'><a href='/wcs/booking.jsp'>RESERVATION</a></div>
 				</div>
 			</div>
    		</div>

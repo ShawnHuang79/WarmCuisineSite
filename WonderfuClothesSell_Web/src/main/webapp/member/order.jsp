@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Customer"%>
 <%@page import="com.wcs.entity.OrderItem"%>
 <%@page import="com.wcs.service.OrderService"%>
 <%@page import="com.wcs.entity.Order"%>
@@ -6,7 +7,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Insert title here</title>
+		<title>Warm Cuisine Site</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
 	    </style>
@@ -15,7 +16,7 @@
 		<jsp:include page='/subviews/header.jsp' > 
 			<jsp:param value="訂單明細" name="subtitle"/>
 		</jsp:include>
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 		<%
 			
 			String orderId = request.getParameter("orderId");

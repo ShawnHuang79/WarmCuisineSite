@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Insert title here</title>
+		<title>Warm Cuisine Site</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
 	    </style>

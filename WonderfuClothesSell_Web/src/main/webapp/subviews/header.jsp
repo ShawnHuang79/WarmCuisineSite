@@ -5,6 +5,13 @@
 	#login{
 		cursor: pointer;
 	}
+	header{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		background-image: url('/wcs/images/headerBackground.jpg');
+		background-position: center;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.0.0.js" 
 	integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
@@ -44,40 +51,37 @@
  		<div id='getHeader' class="lightboxForHeaderContent">
 		</div>
 	</div>	
-	<h1><a href='/wcs'>Warm Cuisine Site</a> 
-		<sub>
-			<%=request.getParameter("subtitle")==null?"歡迎光臨": request.getParameter("subtitle") %>
-		</sub>
-	</h1>
-	<div></div>
+	<div>
+		<h1><a href='/wcs'>&nbsp;&nbsp;&nbsp;&nbsp; Warm Cuisine Site</a> 
+			<%-- <sub>
+				<%=request.getParameter("subtitle")==null?"歡迎光臨": request.getParameter("subtitle") %>
+			</sub>--%>
+		</h1>
+	</div>
+	<div id="navFormHeader">
 
-	<form id='searchForm' method='GET' action='/wcs/products_list.jsp'>
- 		<input type='search' name='keyword' placeholder='請輸入查詢關鍵字' value='${param.keyword}' ><!-- 要把搜尋結果帶回框框內  -->
-		<input type='submit' value='搜尋'>
-	</form>
-	<form id='searchForm' method='GET' action='/wcs/products_list.jsp'>
- 		<input type='search' name='minPrice' placeholder='請輸入最低價格' value='${param.minPrice}' ><!-- 要把搜尋結果帶回框框內  -->
-		<input type='search' name='maxPrice' placeholder='請輸入最高價格' value='${param.maxPrice}' >
-		<input type='submit' value='價格查詢'>
-	</form>
-	<a href='/wcs/member/cart.jsp'>
-		<img class='headerImgs' src='/wcs/images/shopping_cart.png'>
-		<span class='cartQuantitySpan'>
-			${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity) } <!-- 要把搜尋結果帶回框框內，注意EL無法做字串相加  -->
-		</span>
-	</a>|
-<!-- 	改購物車圖示<img src='/wcs/images/cart.png> -->
-	<% 
-	Customer c = (Customer)session.getAttribute("member");
-	if(c==null){
-	%>
-	<a href='/wcs/register.jsp'>註冊</a>|
-	<a id='login'><img id='membertImg' class='headerImgs' src='/wcs/images/membertImg.png'>登入</a>|
-	<%}else{%>
-	<a href='/wcs/member/orders_history.jsp'>歷史訂單</a> |
-	<a href='/wcs/member/update.jsp'>修改會員</a>|
-	<a href='/wcs/logout.do' onclick="logoutSnackbar()" >登出</a>|
-	<%} %>
+		<a href='/wcs/products_list.jsp'>產品列表</a>|
+		<a href='/wcs/booking.jsp'>訂位</a>|
+		<a href='/wcs/member/cart.jsp'>
+			<img class='headerImgs' src='/wcs/images/shopping_cart.png'>
+			<span class='cartQuantitySpan'>
+				${empty sessionScope.cart?"":String.format("(%d)",sessionScope.cart.totalQuantity) } <!-- 要把搜尋結果帶回框框內，注意EL無法做字串相加  -->
+			</span>
+		</a>|
+	<!-- 	改購物車圖示<img src='/wcs/images/cart.png> -->
+		<% 
+		Customer c = (Customer)session.getAttribute("member");
+		if(c==null){
+		%>
+		<a href='/wcs/register.jsp'>註冊</a>|
+		<a id='login'><img id='membertImg' class='headerImgs' src='/wcs/images/membertImg.png'>登入</a>
+		<%}else{%>
+		<span>${sessionScope.member.getName()}你好</span>|
+		<a href='/wcs/member/orders_history.jsp'>歷史訂單</a> |
+		<a href='/wcs/member/update.jsp'>修改會員</a>|
+		<a href='/wcs/logout.do' onclick="logoutSnackbar()" >登出</a>
+		<%} %>
+	</div>
 	
 <!-- 	Show Snackbar -->
 	<div id="snackbar">登出</div>

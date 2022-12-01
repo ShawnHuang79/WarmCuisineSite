@@ -140,7 +140,7 @@
 				<div id='productDivBottom'>
 					<input type='hidden' name='productId' value='<%=productId%>'>
 					
-					<div id='sizesDivCtrl'><span style='float:right'>></span>容量:</div>
+					<div id='sizesDivCtrl'><img src='/wcs/images/downarrow.png'>容量:</div>
 		 			<div id='sizesDiv'>
 			 			<%for (Size size:p.getSizesList()){ 
 						%> 
