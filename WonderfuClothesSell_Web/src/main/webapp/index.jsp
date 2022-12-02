@@ -133,7 +133,7 @@
 				<div id="nav">
 					<div class='navText'><a href='/wcs/products_list.jsp'>START TASTE</a></div>
 					<div><img src="/wcs/images/fork.png"></div>
-					<div class='navText'><a href='/wcs/booking.jsp'>RESERVATION</a></div>
+					<div class='navText'><a href='/wcs/seats.jsp'>RESERVATION</a></div>
 				</div>
 			</div>
    		</div>

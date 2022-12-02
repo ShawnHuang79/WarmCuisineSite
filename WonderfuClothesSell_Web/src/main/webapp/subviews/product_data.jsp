@@ -70,7 +70,7 @@
 	}
 	function addToCartDoneHandler(response){
 		alert("加入購物車成功");//考慮改和登出一樣snackbar
-		$(".cartQuantitySpan").text("("+response.totalQuantity+")");
+		$(".cartQuantitySpan").text("(" + response.totalQuantity + ")");//加上()
 	}
 	function toggleSizesHandler() {
 		var toggle = document.getElementById("sizesDiv");

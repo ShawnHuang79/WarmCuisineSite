@@ -82,7 +82,7 @@
 	</head>
 	<body>
 		<jsp:include page='/subviews/header.jsp' ></jsp:include>
-		<form action="BookingServlet.do" method="POST">
+		<form action="booking.do" method="POST">
 			<div id='outer'>
 				<div id='header'></div>
 				<div id='bottom'>

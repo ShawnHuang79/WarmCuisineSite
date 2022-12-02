@@ -18,7 +18,7 @@ import com.wcs.service.BookingService;
 /**
  * Servlet implementation class BookingServlet
  */
-@WebServlet("/BookingServlet.do")
+@WebServlet("/booking.do")
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

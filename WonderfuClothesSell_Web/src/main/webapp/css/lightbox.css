@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* lightbox */
-.lightboxForHeaderClass, .modal {
+.lightboxForHeaderClass, .modal, .lightboxForReservationClass{
   display: none;
   opacity: 0;
   position: fixed;
@@ -17,7 +17,7 @@
 }
 
 /* Modal Content */
-.lightboxForHeaderContent, .modal-content {
+.lightboxForHeaderContent, .modal-content, .lightboxForReservationContent {
   position: relative;
   background-color: #fdf9f0;
   border-radius:10px;
@@ -31,7 +31,7 @@
 }
 
 /* The Close Button */
-.close, .closelightboxForHeader {
+.close, .closelightboxForHeader, .closelightboxForReservation {
   color: white;
   position: relative;
   margin: auto;
@@ -64,7 +64,7 @@
 	
 }
 
-.closelightboxForHeader:hover, .closelightboxForHeader:focus 
+.closelightboxForHeader:hover, .closelightboxForHeader:focus, .closelightboxForReservation:hover, .closelightboxForReservation:focus 
  {
   color: #999;
   text-decoration: none;

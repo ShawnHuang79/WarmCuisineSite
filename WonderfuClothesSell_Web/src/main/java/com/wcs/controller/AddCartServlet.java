@@ -82,7 +82,7 @@ public class AddCartServlet extends HttpServlet {
 		}else {
 			errorList.add("加入購物車失敗 productId: " + productId + ", quantity" + quantity + "無法處理!");
 		}
-		//如果有ajax請求就把資料傳到small_cart.jsp且不進行Redirect，無論對錯都Redirect給購物車
+		//如果有ajax請求就把資料傳到small_cart.jsp且不進行Redirect。
 		if(ajax!=null && Boolean.parseBoolean(ajax)) {
 			request.getRequestDispatcher("small_cart.jsp").forward(request, response);
 		}else {
