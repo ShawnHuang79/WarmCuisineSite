@@ -10,18 +10,18 @@
 	    <style>
 			@import url(/wcs/css/wcs.css);
 	
-			header{
-		        /*定位對齊*/
+			/*header{
+		        定位對齊
 		        position:relative;   
 		        margin: auto;
 		        top: 20px;
 		        text-align:center; 
-	        }
+	        }*/
 			input, .loginAndSignup, #genderContainer{
 	        	width: 250px;
 	        	height: 20px;
 	       	 	margin: 10px;
-	        	color: #df5334;
+	        	color: #984B4B;
 	        }
 			input{
 		        padding: 5px;
@@ -40,32 +40,28 @@
 	
 	        div .switchBotton{
 		        margin: 20px;
-		        color: #a3a2a3;
+		        color: #984B4B;
 	        }
 	
 	        div .switchBotton:hover{
 	        	color: black;
 	        }
-			#loginContainer, #signupContainer{
-		        padding: 10px;
-		        width: 280px;
-		        height: 300px;
-		        background-color: white;
-		        border-radius: 5px;
-		        border-top: 10px solid #df5334;
-		        box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
-		        /*定位對齊*/
-		        position:relative;   
-		        margin: auto;
-		        top: 200px;
-	        }
 			#signupContainer{
-		        /*display: none;*/
-		        height: 600px;
+				padding: 10px;
+			    width: 280px;
+			    height: 300px;
+			    /* background-color: white; */
+			    border-radius: 5px;
+			    border-top: 10px solid #984B4B;
+			    box-shadow: 0 0px 70px rgb(0 0 0 / 10%);
+			    position: relative;
+			    margin: 5% auto 0% auto;
+			    height: 780px;
 	        }
+
 	        .submit{
 		        color: white;  
-		        background: #df5334;
+		        background: #984B4B;
 		        width: 200px;
 		        height: 30px;
 		        margin: 10px;
@@ -83,7 +79,7 @@
 				position:relative; 
 		        text-align: center;
 		        color: #a3a2a3;
-		        margin: 220px 0px 0px 0px;
+		        /*margin: 220px 0px 0px 0px;*/
 		        font-size: 14px;
 	        }
     	</style>
@@ -128,9 +124,9 @@
 		</script>
 	</head>  
   	<body>
-	    <header>
-	    	<h2>註冊頁面</h2>
-	    </header>
+<!-- 	    <header> -->
+<!-- 	    	<h2>註冊頁面</h2> -->
+<!-- 	    </header> -->
 		<article id="signupContainer"> <!-- 改article -->
 			<div class="loginAndSignup">  
 				<h3>註冊 Sign Up</h3>

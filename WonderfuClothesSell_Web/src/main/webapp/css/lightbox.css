@@ -26,6 +26,9 @@
   /*width: 90%;*/
   max-width: 600px;
 }
+.lightboxForHeaderContent{
+	max-width: 300px;
+}
 
 /* The Close Button */
 .close, .closelightboxForHeader {

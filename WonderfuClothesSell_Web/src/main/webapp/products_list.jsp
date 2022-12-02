@@ -153,9 +153,8 @@
 	    
 	</head>
 	<body>
-		<jsp:include page='/subviews/header.jsp' > 
-			<jsp:param value="Product" name="subtitle"/>
-		</jsp:include>
+		<jsp:include page='/subviews/header.jsp' ></jsp:include>
+<%-- 			<jsp:param value="Product" name="subtitle"/> --%>
 <%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 <!-- lightbox -->
 		<div id="myModal" class="modal">
