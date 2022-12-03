@@ -29,6 +29,10 @@
 .lightboxForHeaderContent{
 	max-width: 300px;
 }
+.lightboxForReservationContent{
+	max-width: 700px;
+	
+}
 
 /* The Close Button */
 .close, .closelightboxForHeader, .closelightboxForReservation {

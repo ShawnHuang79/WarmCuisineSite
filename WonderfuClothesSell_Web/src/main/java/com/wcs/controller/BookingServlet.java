@@ -54,10 +54,11 @@ public class BookingServlet extends HttpServlet {
 			}
 			System.out.println("前端傳來的map:" +seatMap);
 			//用使用者輸入的key(A、B、C)去找"查詢"資料庫吻合的PKey的值出來做後續處理
+			//TODO date time目前寫死
+			String date = "2022-12-03";
+			String time = "12:00AM";
 			try {
-				Map<String, Byte> seatMapFromDB = service.read(seatMap.keySet());
-				
-				
+				Map<String, Byte> seatMapFromDB = service.readByKeySet(seatMap.keySet(), date, time);
 				System.out.println("seatMapFromDB回傳結果:" + seatMapFromDB);
 				
 				

@@ -81,7 +81,7 @@
 		</script>
 	</head>
 	<body>
-		<jsp:include page='/subviews/header.jsp' ></jsp:include>
+		<div><%=request.getAttribute("seatMapFromDB") %></div>
 		<form action="booking.do" method="POST">
 			<div id='outer'>
 				<div id='header'></div>
