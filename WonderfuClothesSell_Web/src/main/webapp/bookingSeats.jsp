@@ -126,6 +126,14 @@
 				}
 				
 			}
+			function bookingHandler(){
+				if(${param.number} > selectedArray.length){
+					alert("所選座位數與人數不合");
+					return false;
+				}
+				
+				
+			}
 			//將從資料庫讀取來的十進位byte轉成看起來像2進位的8個數字，要送出時再想辦法把8個數字組合回一個byte送回資料庫
 			//後端傳來的byte以位元轉成8位數字串，顯示在前端可看出座位是否已選，0沒選，1選了。
 			/*function byteString(n) {
@@ -150,7 +158,7 @@
 	</head>
 	<body>
 <%-- 		<div><%=request.getAttribute("seatListFromDB") %></div> --%>
-		<form action="booking.do" method="POST">
+		<form action="booking.do" method="POST" onsubmit="return bookingHandler(event)">
 			<div id='outer'>
 				<div id='header'>
 <!-- 					value還要再帶值 -->

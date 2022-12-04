@@ -71,10 +71,21 @@ public class BookingServlet extends HttpServlet {
 					if((seatMapValueToByte&seatMapFromDBByte) ==0) {
 						//兩個值做^之後的結果輸出成map送到service做update資料庫資料
 						seatMapResultToDB.put(key, (byte)(seatMapValueToByte^seatMapFromDBByte));
-					}
+					}//應該拋出並處理錯誤
 					
 				}
 				System.out.println(seatMapResultToDB);
+				service.update(seatMapResultToDB, date, time);
+				
+				//redirect到特定網頁
+				/*String submitPath = request.getParameter("submitPath");
+				if(submitPath!=null) {
+					response.sendRedirect(submitPath);
+					return;
+				}*/
+				
+				response.sendRedirect("seats_ok.jsp");		
+				
 			} catch (WCSException e) {
 				e.printStackTrace();
 			}

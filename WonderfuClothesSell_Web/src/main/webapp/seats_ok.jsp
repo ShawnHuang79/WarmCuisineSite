@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Booking Restaurant</title>
-
+		<meta http-equiv="refresh" content="1; url='/wcs/index.jsp'"/>
 		<style>
 			@import url(/wcs/css/wcs.css);
 			@import url(/wcs/css/lightbox.css);
@@ -112,6 +111,8 @@
 			
 			function init(){
 				checkReservationDate();
+				alert("訂位成功");
+				
 				/*$(".seatDiv").click(seatClickHandler);*/
 				
 				//$("#reservationSubmit").click(reservationHandler);
@@ -206,30 +207,30 @@
 			<div id="reservationDiv">
 				<div id=>Make &nbsp;&nbsp; a &nbsp;&nbsp;Reservation</div>
 				<div >
-					<form id="reservationDetails" action="seats.do" method="GET" onsubmit="reservationHandler(event)">
+<!-- 					<form id="reservationDetails" action="seats.do" method="GET" onsubmit="reservationHandler(event)"> -->
 						<div id="reservationDetailsInner">
 							<select class='reservationSelect' name="number">
 								<option value='1'>1 person</option>
-								<option value='2'>2 people</option>
-								<option value='3'>3 people</option>
-								<option value='4'>4 people</option>
-								<option value='5'>5 people</option>
-								<option value='6'>6 people</option>
-								<option value='7'>7 people</option>
-								<option value='8'>8 people</option>
+<!-- 								<option value='2'>2 people</option> -->
+<!-- 								<option value='3'>3 people</option> -->
+<!-- 								<option value='4'>4 people</option> -->
+<!-- 								<option value='5'>5 people</option> -->
+<!-- 								<option value='6'>6 people</option> -->
+<!-- 								<option value='7'>7 people</option> -->
+<!-- 								<option value='8'>8 people</option> -->
 							</select>&nbsp;&nbsp;&nbsp;
 							<input type='date' id='selectDate' class='reservationSelect' name="date">&nbsp;&nbsp;&nbsp;
 		<!-- 					<select class='reservationSelect' name="selectDate" ></select> -->
 							<select class='reservationSelect' name="time">
 								<option value='12:00AM'>12:00 AM</option>
-								<option value='5:00PM'>5:00 PM</option>
-								<option value='7:00PM'>7:00 PM</option>
+<!-- 								<option value='5:00PM'>5:00 PM</option> -->
+<!-- 								<option value='7:00PM'>7:00 PM</option> -->
 							</select>
 						</div>
 						<div>
 							<input type='submit' id='reservationSubmit' class='reservationSelect' value='Find Seats'>
 						</div>
-					</form>
+<!-- 					</form> -->
 				</div>
 			</div>
 		</div>

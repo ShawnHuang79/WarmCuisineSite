@@ -11,13 +11,10 @@ import java.util.Set;
 import com.wcs.entity.Size;
 import com.wcs.exception.WCSException;
 
+
 class BookingDAO {
 
 
-	
-
-	
-	
 	Map<String, Byte> selectSeatsAllColumn(String date, String time)  throws WCSException{
 		Map<String, Byte> seatMapFromDB = new HashMap<>();
 		final String SELECT_SEAT_ALL_COLUMN = "SELECT date, seat_row_name, "
@@ -60,7 +57,9 @@ class BookingDAO {
 				+ " seat_row_name, " 
 				+ time 
 				+ " FROM wcs.booking "
-				+ " WHERE seat_row_name IN "
+				+ " WHERE date=" 
+				+ "'" + date + "'"
+				+ " AND seat_row_name IN "
 				+ keySetToMark;
 		
 		
@@ -90,6 +89,41 @@ class BookingDAO {
 		}
 		
 		return seatMapFromDB;
+	}
+// TODO 交易控制，裡面要有判斷式，老師的判斷式就是動態stock > 0，也就是&和^(也)要寫在DAO
+	public void updateSeats(Map<String, Byte> seatMapResultToDB, String date, String time) throws WCSException{
+		final String UPDATE_SEAT_COLUMN ="UPDATE wcs.booking SET " 
+				+ time + "=? "
+				+ " WHERE date=" 
+				+ "'" + date + "'"
+				+ " AND seat_row_name=? ";
+		System.out.println(UPDATE_SEAT_COLUMN);
+		try(
+				Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE_SEAT_COLUMN);
+		){
+			connection.setAutoCommit(false);
+			try {
+				for(String key:seatMapResultToDB.keySet()) {
+					pstmt.setByte(1, seatMapResultToDB.get(key));
+					pstmt.setString(2, key);
+					pstmt.executeUpdate();
+					/*交易控制的拋出新錯誤
+					int rows = pstmtUpdate.executeUpdate();
+					if (rows < 1)
+						throw new StockShortageException(orderItem);*/
+					
+				}
+				connection.commit();
+			}catch (Exception e) {
+				connection.rollback();
+				throw e;	
+			}finally {
+				connection.setAutoCommit(true);
+			}
+		}catch (SQLException e) {
+			throw new WCSException("寫入座位狀態失敗", e);
+		}
 	}
 
 }
