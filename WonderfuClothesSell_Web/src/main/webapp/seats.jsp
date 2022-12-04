@@ -54,7 +54,7 @@
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
-			.seatDiv{
+			/*.seatDiv{
 				position: absolute;
 				background-color:rgba(253,249,240,1);
 			}
@@ -72,7 +72,7 @@
 			}
 			input[type=checkbox]{
 				display: none;
-			}
+			}*/
 			.reservationSelect{
 				width: 200px;
 				height: 60px;

@@ -164,7 +164,8 @@
 							<div class="quantityIncrease">+</div>
 						</div>
 						<div><input id='addToCartBtn' class='addToCartBtn' type='submit' value="加入購物車" onclick='ajax=true'></div>
-						<div><input class='addToCartBtn' type='submit' value="直接結帳" onclick='ajax=false'></div>
+<!-- 						<div><input class='addToCartBtn' type='submit' value="直接結帳" onclick='ajax=false'></div> -->
+							<div><button class='addToCartBtn' type='submit' name='submitPath' value='check_out.jsp' onclick='ajax=false'>直接結帳</button></div>
 					</div>
 					
 				</div>

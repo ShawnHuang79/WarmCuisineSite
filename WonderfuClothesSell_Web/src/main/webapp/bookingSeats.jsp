@@ -38,7 +38,7 @@
 				position: absolute;
 				background-color:rgba(253,249,240,1);
 				border-radius:5px;
-				cursor: pointer;
+				
 			}
 
 			.seatDiv label{
@@ -47,7 +47,7 @@
 				text-align: center;
  				padding: 2px 0px;
 				display: block;
-				
+				cursor: pointer;
 				user-select: none;
 				width: 30px;
 				font-size: 1em;
@@ -56,8 +56,12 @@
 			/*從後端傳來的資料透過data-status儲存，1就是有劃位了*/
 			.seatDiv[data-status='1']{
 				background-color: grey;
+				
 				color: white;
-				cursor:default;
+				
+			}
+			.seatDiv[data-status='1'] label{
+				cursor: default;
 			}
 			input[type=checkbox]{
 				display: none;
@@ -105,8 +109,6 @@
 							if(a>b) return 1;
 							if(a<b) return -1;
 							return 0;
-							
-							
 							//return a-b;
 						})
 						$("#selectedList").val(selectedArray);

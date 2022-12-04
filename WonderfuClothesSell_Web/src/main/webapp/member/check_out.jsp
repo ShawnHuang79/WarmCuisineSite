@@ -378,7 +378,7 @@
 		<jsp:include page='/subviews/header.jsp' > 
 			<jsp:param value="結帳" name="subtitle"/>
 		</jsp:include>
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 		<%
 			ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");	
 		%>	

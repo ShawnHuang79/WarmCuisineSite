@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.wcs.entity.Customer;
+import com.wcs.entity.ShoppingCart;
 import com.wcs.exception.WCSException;
 import com.wcs.service.CustomerService;
 
@@ -86,10 +87,18 @@ public class LoginServlet extends HttpServlet {
 	    		//cookie寫入結束
 	    		session.setAttribute("member", c);
 	    		//3.1登入成功，轉交(forward)給login_ok.jsp
-	    		RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
-	    		dispatcher.forward(request, response);
+		
+		    	//RequestDispatcher dispatcher = request.getRequestDispatcher("products_list.jsp");
+		    	//dispatcher.forward(request, response);
+	    		
 	    		//3.1作法二:登入成功轉址首頁
 	    		//response.sendRedirect(request.getContextPath());
+	    		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");	
+	    		if(cart==null || cart.isEmpty()) { 
+	    			response.sendRedirect("/wcs/products_list.jsp");
+	    			return;
+		    	}
+	    		response.sendRedirect("/wcs/member/cart.jsp");
 	    		return;    		
 	    	}catch(WCSException e){
 	    		//3.2登入失敗
