@@ -14,5 +14,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/WonderfuClothesSell_Lib"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/freemarker.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/java_activation.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
