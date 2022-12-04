@@ -155,9 +155,9 @@
 				<div id='header'>
 <!-- 					value還要再帶值 -->
 					<div id='selectedoption'>
-						<input type='text' class='reservationSelected' name='number' value='${param.number eq 1? param.number.concat(" person") : param.number.concat(" people")}' readonly>&nbsp;&nbsp;&nbsp;
-						<input type='date' class='reservationSelected' name='date' value='${param.date}' readonly>&nbsp;&nbsp;&nbsp;
-						<input type='text' class='reservationSelected' name='time' value='${param.time}' readonly>
+						<input type='text' class='reservationSelected' value='${param.number eq 1? param.number.concat(" person") : param.number.concat(" people")}' readonly>&nbsp;&nbsp;&nbsp;
+						<input type='date' class='reservationSelected' value='${param.date}' readonly>&nbsp;&nbsp;&nbsp;
+						<input type='text' class='reservationSelected' value='${param.time}' readonly>
 					</div>
 					<div id='selectedseats'>
 						<input type='text' id=selectedList class='reservationSelected' value='' placeholder='Choosed Seats' readonly>&nbsp;&nbsp;&nbsp;
@@ -175,11 +175,11 @@
 					int position= 50;*/
 					ArrayList<String> seatListFromDB = (ArrayList)request.getAttribute("seatListFromDB");
 					//System.out.println(seatListFromDB);
-					int xSite= 730;
-					int ySite= 275;
-					int originSite= 120;
-					int curve= 80;
-					int position= 35;
+					int xSite= 700;
+					int ySite= 300;
+					int originSite= 150;
+					int curve= 60;
+					int position= 33;
 					for (int i=1; i<9;i++){ %>
 						<%--(x-600)^2=4*400*(y+300)，600,300影響x,y切點位置，400影響弧度數字越小就越大，400正負影響上下開口；originSite + 3.5*position需=x或ysite就能置中--%>
 						<div class='seatDiv' data-status='<%=seatListFromDB.get(i-1) %>' style="top:<%=originSite+i*position%>px;left:<%=((originSite+i*position-ySite)*(originSite+i*position-ySite)/(-4*curve))+xSite%>px;">

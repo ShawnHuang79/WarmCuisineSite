@@ -15,6 +15,9 @@
   /*background-color: black;*/
   transition: opacity 0.4s;
 }
+.lightboxForReservationClass{
+	background-color: rgba(0,0,0,0.8);
+}
 
 /* Modal Content */
 .lightboxForHeaderContent, .modal-content, .lightboxForReservationContent {
@@ -50,6 +53,11 @@
   top: 10px;
   right: 25px;*/
 }
+.closelightboxForReservation {
+	left: 640px;
+    top: 10px;
+}
+
 .closeCircle{
 	/*width:30px;
 	height:30px;*/
