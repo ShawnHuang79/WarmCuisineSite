@@ -151,7 +151,7 @@
 			}
 			.quantityDecrease:hover {
 				color: #747474;
-				background: #E0E0E0;
+				/*background: #E0E0E0;*/
 				cursor: pointer;
 			}
 			/* Chrome, Safari, Edge, Opera */

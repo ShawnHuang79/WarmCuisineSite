@@ -95,7 +95,7 @@ public class MailService {
             Map<String, Object> map = new HashMap<>();
             map.put("title", "非常好書-歡迎光臨");
             map.put("brand", "非常好書");
-            map.put("contextPath", "vgb");            
+            map.put("contextPath", "wcs");            
             String ipAddress = java.net.InetAddress.getLocalHost().getHostAddress();
             map.put("host", ipAddress);
 
