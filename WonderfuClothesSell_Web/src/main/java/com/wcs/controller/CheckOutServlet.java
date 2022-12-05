@@ -118,6 +118,16 @@ public class CheckOutServlet extends HttpServlet {
 			
 				oService.checkOut(order);
 				session.removeAttribute("cart");
+				
+				// 若paymentType=PaymentType.CARD則轉交/WEB-INF/credit_card.jsp來送出對於第三方支付的請求
+				// TODO 信用卡剛剛加的
+				if (order.getPaymentType() == PaymentType.CARD) {
+	               request.setAttribute("order", order);
+	               request.getRequestDispatcher("/WEB-INF/credit_card.jsp").forward(request, response);
+	               return;
+	            }
+				
+				
 				//3.1 結帳成功，內部轉交check_out_ok.jsp
 				request.setAttribute("order", order);
 				request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);

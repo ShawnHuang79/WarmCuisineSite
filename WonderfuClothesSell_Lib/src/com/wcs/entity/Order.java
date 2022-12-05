@@ -209,8 +209,12 @@ public class Order {
 		this.totalAmount = totalAmount;
 	}
 	public double getTotalAmountWithFee() {		
-		return Math.round(getTotalAmount()+paymentFee+shippingFee);
+	       double sum = getTotalAmount();
+	       sum += paymentFee+shippingFee;
+	       return Math.round(sum);
 	}
+		/*return Math.round(getTotalAmount()+paymentFee+shippingFee);
+	}*/
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + 
