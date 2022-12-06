@@ -170,7 +170,7 @@
 						<input type='text' class='reservationSelected' name='time' value='${param.time}' readonly>
 					</div>
 					<div id='selectedseats'>
-						<input type='text' id=selectedList class='reservationSelected' value='' placeholder='Choosed Seats' readonly>&nbsp;&nbsp;&nbsp;
+						<input type='text' id=selectedList name='seats' class='reservationSelected' value='' placeholder='Choosed Seats' readonly>&nbsp;&nbsp;&nbsp;
 						<input type='submit' class='reservationSelected' value='Find Seats' readonly>
 					</div>
 					

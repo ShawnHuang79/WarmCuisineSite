@@ -31,17 +31,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import com.wcs.entity.Customer;
+
 import javax.mail.Authenticator;
 
 /**
  *
  * @author Administrator
  */
-public class MailService {
+public class MailService1 {
 
-    public static void sendHelloMailWithLogo(String name, String email, String seats, String date, String time) {
+    public static void sendHelloMailWithLogo(String name, String emailTo, String seats, String date, String time) {//member
     	System.out.println("test1");
-    	if (email == null || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+    	if (emailTo == null || !emailTo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             throw new IllegalArgumentException("email格式不正確!");            
         }
         System.out.println("test1");
@@ -56,7 +59,6 @@ public class MailService {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.port", port);
-        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");//??
         
         //Properties props = new Properties();
         props.put("mail.imap.ssl.enable", "true"); // required for Gmail
@@ -76,13 +78,13 @@ public class MailService {
         try {
 //        	Store store = session.getStore("imap");
 //        	store.connect("imap.gmail.com", username, password);
-
-       
+        	/*HttpSession httpsession = httpRequest.getSession();
+        	Customer member = (Customer)httpsession.getAttribute("member");*/
             // 以下建立message物件作為mail的內容
             Message message = new MimeMessage(session);
 
             // Set 收件email: header field of the header.
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo));
 
             // Set Subject: header field
             message.setSubject("感謝您於Warm Cuisine Site線上訂位");
@@ -97,7 +99,7 @@ public class MailService {
             map.put("title", name + "您好，您的訂位資訊如下：");
             map.put("seats", seats);
             map.put("date", date);    
-            map.put("time", time);           
+            map.put("time", time);    
             String ipAddress = java.net.InetAddress.getLocalHost().getHostAddress();
             map.put("host", ipAddress);
 

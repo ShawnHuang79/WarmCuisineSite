@@ -19,6 +19,7 @@
 				display: flex;
 				flex-direction: row;
 				justify-content: space-around;
+				margin-top: 15px;
 			}
 			
 			 .id, .date, .type, .amount, .detail{
@@ -37,6 +38,10 @@
 				margin-bottom: 20px;
 				font-weight: bold;
 				text-align: center;
+			}
+			
+			#ordersHistoryCenterTitle{
+				font-size: 1.5em;
 			}
 			
 	    </style>
@@ -62,7 +67,7 @@
 			<div id='ordersHistoryOuter'>
 				
 				<div>
-					<div class='ordersHistoryTitle'>歷史訂單</div>
+					<div id='ordersHistoryCenterTitle' class='ordersHistoryTitle'>歷史訂單</div>
 					<div class='ordersHistory ordersHistoryTitle'>
 						<div class='id'>訂單編號</div>
 						<div class='date'>訂購日期時間</div>

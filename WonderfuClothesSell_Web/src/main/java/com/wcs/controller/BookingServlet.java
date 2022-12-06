@@ -11,9 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.wcs.entity.Customer;
 import com.wcs.exception.WCSException;
 import com.wcs.service.BookingService;
+import com.wcs.service.MailService;
 
 /**
  * Servlet implementation class BookingServlet
@@ -34,6 +37,8 @@ public class BookingServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpServletRequest httpRequest = ((HttpServletRequest)request);
+		HttpSession session = httpRequest.getSession();
 		List<String> errorList = new ArrayList<>();
 		String[] seatList = request.getParameterValues("seat");
 		//TODO 需要檢查資料間有沒有重複?如何檢查?
@@ -54,8 +59,21 @@ public class BookingServlet extends HttpServlet {
 			}
 			System.out.println("前端傳來的map:" +seatMap);
 			//用使用者輸入的key(A、B、C)去找"查詢"資料庫吻合的PKey的值出來做後續處理
+
+			Customer member = (Customer)session.getAttribute("member");
+			String name = null;
+			if(member!=null) {
+				name = member.getName();
+			}else {
+				name = "黃曉泓";
+			}
+			
+			//TODO 寫死的測試email
+			String email = "bancohuang29@gmail.com";
+			String seats = request.getParameter("seats");
 			String date = request.getParameter("date");
 			String time = request.getParameter("time");
+			
 			try {
 				Map<String, Byte> seatMapFromDB = service.readByKeySet(seatMap.keySet(), date, time);
 				Map<String, Byte> seatMapResultToDB = new HashMap<>();
@@ -84,6 +102,9 @@ public class BookingServlet extends HttpServlet {
 					return;
 				}*/
 				
+				//送出email
+				
+				MailService.sendHelloMailWithLogo(name, email, seats, date, time);
 				response.sendRedirect("seats_ok.jsp");		
 				
 			} catch (WCSException e) {

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href='<%= request.getContextPath() %>/css/vgb.css' rel="stylesheet">
+<link href='<%=request.getContextPath()%>/css/vgb.css' rel="stylesheet">
 <title>測試email發送</title>
 </head>
 <body>
@@ -14,11 +14,15 @@
 	<%@include file='/subviews/nav.jsp' %>
 <!-- 	<div>https://drive.google.com/file/d/1dw_uW7qm1hB2xMIN8lLAj2TI1rTS72NK/view?usp=sharing</div> -->
 	<%
-		String email = request.getParameter("email");
-		if (email!=null){
-			MailService.sendHelloMailWithLogo(email);
-		}
-	
+	String email = request.getParameter("email");
+	String name = "黃先生";
+	String seats = "A1, A2";
+	String date = "2022-12-06";
+	String time = "12:00AM";
+			if (email!=null){
+				MailService.sendHelloMailWithLogo(name, email, seats, date, time);
+				//MailService.sendHelloMailWithLogo(email);
+			}
 	%>
 	<article>
 		<form method='POST'>

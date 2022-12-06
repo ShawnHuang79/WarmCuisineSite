@@ -6,9 +6,8 @@
     </head>
     <body>
     <h1> ${title} </h1>
-    <p>
-      <h3>你好! 點擊下圖即可光臨${brand}</h3><a href='http://${host}:8080/${contextPath}'><img src='cid:image'></a>
-    </p>
-    <h3>References</h3>
+    <p><h3>日期：${date}</p>
+    <p><h3>時間：${time}</p>
+    <p><h3>座位：${seats}</p>
     </body>
 </html>

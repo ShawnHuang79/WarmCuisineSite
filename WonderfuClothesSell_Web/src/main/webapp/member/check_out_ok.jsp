@@ -1,3 +1,4 @@
+<%@page import="com.wcs.entity.Customer"%>
 <%@page import="com.wcs.entity.OrderItem"%>
 <%@page import="com.wcs.entity.Order"%>
 <%@ page pageEncoding="UTF-8"%>
@@ -14,7 +15,7 @@
 		<jsp:include page='/subviews/header.jsp' > 
 			<jsp:param value="結帳成功" name="subtitle"/>
 		</jsp:include>
-		<%@include file='/subviews/nav.jsp' %> 
+<%-- 		<%@include file='/subviews/nav.jsp' %>  --%>
 		<%
 			Order order = (Order)request.getAttribute("order");
 			Customer member = (Customer)session.getAttribute("member");
@@ -93,6 +94,6 @@
 			</div>
 		<% } %>
 		</article>
-		<%@include file='/subviews/footer.jsp' %>
+<%-- 		<%@include file='/subviews/footer.jsp' %> --%>
 	</body>
 </html>
