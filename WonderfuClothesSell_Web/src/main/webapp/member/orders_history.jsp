@@ -10,6 +10,35 @@
 		<title>歷史訂單</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
+			#ordersHistoryOuter{
+				width: 60%;
+				margin: 0px 20%;
+			}
+			
+			.ordersHistory{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+			}
+			
+			 .id, .date, .type, .amount, .detail{
+				width: 150px;
+				text-align: center;
+			}
+			.id{
+				width: 120px;
+			}
+			
+			.type{
+				width: 200px;
+			}
+			.ordersHistoryTitle{
+				font-size: 1.2em;
+				margin-bottom: 20px;
+				font-weight: bold;
+				text-align: center;
+			}
+			
 	    </style>
 	</head>
 	<body>
@@ -30,25 +59,31 @@
 			<% if(list==null || list.size()==0){ %>
 				<h2>查無您的歷史訂單</h2>
 			<%}else{ %>
-			<table id='ordersHistory'>
-				<caption>歷史訂單</caption>
-				<thead>
-					<tr>
-						<th>訂單編號</th><th>訂購日期時間</th><th>取貨/付款</th><th>總金額</th><th></th>
-					</tr>
-				</thead>
-				<tbody>
+			<div id='ordersHistoryOuter'>
+				
+				<div>
+					<div class='ordersHistoryTitle'>歷史訂單</div>
+					<div class='ordersHistory ordersHistoryTitle'>
+						<div class='id'>訂單編號</div>
+						<div class='date'>訂購日期時間</div>
+						<div class='type'>取貨/付款</div>
+						<div class='amount'>總金額</div>
+						<div class='detail'></div>
+					</div>
+				</div>
+				<div>
 					<% for(Order order:list){%>
-					<tr>
-						<td><%= order.getId()%></td>
-						<td><%= order.getCreatedDate() %> <%= order.getCreatedTime() %></td>
-						<td><%= order.getShippingType().getDescription() %>, 
-								<%= order.getPaymentType().getDescription() %></td>
-						<td><%=order.getTotalAmount()%>及<%= order.getTotalAmountWithFee() %>元</td><td><a href='order.jsp?orderId=<%= order.getId() %>'>檢視明細</a></td>
-					</tr>				
+					<div class='ordersHistory'>
+						<div class='id'><%= order.getId()%></div>
+						<div class='date'><%= order.getCreatedDate() %> <%= order.getCreatedTime() %></div>
+						<div class='type'><%= order.getShippingType().getDescription() %>, 
+								<%= order.getPaymentType().getDescription() %></div>
+						<div class='amount'><%= order.getTotalAmountWithFee() %>元</div>
+						<div class='detail'><a href='order.jsp?orderId=<%= order.getId() %>'>檢視明細</a></div>
+					</div>				
 					<% } %>
-				</tbody>
-			</table>
+				</div>
+			</div>
 			<% } %>
 		</article>
 		<%@include file='/subviews/footer.jsp' %>

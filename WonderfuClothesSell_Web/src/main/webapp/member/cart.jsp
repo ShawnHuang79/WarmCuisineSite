@@ -315,7 +315,7 @@
 <!-- 				<ul> -->
 <!-- 				</ul> -->
 <!-- 			</div> -->
-		<%@include file='/subviews/footer.jsp' %> 
+<%-- 		<%@include file='/subviews/footer.jsp' %>  --%>
 		</article>
 	</body>
 </html>

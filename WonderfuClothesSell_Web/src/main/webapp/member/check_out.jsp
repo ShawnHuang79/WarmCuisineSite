@@ -19,11 +19,8 @@
 				/*background: #f5f5f5;
 				height: 100%;*/
 			}	
-			
-
-			
 			.cart {
-				width: 1240px;
+				width: 800px;
 				margin: 20px auto;
 				background: #FFF;
 				user-select: none;
@@ -171,7 +168,7 @@
 			
 			
 			#sumArea {
-				width: 1240px;
+				width: 800px;
 				height: 60px;
 				background: white;
 				margin: 20px auto;
@@ -211,7 +208,34 @@
 				/*	float: left;*/
 			}
 			form{
-			margin-top: 100px;
+				/*margin-top: 100px;*/
+			}
+			#customerInfo{
+				margin: 0px 30%;
+				display:flex;
+				flex-direction: column;
+				justify-content: space-between;
+				height:300px;
+				float: right;
+				text-align: right;
+			}
+			
+			#checkoutSubmit{
+				background-color: #984B4B;
+				color: #fdf9f0;
+				position: relative;
+				cursor: pointer;
+				width: 200px;
+  				height: 40px;
+  				font-size: 1em;
+			}
+			.checkoutSelect{
+				width: 200px;
+				height: 40px;
+				font-size: 20px;
+				cursor: pointer;
+				text-align: center;
+				
 			}
 			
 
@@ -246,89 +270,61 @@
 		<%}else{ %>
 			<p>${errorList}</p>
 			<form action='check_out.do' method='POST' id='cartForm'>
-			<div id="cart" class="cart">
-		
-				<div class="cartHead hide">
-					<div class="img left"></div>
-					<div class="name left">商品名稱</div>
-					<div class="price left">單價</div>
-					<div class="quantityDiv left">數量</div>
-					<div class="size left">尺寸</div>
-					<div class="subtotal left">小計</div>
-				</div>
-				<%for(CartItem cartItem:cart.getCartItemsSet()) {%>
-					<div class="row hide">
-						<div class="img left"><img src='<%= cartItem.getPhotoUrl() %>' width="80" height="80"></div>
-						<div class="name left"><%= cartItem.getProductName() %></div>
-						<div class="price left"><%=cart.getUnitPrice(cartItem) %></div>
-						<div class="quantityDiv left"><%=cart.getQuantity(cartItem) %></div>
-						<div class="size left"><%= cartItem.getSizeName() %></div>
-						<div class="subtotal left"><%=cart.getUnitPrice(cartItem) %></div>
-	
+				<div id="cart" class="cart">
+			
+					<div class="cartHead hide">
+						<div class="img left"></div>
+						<div class="name left">商品名稱</div>
+						<div class="price left">單價</div>
+						<div class="quantityDiv left">數量</div>
+						<div class="size left">尺寸</div>
+						<div class="subtotal left">小計</div>
 					</div>
-				<%} %>
-			</div>
-			<div id="sumArea">
-				<div id="checkOutAmountDiv">
-					合計：<span id="checkOutAmount"><%=cart.getTotalAmount() %></span>元
+					<%for(CartItem cartItem:cart.getCartItemsSet()) {%>
+						<div class="row hide">
+							<div class="img left"><img src='<%= cartItem.getPhotoUrl() %>' width="80" height="80"></div>
+							<div class="name left"><%= cartItem.getProductName() %></div>
+							<div class="price left"><%=cart.getUnitPrice(cartItem) %></div>
+							<div class="quantityDiv left"><%=cart.getQuantity(cartItem) %></div>
+							<div class="size left"><%= cartItem.getSizeName() %></div>
+							<div class="subtotal left"><%=cart.getUnitPrice(cartItem) %></div>
+		
+						</div>
+					<%} %>
 				</div>
-			</div>
-				<table>
-				<tfoot>
-					<tr>
-						<td colspan='3'>
-						共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件, 
-						總金額: <%=cart.getTotalAmount() %>元						
-						</td>						
-					</tr>
-					<tr >
-						<td class='inputTd' colspan='1'>
-							<span>
-								<label>取件方式:</label>
-								<select name='shippingType' required>
-									<option value=''>請選擇...</option>
-									<option value='SHOP' >店面自取</option>									
-									<option value='HOME' data-fee='100'>宅配,100元</option>
-									<option value='STORE' data-fee='65'>超商, 65元</option>									
-								</select>
-							</span>								
-							<span>
-								<label>付款方式:</label>
-								<select name='paymentType' required>
-									<option value=''>請選擇...</option>
-									<option value='SHOP'>自取付款</option>
-									<option value='ATM'>ATM轉帳</option>
-									<option value='HOME' data-fee='50'>貨到付款,50</option>
-									<option value='STORE'>超商付款</option>
-									<option value='CARD'>信用卡付款</option>
-								</select>
-							</span>
-						</td>
-						<td colspan='2'>
-<%-- 							總金額+物流費: <%=cart.getTotalAmount() %><span id='feeSpan'></span><span id='totalAmountWithFee'></span>元 --%>
-						</td>				
-					</tr>
-					<tr>
-						<td colspan='3'>							
-								<fieldset style='width:75%;margin: auto;text-align: left'>
-									<legend>收件人 <a style='font-size: smaller' href="javascript:copyMember()">同訂購人</a></legend>								
-									<label>姓 名: </label><input name='recipientName' required><br>
-									<label>Email:</label><input name='recipientEmail' required><br>
-									<label>電 話: </label><input name='recipientPhone' required><br>									
-									<label>地 址: </label><input name='shippingAddress' required><br>
-								</fieldset>
-						</td>
-					</tr>
-					<tr>
-						<td colspan='3'>
-						<input type='submit' value='送出訂單'>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+				<div id="sumArea">
+					<div id="checkOutAmountDiv">
+						共<%= cart.size() %>項 <%=cart.getTotalQuantity() %>件 合計：<span id="checkOutAmount"><%=cart.getTotalAmount() %></span>元
+					</div>
+				</div>
+				<div id="customerInfo">						
+					<div>
+						<select class='checkoutSelect' name='shippingType' required>
+							<option value='' disabled selected hidden>請選擇取件方式</option>
+							<option value='SHOP' >店面自取</option>									
+							<option value='HOME' data-fee='100'>宅配,100元</option>
+							<option value='STORE' data-fee='65'>超商, 65元</option>									
+						</select>					
+						
+						<select class='checkoutSelect' name='paymentType' required>
+							<option value='' disabled selected hidden>請選擇付款方式</option>
+							<option value='SHOP'>自取付款</option>
+							<option value='ATM'>ATM轉帳</option>
+							<option value='STORE'>超商付款</option>
+							<option value='CARD'>信用卡付款</option>
+						</select>
+					</div>
+	<%-- 							總金額+物流費: <%=cart.getTotalAmount() %><span id='feeSpan'></span><span id='totalAmountWithFee'></span>元 --%>
+					<div>收件人 <a style='font-size: smaller' href="javascript:copyMember()">同訂購人</a></div>								
+					<div>姓 名： <input name='recipientName' required></div>
+					<div>Email：<input name='recipientEmail' required></div>
+					<div>電 話： <input name='recipientPhone' required></div>								
+					<div>地 址： <input name='shippingAddress' required></div>
+					<div><input id='checkoutSubmit' type='submit' value='送出訂單'></div>
+				</div>
 			</form>
 		<%} %>
 	</article>
-		<%@include file='/subviews/footer.jsp' %>
+<%-- 		<%@include file='/subviews/footer.jsp' %> --%>
 	</body>
 </html>
