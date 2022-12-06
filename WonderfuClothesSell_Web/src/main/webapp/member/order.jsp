@@ -10,6 +10,20 @@
 		<title>Warm Cuisine Site</title>
 		<style>
 			@import url(/wcs/css/wcs.css);
+			
+			.orderDetails{
+				margin-top: 10px;
+			}
+			#reciever{
+				width: 300px;
+			}
+			#productImg{
+				width: 100px;
+				height: 70px;
+			}
+			#productOuter{
+				margin-top: 100px;
+			}
 	    </style>
 	</head>
 	<body>
@@ -34,18 +48,19 @@
 			<% }else{%>
 			<div class='master'>
 				<div class='order'>
-					<div>訂單編號:<%= order.getId() %> 訂購人: ${member.name}</div>
-					<div>訂購日期時間: <%= order.getCreatedDate() %> <%= order.getCreatedTime() %></div>				
-					<div>取貨方式: <%= order.getShippingType().getDescription() %>  
-						, 付款方式:<%= order.getPaymentType().getDescription() %>
+					<div class='orderDetails'>訂單編號:<%= order.getId() %></div>
+					<div class='orderDetails'>訂購人: ${member.name}</div>
+					<div class='orderDetails'>訂購日期時間: <%= order.getCreatedDate() %> <%= order.getCreatedTime() %></div>				
+					<div class='orderDetails'>取貨方式: <%= order.getShippingType().getDescription() %></div>
+					<div  class='orderDetails'>付款方式:<%= order.getPaymentType().getDescription() %></div>
 <%-- 						<% if(order.getPaymentType() == PaymentType.ATM  --%>
 <%-- 							&& order.getStatus()==Order.Status.NEW.ordinal()){%> --%>
 <%-- 						<a href='atm_transfer.jsp?orderId=<%= order.getId() %>'>通知已轉帳</a> --%>
 <%-- 						<% }%> --%>
 					</div>
-					<div>訂單狀態: <%= order.getStatusString()%></div>
+					<div class='orderDetails'>訂單狀態: <%= order.getStatusString()%></div>
 					<h3>總金額(含物流手續費): <%= order.getTotalAmountWithFee()%>元</h3>
-				</div>
+				<div id='reciever'>
 				<fieldset class='order'>
 					<legend>收件人</legend>								
 					<label>姓 名: </label><input value='<%= order.getRecipientName() %> ' readonly><br>
@@ -53,12 +68,9 @@
 					<label>電 話: </label><input value='<%= order.getRecipientPhone() %>' readonly><br>									
 					<label>地 址: </label><input value='<%= order.getShippingAddress() %>' readonly><br>
 				</fieldset>
-			</div>
-			<div class='master'>
-				<div class='statusDiv'>新訂單</div> <i style='font-size:24px' class='fas'>&#xf105;</i>
-				<div class='statusDiv'>待處理</div> 
-			</div>
-			<div class='details' style='clear:both'>
+				</div>
+
+			<div class='details'>
 				<% if(order.getOrderItemsSet()==null || order.getOrderItemsSet().isEmpty() ) {%>
 					<p>無訂單明細</p>
 				<%}else{ %>				
@@ -73,24 +85,26 @@
 					</thead>
 					<tbody>
 						<% for(OrderItem orderItem:order.getOrderItemsSet()){%>
-						<tr>
-							<td>
-								<img src='<%= orderItem.getPhotoUrl() %>'>
-								<div><%= orderItem.getProductName() %></div>
-								<div>
-									<span class='colorSizeSpan'>
-										<%= orderItem.getSizeName() %>
-									</span> 									
-								</div>
-							</td>
-							<td>							
-								<div>售價: <%= orderItem.getPrice() %>元</div>
-							</td>
-							<td>
-								<div>數量: <%= orderItem.getQuantity() %></div>
-								<div style='font-size: smaller'>小計: <%= orderItem.getAmount() %>元</div>
-							</td>
-						</tr>	
+						<div id='productOuter'></div>
+							<tr>
+								<td>
+									<img src='<%= orderItem.getPhotoUrl() %>' id='productImg'>
+									<div><%= orderItem.getProductName() %></div>
+									<div>
+										<span class='colorSizeSpan'>
+											<%= orderItem.getSizeName() %>
+										</span> 									
+									</div>
+								</td>
+								<td>							
+									<div>售價: <%= orderItem.getPrice() %>元</div>
+								</td>
+								<td>
+									<div>數量: <%= orderItem.getQuantity() %></div>
+									<div style='font-size: smaller'>小計: <%= orderItem.getAmount() %>元</div>
+								</td>
+							</tr>	
+						
 						<% } %>										
 					</tbody>	
 					<tfoot>
@@ -107,6 +121,6 @@
 		<% } %>
 	
 		</article>
-		<%@include file='/subviews/footer.jsp' %>
+<%-- 		<%@include file='/subviews/footer.jsp' %> --%>
 	</body>
 </html>
