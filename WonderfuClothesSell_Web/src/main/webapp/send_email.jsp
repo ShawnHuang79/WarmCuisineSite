@@ -12,7 +12,7 @@
 		<jsp:param value="測試email發送" name="subtitle" />		
 	</jsp:include>
 	<%@include file='/subviews/nav.jsp' %>
-<!-- 	<div>https://drive.google.com/file/d/1dw_uW7qm1hB2xMIN8lLAj2TI1rTS72NK/view?usp=sharing</div> -->
+	<div>https://drive.google.com/file/d/1W16rcBsLGc8lSNw6dGAY4CEb3nZRMc_o/view?usp=sharing</div>
 	<%
 	String email = request.getParameter("email");
 	String name = "黃先生";
