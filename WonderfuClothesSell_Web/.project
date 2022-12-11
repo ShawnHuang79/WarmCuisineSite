@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>WonderfuClothesSell_Web</name>
+	<name>WarmCuisineSite_Web</name>
 	<comment></comment>
 	<projects>
-		<project>WonderfuClothesSell_Lib</project>
+		<project>WarmCuisineSite_Lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
