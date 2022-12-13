@@ -1,4 +1,4 @@
-# WarmCuisineSite
+# WarmCuisineSite - food and table reservation website
 ## Membership System
 * Including ***registration(create)***, ***login(read)*** and ***modification(update)*** functions, using the ***MVC*** framework. 
 * ***Servlets*** are responsible for checking whether the datas transmitted by the user from the front-end jsp page are consistent with the format.
